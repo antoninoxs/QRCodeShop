@@ -15,6 +15,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -71,49 +74,99 @@ public class Registrazione extends Activity {
 		});
 	}
 	
-	public boolean insertToDB(String nome, String cognome, String email, String username, String password){
+	public void insertToDB(String nome, String cognome, String email, String username, String password){
+		
+		InputStream is = null;
+		String result = "";
+		
+		if(!controlloUserName(username)){
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("n",nome));
+			nameValuePairs.add(new BasicNameValuePair("c",cognome));
+			nameValuePairs.add(new BasicNameValuePair("e",email));
+			nameValuePairs.add(new BasicNameValuePair("u",username));
+			nameValuePairs.add(new BasicNameValuePair("p",password));
+
+			//http post
+			try{
+			        HttpClient httpclient = new DefaultHttpClient();
+//			        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php?n="+nome+"&c="+cognome+"&e="+email+"&u="+username+"&p="+password);
+			        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php");
+			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			        HttpResponse response = httpclient.execute(httppost); 
+			        HttpEntity entity = response.getEntity();
+			        is = entity.getContent();
+			        Log.i("tag", is.toString());
+			}catch(Exception e){
+			        Log.e("log_tag", "Error in http connection: "+e.toString());
+			}
+			
+			try{
+		        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+		        StringBuilder sb = new StringBuilder();
+		        String line = null;
+		        while ((line = reader.readLine()) != null) {
+		                sb.append(line);
+		        }
+		        Log.i("tag1", is.toString());
+		        is.close();
+		        result=sb.toString();
+		        Log.i("result", result);
+			}catch(Exception e){
+			        Log.e("log_tag", "Error converting result "+e.toString());
+			}
+		}
+		else {
+			Toast toast = Toast.makeText(Registrazione.this, "Username già utilizzato", Toast.LENGTH_LONG);
+			toast.show();
+		}
+	}
+	
+//	Ritorna true se l'username è già stao utilizzato
+	public boolean controlloUserName(String usr){
 		
 		InputStream is = null;
 		String result = "";
 		
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		nameValuePairs.add(new BasicNameValuePair("n",nome));
-		nameValuePairs.add(new BasicNameValuePair("c",cognome));
-		nameValuePairs.add(new BasicNameValuePair("e",email));
-		nameValuePairs.add(new BasicNameValuePair("u",username));
-		nameValuePairs.add(new BasicNameValuePair("p",password));
-
+		nameValuePairs.add(new BasicNameValuePair("u",usr));
+		
 		//http post
 		try{
 		        HttpClient httpclient = new DefaultHttpClient();
-//		        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php?n="+nome+"&c="+cognome+"&e="+email+"&u="+username+"&p="+password);
-		        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php");
+		        HttpPost httppost = new HttpPost("http://10.0.2.2/controlloUserName.php");
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		        HttpResponse response = httpclient.execute(httppost); 
 		        HttpEntity entity = response.getEntity();
 		        is = entity.getContent();
-		        Log.i("tag", is.toString());
+		        Log.i("controlloUSR", is.toString());
 		}catch(Exception e){
 		        Log.e("log_tag", "Error in http connection: "+e.toString());
 		}
 		
+//		Conversione risposta in Stringa
 		try{
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
 	        StringBuilder sb = new StringBuilder();
 	        String line = null;
 	        while ((line = reader.readLine()) != null) {
-	                sb.append(line + " ");
+	                sb.append(line);
 	        }
-	        Log.i("tag1", is.toString());
+	        Log.i("controlloUSR1", is.toString());
 	        is.close();
 	        result=sb.toString();
-	        Log.i("result", result);
-	}catch(Exception e){
-	        Log.e("log_tag", "Error converting result "+e.toString());
-	}
+	        Log.i("resultControlloUSR", result);
+		}catch(Exception e){
+			Log.e("log_tag", "Error converting result "+e.toString());
+		}
+		Log.i("size", ""+result.toString().length());
+		if(result.toString().equals("YES")){
+			Toast toast = Toast.makeText(Registrazione.this, "Username già utilizzato da un altro utente!", Toast.LENGTH_LONG);
+			toast.show();
+			return true;
+		}
 		return false;
 	}
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

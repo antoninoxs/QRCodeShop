@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 					        StringBuilder sb = new StringBuilder();
 					        String line = null;
 					        while ((line = reader.readLine()) != null) {
-					                sb.append(line + "\n");
+					                sb.append(line);
 					        }
 					        Log.i("tag1", is.toString());
 					        is.close();
@@ -98,8 +98,7 @@ public class MainActivity extends Activity {
 					}catch(Exception e){
 					        Log.e("log_tag", "Error converting result "+e.toString());
 					}
-
-					if(result.toString().equals("YES\n")){
+					if(result.toString().equals("YES")){
 						Toast toast = Toast.makeText(MainActivity.this, "CONNESSO", Toast.LENGTH_LONG);
 						toast.show();
 					}
