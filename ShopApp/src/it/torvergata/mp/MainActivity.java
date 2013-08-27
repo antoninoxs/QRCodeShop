@@ -33,7 +33,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	EditText edUsername;
+	EditText edUsernameCostantino;
 	EditText edPassword;
 	
 	TextView tvRegistrazione;
