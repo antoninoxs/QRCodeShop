@@ -34,7 +34,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 
-	EditText edUsernameCostantino;
+	EditText edUsername;
 	EditText edPassword;
 	
 	TextView tvRegistrazione;
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		edUsernameCostantino = (EditText) findViewById(R.id.editTextUsername);
+		edUsername = (EditText) findViewById(R.id.editTextUsername);
 		edPassword = (EditText) findViewById(R.id.editTextPassword);
 		
 		tvRegistrazione = (TextView) findViewById(R.id.textViewRegistrazione);
@@ -57,13 +57,13 @@ public class MainActivity extends Activity {
 
 		bAccesso.setOnClickListener(new OnClickListener() {			
 			public void onClick(View v) {
-				if(edUsernameCostantino.getText().length()==0 ||edPassword.getText().length()==0){
+				if(edUsername.getText().length()==0 ||edPassword.getText().length()==0){
 					Toast toast = Toast.makeText(MainActivity.this, "Username o Password Vuoti", Toast.LENGTH_LONG);
 					toast.show();
 				}
 				else{
 
-					String user = edUsernameCostantino.getText().toString();
+					String user = edUsername.getText().toString();
 					String pass = edPassword.getText().toString();
 					
 					Log.i("USER", user);
