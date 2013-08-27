@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
 					try{
 					        HttpClient httpclient = new DefaultHttpClient();
 //					        HttpPost httppost = new HttpPost("http://10.0.2.2/login.php?u="+user+"&p="+pass);
-					        HttpPost httppost = new HttpPost("http://10.0.2.2/login.php");
+					        HttpPost httppost = new HttpPost("http://192.168.2.102/login.php");
 					        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 					        HttpResponse response = httpclient.execute(httppost); 
 					        HttpEntity entity = response.getEntity();

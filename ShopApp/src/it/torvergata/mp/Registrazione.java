@@ -91,7 +91,7 @@ public class Registrazione extends Activity {
 			try{
 			        HttpClient httpclient = new DefaultHttpClient();
 //			        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php?n="+nome+"&c="+cognome+"&e="+email+"&u="+username+"&p="+password);
-			        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php");
+			        HttpPost httppost = new HttpPost("http://192.168.2.102/registrazione.php");
 			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			        HttpResponse response = httpclient.execute(httppost); 
 			        HttpEntity entity = response.getEntity();
@@ -134,7 +134,7 @@ public class Registrazione extends Activity {
 		//http post
 		try{
 		        HttpClient httpclient = new DefaultHttpClient();
-		        HttpPost httppost = new HttpPost("http://10.0.2.2/controlloUserName.php");
+		        HttpPost httppost = new HttpPost("http://192.168.2.102/controlloUserName.php");
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		        HttpResponse response = httpclient.execute(httppost); 
 		        HttpEntity entity = response.getEntity();
@@ -161,8 +161,6 @@ public class Registrazione extends Activity {
 		}
 		Log.i("size", ""+result.toString().length());
 		if(result.toString().equals("YES")){
-			Toast toast = Toast.makeText(Registrazione.this, "Username già utilizzato da un altro utente!", Toast.LENGTH_LONG);
-			toast.show();
 			return true;
 		}
 		return false;
