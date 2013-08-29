@@ -67,4 +67,13 @@
         android:text="@string/registrazione"
         android:textSize="20dp" />
 
+    <Button
+        android:id="@+id/btnSalta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/buttonAccess"
+        android:layout_below="@+id/textViewRegistrazione"
+        android:layout_marginTop="24dp"
+        android:text="Salta" />
+
 </RelativeLayout>

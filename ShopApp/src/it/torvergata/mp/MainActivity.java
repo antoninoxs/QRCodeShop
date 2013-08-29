@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 	
 	TextView tvRegistrazione;
 	
-	Button bAccesso;
+	Button bAccesso,btnSalta;
 	
 	String result = "";
 	InputStream is = null;
@@ -54,7 +54,8 @@ public class MainActivity extends Activity {
 		tvRegistrazione = (TextView) findViewById(R.id.textViewRegistrazione);
 		
 		bAccesso = (Button) findViewById(R.id.buttonAccess);
-
+		btnSalta = (Button) findViewById(R.id.btnSalta);
+		
 		bAccesso.setOnClickListener(new OnClickListener() {			
 			public void onClick(View v) {
 				if(edUsername.getText().length()==0 ||edPassword.getText().length()==0){
@@ -119,6 +120,19 @@ public class MainActivity extends Activity {
 				finish();
 			}
 		});
+	
+		btnSalta.setOnClickListener(new OnClickListener() {
+			
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getBaseContext(), TabsFragmentActivity.class);
+				startActivity(intent);
+				
+			}
+		});
+	
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {

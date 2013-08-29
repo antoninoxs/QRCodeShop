@@ -15,5 +15,7 @@
     <string name="registrazioneEmail">e-mail</string>
     <string name="registrazioneRegistrati">Registrati</string>
     <string name="title_activity_registrazione">Registrazione</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_tab">TabActivity</string>
 
 </resources>
