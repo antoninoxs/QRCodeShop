@@ -17,5 +17,8 @@
     <string name="title_activity_registrazione">Registrazione</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_tab">TabActivity</string>
+    <string name="title_tab1">Acquisizione QrCode</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="tvProductID">Prodotti:</string>
 
 </resources>

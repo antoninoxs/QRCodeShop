@@ -127,6 +127,9 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+//				
+				
 				Intent intent = new Intent(getBaseContext(), TabsFragmentActivity.class);
 				startActivity(intent);
 				
@@ -134,6 +137,7 @@ public class MainActivity extends Activity {
 		});
 	
 	}
+	
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

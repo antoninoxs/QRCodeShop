@@ -29,6 +29,8 @@ public class Tab2Fragment extends Fragment {
             // the view hierarchy; it would just never be used.
             return null;
         }
+       
         return (LinearLayout)inflater.inflate(R.layout.tab_frag2_layout, container, false);
+        
     }
 }
