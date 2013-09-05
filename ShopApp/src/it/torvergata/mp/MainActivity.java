@@ -1,5 +1,6 @@
 package it.torvergata.mp;
 
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -77,7 +78,7 @@ public class MainActivity extends Activity {
 					try{
 					        HttpClient httpclient = new DefaultHttpClient();
 //					        HttpPost httppost = new HttpPost("http://10.0.2.2/login.php?u="+user+"&p="+pass);
-					        HttpPost httppost = new HttpPost("http://192.168.2.102/login.php");
+					        HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/login.php");
 					        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 					        HttpResponse response = httpclient.execute(httppost); 
 					        HttpEntity entity = response.getEntity();
@@ -102,12 +103,16 @@ public class MainActivity extends Activity {
 					        Log.e("log_tag", "Error converting result "+e.toString());
 					}
 					if(result.toString().equals("YES")){
-						Toast toast = Toast.makeText(MainActivity.this, "CONNESSO", Toast.LENGTH_LONG);
-						toast.show();
+						Toast.makeText(MainActivity.this, "Connesso",
+								Toast.LENGTH_SHORT).show();
+						Intent intent = new Intent(getBaseContext(), TabsFragmentActivity.class);
+						startActivity(intent);
+						
 					}
 					else {
-						Toast toast = Toast.makeText(MainActivity.this, "USER e PASSWORD ERRATI", Toast.LENGTH_LONG);
-						toast.show();
+						Toast.makeText(MainActivity.this, "Username e Password Errati",
+								Toast.LENGTH_SHORT).show();
+						
 					}
 				}
 			}
