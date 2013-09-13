@@ -38,6 +38,8 @@ public class Registrazione extends Activity {
 	EditText edPassword;
 	EditText edPassword1;
 	Button   bRegistrati;
+	InputStream is = null;
+	InputStream ins = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,30 +78,39 @@ public class Registrazione extends Activity {
 	
 	public void insertToDB(String nome, String cognome, String email, String username, String password){
 		
-		InputStream is = null;
+		 
 		String result = "";
 		
 		if(true){
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("n",nome));
 			nameValuePairs.add(new BasicNameValuePair("c",cognome));
 			nameValuePairs.add(new BasicNameValuePair("e",email));
 			nameValuePairs.add(new BasicNameValuePair("u",username));
 			nameValuePairs.add(new BasicNameValuePair("p",password));
 
+			
+			Thread threadConnectionForRegister = new Thread(new Runnable(){
+			    @Override
+			    public void run() {
+			        try {
+			        	 HttpClient httpclient = new DefaultHttpClient();
+//					        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php?n="+nome+"&c="+cognome+"&e="+email+"&u="+username+"&p="+password);
+					        HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/registrazione.php");
+					        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+					        HttpResponse response = httpclient.execute(httppost); 
+					        HttpEntity entity = response.getEntity();
+					        is = entity.getContent();
+					        Log.i("tag", is.toString());
+			        } catch (Exception e) {
+			        	 Log.e("log_tag", "Error in http connection: "+e.toString());
+			        }
+			    }
+			});
+
+			threadConnectionForRegister.start(); 
 			//http post
-			try{
-			        HttpClient httpclient = new DefaultHttpClient();
-//			        HttpPost httppost = new HttpPost("http://10.0.2.2/registrazione.php?n="+nome+"&c="+cognome+"&e="+email+"&u="+username+"&p="+password);
-			        HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/registrazione.php");
-			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			        HttpResponse response = httpclient.execute(httppost); 
-			        HttpEntity entity = response.getEntity();
-			        is = entity.getContent();
-			        Log.i("tag", is.toString());
-			}catch(Exception e){
-			        Log.e("log_tag", "Error in http connection: "+e.toString());
-			}
+		
 			
 			try{
 		        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
@@ -125,21 +136,34 @@ public class Registrazione extends Activity {
 //	Ritorna true se l'username è già stao utilizzato
 	public boolean controlloUserName(String usr){
 		
-		InputStream is = null;
+		
 		String result = "";
 		
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("u",usr));
+		
+		Thread threadConnectionForCheckUser = new Thread(new Runnable(){
+		    @Override
+		    public void run() {
+		        try {
+		        	 HttpClient httpclient = new DefaultHttpClient();
+				        HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/controlloUserName.php");
+				        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				        HttpResponse response = httpclient.execute(httppost); 
+				        HttpEntity entity = response.getEntity();
+				        ins = entity.getContent();
+				        Log.i("controlloUSR", ins.toString());
+		        	} catch (Exception e) {
+		        	 Log.e("log_tag", "Error in http connection: "+e.toString());
+		        }
+		    }
+		});
+
+		threadConnectionForCheckUser.start(); 
 		
 		//http post
 		try{
-		        HttpClient httpclient = new DefaultHttpClient();
-		        HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/controlloUserName.php");
-		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		        HttpResponse response = httpclient.execute(httppost); 
-		        HttpEntity entity = response.getEntity();
-		        is = entity.getContent();
-		        Log.i("controlloUSR", is.toString());
+		       
 		}catch(Exception e){
 		        Log.e("log_tag", "Error in http connection: "+e.toString());
 		}

@@ -2,14 +2,17 @@ package it.torvergata.mp;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -20,9 +23,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.R.string;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -42,8 +50,13 @@ public class MainActivity extends Activity {
 	
 	Button bAccesso,btnSalta;
 	
-	String result = "";
+	String res="";
 	InputStream is = null;
+	
+	String user="";
+	String password="";
+
+	Handler handler;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,63 +70,90 @@ public class MainActivity extends Activity {
 		bAccesso = (Button) findViewById(R.id.buttonAccess);
 		btnSalta = (Button) findViewById(R.id.btnSalta);
 		
+
+		final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+		
+		
 		bAccesso.setOnClickListener(new OnClickListener() {			
 			public void onClick(View v) {
+				
 				if(edUsername.getText().length()==0 ||edPassword.getText().length()==0){
 					Toast toast = Toast.makeText(MainActivity.this, "Username o Password Vuoti", Toast.LENGTH_LONG);
 					toast.show();
 				}
+				
+				
 				else{
 
-					String user = edUsername.getText().toString();
-					String pass = edPassword.getText().toString();
+					user = edUsername.getText().toString();
+					password = edPassword.getText().toString();
 					
 					Log.i("USER", user);
-					Log.i("PASS", pass);
+					Log.i("PASS", password);
 					
-					ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-					nameValuePairs.add(new BasicNameValuePair("u",user));
-					nameValuePairs.add(new BasicNameValuePair("p",pass));
-					//http post
-					try{
-					        HttpClient httpclient = new DefaultHttpClient();
-//					        HttpPost httppost = new HttpPost("http://10.0.2.2/login.php?u="+user+"&p="+pass);
-					        HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/login.php");
-					        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-					        HttpResponse response = httpclient.execute(httppost); 
-					        HttpEntity entity = response.getEntity();
-					        is = entity.getContent();
-					        Log.i("tag", is.toString());
-					}catch(Exception e){
-					        Log.e("log_tag", "Error in http connection: "+e.toString());
-					}
-					//convert response to string
-					try{
-					        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-					        StringBuilder sb = new StringBuilder();
-					        String line = null;
-					        while ((line = reader.readLine()) != null) {
-					                sb.append(line);
+				
+					
+					handler = new Handler() {
+			            @Override
+			            public void handleMessage(Message message) {
+			                res=(String) message.obj;
+			                if(res.toString().equals("YES")){
+								Toast.makeText(MainActivity.this, "Connesso",
+										Toast.LENGTH_SHORT).show();
+								Intent intent = new Intent(getBaseContext(), TabsFragmentActivity.class);
+								dialog.dismiss();
+								startActivity(intent);
+			                }
+							else if(res.toString().equals("FALSE")){
+								dialog.dismiss();
+								Toast.makeText(MainActivity.this, "Username e Password Errati",
+										Toast.LENGTH_SHORT).show();
+							}
+			                
+			            }
+					};
+					
+					/*
+					Thread threadConnectionForLogin = new Thread(new Runnable(){
+					    @Override
+					    public void run() {
+					        try {
+					        	 HttpClient httpclient = new DefaultHttpClient();
+//							   	 HttpPost httppost = new HttpPost("http://10.0.2.2/login.php?u="+user+"&p="+pass);
+							     HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/login.php");
+							     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+							     HttpResponse response = httpclient.execute(httppost); 
+							     HttpEntity entity = response.getEntity();
+							     is = entity.getContent();
+							     Log.i("tag", is.toString());
+					        	
+							     BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+							     StringBuilder sb = new StringBuilder();
+							     String line = null;
+							     while ((line = reader.readLine()) != null) {
+							             sb.append(line);
+							        }
+							     Log.i("tag1", is.toString());
+							     is.close();
+							     String result=sb.toString();
+							     Log.i("result", result);
+							     Message message = handler.obtainMessage(1, result);
+					             handler.sendMessage(message);
+							     
+					        } catch (Exception e) {
+					        	 Log.e("log_tag", "Error in http connection: "+e.toString());
 					        }
-					        Log.i("tag1", is.toString());
-					        is.close();
-					        result=sb.toString();
-					        Log.i("result", result);
-					}catch(Exception e){
-					        Log.e("log_tag", "Error converting result "+e.toString());
-					}
-					if(result.toString().equals("YES")){
-						Toast.makeText(MainActivity.this, "Connesso",
-								Toast.LENGTH_SHORT).show();
-						Intent intent = new Intent(getBaseContext(), TabsFragmentActivity.class);
-						startActivity(intent);
-						
-					}
-					else {
-						Toast.makeText(MainActivity.this, "Username e Password Errati",
-								Toast.LENGTH_SHORT).show();
-						
-					}
+					    }
+					});*/
+					
+				
+					LoadData task = new LoadData();
+					task.execute();
+					
+					
+				
+					//threadConnectionForLogin.start(); 
+					
 				}
 			}
 		});
@@ -150,4 +190,67 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	
+	public class LoadData extends AsyncTask<Void, Void, Void> {
+	    ProgressDialog progressDialog;
+	    //declare other objects as per your need
+	    @Override
+	    protected void onPreExecute()
+	    {
+	        progressDialog= ProgressDialog.show(MainActivity.this, "ShopApp","Accesso in corso...", true);
+
+	        //do initialization of required objects objects here                
+	    };      
+	    @Override
+	    protected Void doInBackground(Void... params)
+	    {   
+	    	 final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			 nameValuePairs.add(new BasicNameValuePair("u",user));
+			 nameValuePairs.add(new BasicNameValuePair("p",password));
+	    	 HttpClient httpclient = new DefaultHttpClient();
+//		   	 HttpPost httppost = new HttpPost("http://10.0.2.2/login.php?u="+user+"&p="+pass);
+		     HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/login.php");
+		     try {
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			
+		     HttpResponse response = httpclient.execute(httppost); 
+		     HttpEntity entity = response.getEntity();
+		     is = entity.getContent();
+		     Log.i("tag", is.toString());
+	   	
+		     BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+		     StringBuilder sb = new StringBuilder();
+		     String line = null;
+		     while ((line = reader.readLine()) != null) {
+		             sb.append(line);
+		        }
+		     Log.i("tag1", is.toString());
+		     is.close();
+		     String result=sb.toString();
+		     Log.i("result", result);
+		     Message message = handler.obtainMessage(1, result);
+	         handler.sendMessage(message);
+		     } catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	         
+	         //do loading operation here  
+	        return null;
+	    }       
+	    @Override
+	    protected void onPostExecute(Void result)
+	    {
+	        super.onPostExecute(result);
+	        progressDialog.dismiss();
+	    };
+	 }
+	
+	
 }

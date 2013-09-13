@@ -85,6 +85,7 @@ public final class R {
         public static final int tab=0x7f070004;
     }
     public static final class string {
+        public static final int Loading=0x7f050013;
         public static final int accedi=0x7f050007;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;

@@ -1,5 +1,7 @@
 package it.torvergata.mp;
 
+import it.torvergata.mp.MainActivity.LoadData;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,10 +28,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.R.id;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -90,11 +96,8 @@ public class CameraActivity extends ListActivity {
 				// Handle successful scan
 				Log.i("Contenuto: ", contents);
 				
-								
-				download_info_and_fills_product_list(contents);
-				
-			
-				
+				LoadDataProduct task = new LoadDataProduct();
+				task.execute(contents);
 				startQrCodeScan();
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(CameraActivity.this, "Fine Acquisizione",
@@ -106,63 +109,89 @@ public class CameraActivity extends ListActivity {
 	}
 	
 	
-	public void download_info_and_fills_product_list(String productId){
-		
-		Product tempProd = new Product(Integer.parseInt(productId));
-		
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		nameValuePairs.add(new BasicNameValuePair("id",productId));
-		
-		
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
-				+ "/info_download.php");
-        
-		try {
-			
-			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		
-			HttpResponse response = httpclient.execute(httppost);
-			String jsonResult = inputStreamToString(
-					response.getEntity().getContent()).toString();
-			
-			Log.i("JsonResult", "["+jsonResult+"]");
-			
-			JSONObject object = new JSONObject(jsonResult);
+	
+	
+	public class LoadDataProduct extends AsyncTask<String, Void, Void> {
+	    ProgressDialog progressDialog;
+	    
+	   
 
-			String idProdotto = 	object.getString("idProdotto");
-			String nome = 			object.getString("nome");
-			double prezzo =			object.getDouble("prezzo");
-			String scadenza = 		object.getString("scadenza");
-			String disponibilita = 	object.getString("disponibilita");
-			String descrizione = 	object.getString("descrizione");
-			String fileImmagine = 	object.getString("file_immagine");
+		//declare other objects as per your need
+	    @Override
+	    protected void onPreExecute()
+	    {
+	      
+	        //do initialization of required objects objects here                
+	    };      
+	 
+	    @Override
+	    protected void onPostExecute(Void result)
+	    {
+	    
+	    }
+		@Override
+		protected Void doInBackground(String... params) {
+			String productId = params[0];
+			
+			final Product tempProd = new Product(Integer.parseInt(productId));
+			
+			final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("id",productId));
 			
 			
-			Log.i("idProdotto: ", idProdotto );
-			Log.i("nome: ", nome );
-			Log.i("prezzo: ", Double.toString(prezzo));
-			Log.i("scadenza: ", scadenza );
-			Log.i("descrizione: ", descrizione );
-			Log.i("disponibilita: ", disponibilita );
-			Log.i("file_immagine: ", fileImmagine );
+			try {
+	        	HttpClient httpclient = new DefaultHttpClient();
+	    		HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
+	    				+ "/info_download.php");
+	    		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	    		
+				HttpResponse response = httpclient.execute(httppost);
+				String jsonResult = inputStreamToString(
+						response.getEntity().getContent()).toString();
+				
+				Log.i("JsonResult", "["+jsonResult+"]");
+				
+				JSONObject object = new JSONObject(jsonResult);
 
-			tempProd.setId(Integer.parseInt(idProdotto));
-			tempProd.setNome(nome);
-			tempProd.setPrezzo(prezzo);
-			tempProd.setScadenza(scadenza);
-			tempProd.setDescrizione(descrizione);
-			tempProd.setDisponibilita(Integer.parseInt(disponibilita));
-			tempProd.setFileImmagine(fileImmagine);
-			
-			productList.add(tempProd);
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+				String idProdotto = 	object.getString("idProdotto");
+				String nome = 			object.getString("nome");
+				double prezzo =			object.getDouble("prezzo");
+				String scadenza = 		object.getString("scadenza");
+				String disponibilita = 	object.getString("disponibilita");
+				String descrizione = 	object.getString("descrizione");
+				String fileImmagine = 	object.getString("file_immagine");
+				
+				
+				Log.i("idProdotto: ", idProdotto );
+				Log.i("nome: ", nome );
+				Log.i("prezzo: ", Double.toString(prezzo));
+				Log.i("scadenza: ", scadenza );
+				Log.i("descrizione: ", descrizione );
+				Log.i("disponibilita: ", disponibilita );
+				Log.i("file_immagine: ", fileImmagine );
+
+				tempProd.setId(Integer.parseInt(idProdotto));
+				tempProd.setNome(nome);
+				tempProd.setPrezzo(prezzo);
+				tempProd.setScadenza(scadenza);
+				tempProd.setDescrizione(descrizione);
+				tempProd.setDisponibilita(Integer.parseInt(disponibilita));
+				tempProd.setFileImmagine(fileImmagine);
+				
+				productList.add(tempProd);
+	    		
+	        } catch (JSONException e) {
+				e.printStackTrace();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}catch (Exception e) {
+	        	 Log.e("log_tag", "Error in http connection: "+e.toString());
+	        }
+			// TODO Auto-generated method stub
+			return null;
+		};
+	 }
+	
 }
