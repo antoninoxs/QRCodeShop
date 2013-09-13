@@ -1,5 +1,7 @@
 package it.torvergata.mp;
 
+import android.graphics.drawable.Drawable;
+
 public class Product {
 	private int id;
 	private String nome;
@@ -8,8 +10,10 @@ public class Product {
 	private int disponibilita;
 	private String descrizione;
 	private String fileImmagine;
+	private Drawable immagine;
 	
 	
+
 	public Product(int i){
 		id=i;
 		nome="";
@@ -18,6 +22,15 @@ public class Product {
 		disponibilita=0;
 		descrizione="";
 		fileImmagine="";
+		
+	}
+	
+	public Drawable getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(Drawable immagine) {
+		this.immagine = immagine;
 	}
 	
 	public String getFileImmagine() {

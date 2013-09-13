@@ -74,15 +74,19 @@ public class DrawableManager {
         }
     }
 
-    public void fetchDrawableOnThread(final String urlString, final ImageView imageView) {
-        if (drawableMap.containsKey(urlString)) {
+    public void fetchDrawableOnThread( final Product product, final ImageView imageView) {
+        final String urlString=Const.IMAGE_URL+product.getFileImmagine();
+    	if (drawableMap.containsKey(urlString)) {
             imageView.setImageDrawable(drawableMap.get(urlString));
+            product.setImmagine(drawableMap.get(urlString));
         }
 
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message message) {
-                imageView.setImageDrawable((Drawable) message.obj);
+                Drawable dr = (Drawable) message.obj;
+            	imageView.setImageDrawable(dr);
+                product.setImmagine(dr);
             }
         };
 
@@ -97,6 +101,31 @@ public class DrawableManager {
         };
         thread.start();
     }
+    
+    public void fetchDrawableOnThread(final String urlString, final Product product) {
+        if (drawableMap.containsKey(urlString)) {
+            product.setImmagine(drawableMap.get(urlString));
+        }
+
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                product.setImmagine((Drawable) message.obj);
+            }
+        };
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                //TODO : set imageView to a "pending" image
+                Drawable drawable = fetchDrawable(urlString);
+                Message message = handler.obtainMessage(1, drawable);
+                handler.sendMessage(message);
+            }
+        };
+        thread.start();
+    }
+    
 
     private InputStream fetch(String urlString) throws MalformedURLException, IOException {
         DefaultHttpClient httpClient = new DefaultHttpClient();

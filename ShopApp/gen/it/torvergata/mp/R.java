@@ -25,15 +25,16 @@ public final class R {
         public static final int gradient_back=0x7f020001;
         public static final int ic_launcher=0x7f020002;
         public static final int image_back=0x7f020003;
-        public static final int tab=0x7f020004;
-        public static final int tab_bs_not_selected=0x7f020005;
-        public static final int tab_bs_selected=0x7f020006;
-        public static final int tab_not_selected=0x7f020007;
-        public static final int tab_or_not_selected=0x7f020008;
-        public static final int tab_or_selected=0x7f020009;
-        public static final int tab_qr_not_selected=0x7f02000a;
-        public static final int tab_qr_selected=0x7f02000b;
-        public static final int tab_selected=0x7f02000c;
+        public static final int img_delete=0x7f020004;
+        public static final int tab=0x7f020005;
+        public static final int tab_bs_not_selected=0x7f020006;
+        public static final int tab_bs_selected=0x7f020007;
+        public static final int tab_not_selected=0x7f020008;
+        public static final int tab_or_not_selected=0x7f020009;
+        public static final int tab_or_selected=0x7f02000a;
+        public static final int tab_qr_not_selected=0x7f02000b;
+        public static final int tab_qr_selected=0x7f02000c;
+        public static final int tab_selected=0x7f02000d;
     }
     public static final class id {
         public static final int BregistrazioneRegistrati=0x7f080013;
@@ -98,6 +99,11 @@ public final class R {
         public static final int registrazioneNome=0x7f050009;
         public static final int registrazioneRegistrati=0x7f05000c;
         public static final int registrazioneRegistrazione=0x7f050008;
+        public static final int tCancelDelete=0x7f050016;
+        public static final int tDeleteProduct=0x7f050014;
+        public static final int tMessageDelete=0x7f050015;
+        public static final int tMessageDeleteProd=0x7f050018;
+        public static final int tTitleBoxDeleteProduct=0x7f050017;
         public static final int title_activity_camera=0x7f050011;
         public static final int title_activity_menu=0x7f05000e;
         public static final int title_activity_registrazione=0x7f05000d;

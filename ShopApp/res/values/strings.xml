@@ -21,5 +21,10 @@
     <string name="title_activity_camera">CameraActivity</string>
     <string name="tvProductID">Prodotti:</string>
     <string name="Loading">Accesso in corso...</string>
+    <string name="tDeleteProduct">Elimina</string>
+    <string name="tMessageDelete">Desidera eliminare il prodotto selezionato?</string>
+    <string name="tCancelDelete">Annulla</string>
+    <string name="tTitleBoxDeleteProduct">Eliminazione prodotto</string>
+    <string name="tMessageDeleteProd">Eliminazione </string>
 
 </resources>

@@ -88,7 +88,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		tv2.setText(productList.get(position).getDescrizione());
 		tvPrice.setText(Double.toString(productList.get(position).getPrezzo())+" Euro");
 		
-		drawab.fetchDrawableOnThread(Const.IMAGE_URL+productList.get(position).getFileImmagine(), iv);
+	
+		
+		drawab.fetchDrawableOnThread(productList.get(position), iv);
+		
 		//iv.setImageDrawable(drawab.fetchDrawable(Const.IMAGE_URL));
 
 		return convertView;

@@ -28,24 +28,34 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.R.id;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class CameraActivity extends ListActivity {
 	List<Product> productList;
-
+	private DrawableManager drawab; 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_camera);
@@ -55,9 +65,57 @@ public class CameraActivity extends ListActivity {
 		productList = new ArrayList<Product>();
 		setListAdapter(new ProductAdapter(getApplicationContext(),
 				R.layout.new_list_item, productList));
+		
+		
+		list.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				
+				final AlertDialog dialogBox = DeleteDialog(productList.get(arg2));
+				dialogBox.show();
+				Button deleteButton = dialogBox
+						.getButton(DialogInterface.BUTTON_POSITIVE);
+				deleteButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+							dialogBox.dismiss();
+					}
+				});
+				
+				return false;
+			}
+		});
+		
+		
+		
 
 	}
+	private AlertDialog DeleteDialog(Product prod) {
+		AlertDialog alertDialog = new AlertDialog.Builder(this)
+				.setTitle(getString(R.string.tMessageDeleteProd)+" "+prod.getNome())
+				.setMessage(R.string.tMessageDelete)
+				.setIcon(Const.resize(prod.getImmagine()))
+				.setPositiveButton(R.string.tDeleteProduct,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+							}
+						})
+				.setNegativeButton(R.string.tCancelDelete,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						}).create();
+		return alertDialog;
+	}
 
+	
+	
 	private StringBuilder inputStreamToString(InputStream is) {
 		String rLine = "";
 		StringBuilder answer = new StringBuilder();
