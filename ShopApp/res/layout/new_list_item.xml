@@ -46,7 +46,7 @@
         android:textSize="10dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:text="Just gona stand there and ..." />
+        />
  
        <TextView
         android:id="@+id/price"
@@ -57,7 +57,7 @@
         android:gravity="right"
         android:text="Euro"
         android:layout_marginRight="5dip"
-        android:textSize="10dip"
+        android:textSize="15dip"
         android:textColor="#10bcc9"
         android:textStyle="bold"/>
  

@@ -51,19 +51,28 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CameraActivity extends ListActivity {
-	List<Product> productList;
+	ListProduct productList;
 	ProductAdapter adapter ;
 	private DrawableManager drawab; 
+	TextView totalPrice;
+	
+	
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_camera);
+		totalPrice = (TextView) findViewById(R.id.tvTotalPrice);
+		Button btnAdd = (Button) findViewById(R.id.btnAdd);
+		Button btnContinue = (Button) findViewById(R.id.btnContinue);
+				
 		startQrCodeScan();
 
 		final ListView list = (ListView) findViewById(id.list);
-		productList = new ArrayList<Product>();
+		productList = new ListProduct();
 		adapter =new ProductAdapter(getApplicationContext(),
 				R.layout.new_list_item, productList);
 		setListAdapter(adapter);
@@ -83,10 +92,14 @@ public class CameraActivity extends ListActivity {
 				deleteButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						try{
 						productList.remove(arg2);
 						adapter.notifyDataSetChanged();
-						dialogBox.dismiss();
-							
+						setTotalPrice(totalPrice);
+						}catch (IndexOutOfBoundsException e){
+							adapter.notifyDataSetChanged();
+						}
+						dialogBox.dismiss();	
 					}
 				});
 				
@@ -94,7 +107,14 @@ public class CameraActivity extends ListActivity {
 			}
 		});
 		
+	btnAdd.setOnClickListener(new OnClickListener() {
 		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			startQrCodeScan();
+		}
+	});
 		
 
 	}
@@ -166,6 +186,7 @@ public class CameraActivity extends ListActivity {
 				task.execute(contents);
 				startQrCodeScan();
 			} else if (resultCode == RESULT_CANCELED) {
+				setTotalPrice(totalPrice);
 				Toast.makeText(CameraActivity.this, "Fine Acquisizione",
 						Toast.LENGTH_SHORT).show();
 			
@@ -175,6 +196,12 @@ public class CameraActivity extends ListActivity {
 	}
 	
 	
+	public void setTotalPrice(TextView totalPrice){
+		String price =Double.toString(productList.getTotalPrice());
+		price=price.replace('.',',');
+		totalPrice.setText(getString(R.string.tvTotal)+" "+price+" "+getString(R.string.Euro));
+		
+	}
 	
 	
 	public class LoadDataProduct extends AsyncTask<String, Void, Void> {

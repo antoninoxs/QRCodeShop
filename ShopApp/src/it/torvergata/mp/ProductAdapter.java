@@ -42,20 +42,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 	private LayoutInflater mInflater;
 	
 	private DrawableManager drawab; 
-	private List<Product> productList =new ArrayList<Product>();
+	private ListProduct productList =new ListProduct();
 	private int mViewResourceId;
 	
-	public ProductAdapter(Context ctx, int viewResourceId,List<Product> pList) {
+	public ProductAdapter(Context ctx, int viewResourceId,ListProduct pList) {
 		super(ctx, viewResourceId, pList);
 		
-		
 		mInflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
 		productList=pList;
-
 		drawab = new DrawableManager();
-
-		
 		mViewResourceId = viewResourceId;
 	}
 
@@ -82,6 +77,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		TextView tv1 = (TextView)convertView.findViewById(R.id.title);
 		TextView tv2 = (TextView)convertView.findViewById(R.id.description);
 		ImageView iv = (ImageView)convertView.findViewById(R.id.list_image);
+		
+		
+		
+		
 		TextView tvPrice = (TextView)convertView.findViewById(R.id.price);
 		
 		tv1.setText(productList.get(position).getNome());
@@ -89,14 +88,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		String price=Double.toString(productList.get(position).getPrezzo());
 		price=price.replace('.',',');
 		
-		tvPrice.setText(price+" \u20ac");
+		tvPrice.setText(price+"\u20ac");
 		
 	
 		
 		drawab.fetchDrawableOnThread(productList.get(position), iv);
 		
 		//iv.setImageDrawable(drawab.fetchDrawable(Const.IMAGE_URL));
-
+		
+		
 		return convertView;
 	}
 }

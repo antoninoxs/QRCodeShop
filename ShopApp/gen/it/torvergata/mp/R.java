@@ -37,35 +37,39 @@ public final class R {
         public static final int tab_selected=0x7f02000d;
     }
     public static final class id {
-        public static final int BregistrazioneRegistrati=0x7f080013;
-        public static final int ETregistrazioneCognome=0x7f08000a;
-        public static final int ETregistrazioneEmail=0x7f08000c;
-        public static final int ETregistrazioneNome=0x7f080009;
-        public static final int ETregistrazionePassword=0x7f080010;
-        public static final int ETregistrazionePassword1=0x7f080012;
-        public static final int ETregistrazioneUsername=0x7f08000e;
-        public static final int TWregistrazioneCognome=0x7f080003;
-        public static final int TWregistrazioneEmail=0x7f08000b;
-        public static final int TWregistrazioneNome=0x7f080008;
-        public static final int TWregistrazionePassword=0x7f08000f;
-        public static final int TWregistrazionePassword1=0x7f080011;
-        public static final int TWregistrazioneRegistrazione=0x7f080002;
-        public static final int TWregistrazioneUsername=0x7f08000d;
-        public static final int action_settings=0x7f08001b;
-        public static final int btnQrCode=0x7f08001a;
-        public static final int btnSalta=0x7f080007;
-        public static final int buttonAccess=0x7f080005;
-        public static final int description=0x7f080018;
-        public static final int editTextPassword=0x7f080004;
-        public static final int editTextUsername=0x7f080001;
-        public static final int list_image=0x7f080016;
-        public static final int option_text=0x7f080014;
-        public static final int price=0x7f080019;
+        public static final int BregistrazioneRegistrati=0x7f080017;
+        public static final int ETregistrazioneCognome=0x7f08000e;
+        public static final int ETregistrazioneEmail=0x7f080010;
+        public static final int ETregistrazioneNome=0x7f08000d;
+        public static final int ETregistrazionePassword=0x7f080014;
+        public static final int ETregistrazionePassword1=0x7f080016;
+        public static final int ETregistrazioneUsername=0x7f080012;
+        public static final int TWregistrazioneCognome=0x7f080007;
+        public static final int TWregistrazioneEmail=0x7f08000f;
+        public static final int TWregistrazioneNome=0x7f08000c;
+        public static final int TWregistrazionePassword=0x7f080013;
+        public static final int TWregistrazionePassword1=0x7f080015;
+        public static final int TWregistrazioneRegistrazione=0x7f080006;
+        public static final int TWregistrazioneUsername=0x7f080011;
+        public static final int action_settings=0x7f08001f;
+        public static final int btnAdd=0x7f080003;
+        public static final int btnContinue=0x7f080004;
+        public static final int btnQrCode=0x7f08001e;
+        public static final int btnSalta=0x7f08000b;
+        public static final int buttonAccess=0x7f080009;
+        public static final int description=0x7f08001c;
+        public static final int editTextPassword=0x7f080008;
+        public static final int editTextUsername=0x7f080005;
+        public static final int list_image=0x7f08001a;
+        public static final int lloListView=0x7f080002;
+        public static final int option_text=0x7f080018;
+        public static final int price=0x7f08001d;
         public static final int realtabcontent=0x01010000;
-        public static final int textViewRegistrazione=0x7f080006;
-        public static final int thumbnail=0x7f080015;
-        public static final int title=0x7f080017;
+        public static final int textViewRegistrazione=0x7f08000a;
+        public static final int thumbnail=0x7f080019;
+        public static final int title=0x7f08001b;
         public static final int tvProductID=0x7f080000;
+        public static final int tvTotalPrice=0x7f080001;
     }
     public static final class layout {
         public static final int activity_camera=0x7f030000;
@@ -86,6 +90,7 @@ public final class R {
         public static final int tab=0x7f070004;
     }
     public static final class string {
+        public static final int Euro=0x7f050019;
         public static final int Loading=0x7f050013;
         public static final int accedi=0x7f050007;
         public static final int action_settings=0x7f050001;
@@ -99,6 +104,8 @@ public final class R {
         public static final int registrazioneNome=0x7f050009;
         public static final int registrazioneRegistrati=0x7f05000c;
         public static final int registrazioneRegistrazione=0x7f050008;
+        public static final int tBtnAdd=0x7f05001b;
+        public static final int tBtnContinue=0x7f05001c;
         public static final int tCancelDelete=0x7f050016;
         public static final int tDeleteProduct=0x7f050014;
         public static final int tMessageDelete=0x7f050015;
@@ -110,6 +117,7 @@ public final class R {
         public static final int title_activity_tab=0x7f05000f;
         public static final int title_tab1=0x7f050010;
         public static final int tvProductID=0x7f050012;
+        public static final int tvTotal=0x7f05001a;
         public static final int username=0x7f050004;
     }
     public static final class style {
