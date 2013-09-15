@@ -86,7 +86,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		
 		tv1.setText(productList.get(position).getNome());
 		tv2.setText(productList.get(position).getDescrizione());
-		tvPrice.setText(Double.toString(productList.get(position).getPrezzo())+" Euro");
+		String price=Double.toString(productList.get(position).getPrezzo());
+		price=price.replace('.',',');
+		
+		tvPrice.setText(price+" \u20ac");
 		
 	
 		

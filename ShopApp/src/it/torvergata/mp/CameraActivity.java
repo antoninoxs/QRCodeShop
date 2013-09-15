@@ -55,6 +55,7 @@ import android.widget.Toast;
 
 public class CameraActivity extends ListActivity {
 	List<Product> productList;
+	ProductAdapter adapter ;
 	private DrawableManager drawab; 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,25 +64,29 @@ public class CameraActivity extends ListActivity {
 
 		final ListView list = (ListView) findViewById(id.list);
 		productList = new ArrayList<Product>();
-		setListAdapter(new ProductAdapter(getApplicationContext(),
-				R.layout.new_list_item, productList));
+		adapter =new ProductAdapter(getApplicationContext(),
+				R.layout.new_list_item, productList);
+		setListAdapter(adapter);
 		
 		
 		list.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
+					final int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				
-				final AlertDialog dialogBox = DeleteDialog(productList.get(arg2));
+				final AlertDialog dialogBox = DeleteDialog(arg2);
 				dialogBox.show();
 				Button deleteButton = dialogBox
 						.getButton(DialogInterface.BUTTON_POSITIVE);
 				deleteButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-							dialogBox.dismiss();
+						productList.remove(arg2);
+						adapter.notifyDataSetChanged();
+						dialogBox.dismiss();
+							
 					}
 				});
 				
@@ -93,15 +98,17 @@ public class CameraActivity extends ListActivity {
 		
 
 	}
-	private AlertDialog DeleteDialog(Product prod) {
+	private AlertDialog DeleteDialog(final int position) {
+		Product prod = productList.get(position);
 		AlertDialog alertDialog = new AlertDialog.Builder(this)
-				.setTitle(getString(R.string.tMessageDeleteProd)+" "+prod.getNome())
+				.setTitle(prod.getNome())
 				.setMessage(R.string.tMessageDelete)
 				.setIcon(Const.resize(prod.getImmagine()))
 				.setPositiveButton(R.string.tDeleteProduct,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
+								
 							}
 						})
 				.setNegativeButton(R.string.tCancelDelete,
@@ -109,6 +116,7 @@ public class CameraActivity extends ListActivity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								dialog.dismiss();
+								
 							}
 						}).create();
 		return alertDialog;
