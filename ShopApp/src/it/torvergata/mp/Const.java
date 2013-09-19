@@ -5,8 +5,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 public class Const {
-	public static final String IPADDRESS = "192.168.1.100";
-	public static final String IMAGE_URL = "http://192.168.1.100/images/";
+	public static final String IPADDRESS = "192.168.1.127";
+	public static final String IMAGE_URL = "http://192.168.1.127/images/";
 
 	public static final Drawable resize(Drawable image) {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();

@@ -63,6 +63,10 @@
             android:name="it.torvergata.mp.CameraActivity"
             android:label="@string/title_activity_camera" >
         </activity>
+        <activity
+            android:name="it.torvergata.mp.ProductDectailActivity"
+            android:label="@string/title_activity_product_dectail" >
+        </activity>
     </application>
 
 </manifest>

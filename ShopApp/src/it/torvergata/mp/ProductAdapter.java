@@ -74,21 +74,23 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = mInflater.inflate(mViewResourceId, null);
 		
-		TextView tv1 = (TextView)convertView.findViewById(R.id.title);
-		TextView tv2 = (TextView)convertView.findViewById(R.id.description);
+		TextView tvTitle = (TextView)convertView.findViewById(R.id.title);
+		TextView tvDescription = (TextView)convertView.findViewById(R.id.description);
 		ImageView iv = (ImageView)convertView.findViewById(R.id.list_image);
+		TextView tvQuantitative = (TextView)convertView.findViewById(R.id.tvQuantitative);
 		
 		
 		
 		
 		TextView tvPrice = (TextView)convertView.findViewById(R.id.price);
 		
-		tv1.setText(productList.get(position).getNome());
-		tv2.setText(productList.get(position).getDescrizione());
-		String price=Double.toString(productList.get(position).getPrezzo());
+		tvTitle.setText(productList.get(position).getNome());
+		tvDescription.setText(productList.get(position).getDescrizione());
+		tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
+		String price=Double.toString(productList.get(position).getPrezzoTotale());
 		price=price.replace('.',',');
 		
-		tvPrice.setText(price+"\u20ac");
+		tvPrice.setText(price+" "+"\u20ac"+" ");
 		
 	
 		

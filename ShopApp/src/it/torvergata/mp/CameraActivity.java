@@ -37,6 +37,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,6 +49,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -68,15 +70,27 @@ public class CameraActivity extends ListActivity {
 		totalPrice = (TextView) findViewById(R.id.tvTotalPrice);
 		Button btnAdd = (Button) findViewById(R.id.btnAdd);
 		Button btnContinue = (Button) findViewById(R.id.btnContinue);
-				
+		final Context ctx =this;
+		
 		startQrCodeScan();
 
 		final ListView list = (ListView) findViewById(id.list);
 		productList = new ListProduct();
-		adapter =new ProductAdapter(getApplicationContext(),
+		adapter =new ProductAdapter(ctx,
 				R.layout.new_list_item, productList);
 		setListAdapter(adapter);
 		
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(ctx, ProductDectailActivity.class);
+				intent.putExtra("PRODUCT", productList.get(arg2));
+				startActivity(intent);
+				
+			}
+		});
 		
 		list.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -181,11 +195,19 @@ public class CameraActivity extends ListActivity {
 				String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
 				// Handle successful scan
 				Log.i("Contenuto: ", contents);
-				
-				LoadDataProduct task = new LoadDataProduct();
-				task.execute(contents);
-				startQrCodeScan();
-			} else if (resultCode == RESULT_CANCELED) {
+				Product tProd =productList.searchById(Integer.parseInt(contents));
+				if (tProd!=null){
+					tProd.increment();
+					productList.setIncrementTotalPrice(tProd.getPrezzoUnitario());
+					startQrCodeScan();
+				}
+				else{
+					LoadDataProduct task = new LoadDataProduct();
+					task.execute(contents);
+					startQrCodeScan();
+				}
+			}
+				else if (resultCode == RESULT_CANCELED) {
 				setTotalPrice(totalPrice);
 				Toast.makeText(CameraActivity.this, "Fine Acquisizione",
 						Toast.LENGTH_SHORT).show();
@@ -226,62 +248,69 @@ public class CameraActivity extends ListActivity {
 		protected Void doInBackground(String... params) {
 			String productId = params[0];
 			
-			final Product tempProd = new Product(Integer.parseInt(productId));
+			Product tProd =productList.searchById(Integer.parseInt(productId));
+			if (tProd!=null){
+				tProd.increment();
+			}
+			else{
 			
-			final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("id",productId));
-			
-			
-			try {
-	        	HttpClient httpclient = new DefaultHttpClient();
-	    		HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
-	    				+ "/info_download.php");
-	    		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-	    		
-				HttpResponse response = httpclient.execute(httppost);
-				String jsonResult = inputStreamToString(
-						response.getEntity().getContent()).toString();
+				final Product tempProd = new Product(Integer.parseInt(productId));
 				
-				Log.i("JsonResult", "["+jsonResult+"]");
-				
-				JSONObject object = new JSONObject(jsonResult);
-
-				String idProdotto = 	object.getString("idProdotto");
-				String nome = 			object.getString("nome");
-				double prezzo =			object.getDouble("prezzo");
-				String scadenza = 		object.getString("scadenza");
-				String disponibilita = 	object.getString("disponibilita");
-				String descrizione = 	object.getString("descrizione");
-				String fileImmagine = 	object.getString("file_immagine");
+				final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				nameValuePairs.add(new BasicNameValuePair("id",productId));
 				
 				
-				Log.i("idProdotto: ", idProdotto );
-				Log.i("nome: ", nome );
-				Log.i("prezzo: ", Double.toString(prezzo));
-				Log.i("scadenza: ", scadenza );
-				Log.i("descrizione: ", descrizione );
-				Log.i("disponibilita: ", disponibilita );
-				Log.i("file_immagine: ", fileImmagine );
-
-				tempProd.setId(Integer.parseInt(idProdotto));
-				tempProd.setNome(nome);
-				tempProd.setPrezzo(prezzo);
-				tempProd.setScadenza(scadenza);
-				tempProd.setDescrizione(descrizione);
-				tempProd.setDisponibilita(Integer.parseInt(disponibilita));
-				tempProd.setFileImmagine(fileImmagine);
-				
-				productList.add(tempProd);
-	    		
-	        } catch (JSONException e) {
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}catch (Exception e) {
-	        	 Log.e("log_tag", "Error in http connection: "+e.toString());
-	        }
+				try {
+		        	HttpClient httpclient = new DefaultHttpClient();
+		    		HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
+		    				+ "/info_download.php");
+		    		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		    		
+					HttpResponse response = httpclient.execute(httppost);
+					String jsonResult = inputStreamToString(
+							response.getEntity().getContent()).toString();
+					
+					Log.i("JsonResult", "["+jsonResult+"]");
+					
+					JSONObject object = new JSONObject(jsonResult);
+	
+					String idProdotto = 	object.getString("idProdotto");
+					String nome = 			object.getString("nome");
+					double prezzo =			object.getDouble("prezzo");
+					String scadenza = 		object.getString("scadenza");
+					String disponibilita = 	object.getString("disponibilita");
+					String descrizione = 	object.getString("descrizione");
+					String fileImmagine = 	object.getString("file_immagine");
+					
+					
+					Log.i("idProdotto: ", idProdotto );
+					Log.i("nome: ", nome );
+					Log.i("prezzo: ", Double.toString(prezzo));
+					Log.i("scadenza: ", scadenza );
+					Log.i("descrizione: ", descrizione );
+					Log.i("disponibilita: ", disponibilita );
+					Log.i("file_immagine: ", fileImmagine );
+	
+					tempProd.setId(Integer.parseInt(idProdotto));
+					tempProd.setNome(nome);
+					tempProd.setPrezzoUnitario(prezzo);
+					tempProd.setScadenza(scadenza);
+					tempProd.setDescrizione(descrizione);
+					tempProd.setDisponibilita(Integer.parseInt(disponibilita));
+					tempProd.setFileImmagine(fileImmagine);
+					
+					productList.add(tempProd);
+		    		
+		        } catch (JSONException e) {
+					e.printStackTrace();
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}catch (Exception e) {
+		        	 Log.e("log_tag", "Error in http connection: "+e.toString());
+		        }
+			}
 			// TODO Auto-generated method stub
 			return null;
 		};
