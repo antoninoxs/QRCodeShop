@@ -1,5 +1,11 @@
-package it.torvergata.mp;
+package it.torvergata.mp.activity;
 
+
+import it.torvergata.mp.Const;
+import it.torvergata.mp.R;
+import it.torvergata.mp.R.id;
+import it.torvergata.mp.R.layout;
+import it.torvergata.mp.R.menu;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

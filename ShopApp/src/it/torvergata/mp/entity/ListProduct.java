@@ -1,4 +1,5 @@
-package it.torvergata.mp;
+package it.torvergata.mp.entity;
+
 
 import java.util.ArrayList;
 import java.util.List;

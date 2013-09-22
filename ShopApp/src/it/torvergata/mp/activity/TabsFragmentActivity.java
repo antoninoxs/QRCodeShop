@@ -1,5 +1,10 @@
-package it.torvergata.mp;
+package it.torvergata.mp.activity;
 
+
+import it.torvergata.mp.R;
+import it.torvergata.mp.R.drawable;
+import it.torvergata.mp.R.id;
+import it.torvergata.mp.R.layout;
 
 import java.util.HashMap;
 

@@ -1,5 +1,8 @@
-package it.torvergata.mp;
+package it.torvergata.mp.activity;
 
+import it.torvergata.mp.R;
+import it.torvergata.mp.R.id;
+import it.torvergata.mp.R.layout;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

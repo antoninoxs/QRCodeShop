@@ -114,6 +114,7 @@ public final class R {
         public static final int registrazioneNome=0x7f050009;
         public static final int registrazioneRegistrati=0x7f05000c;
         public static final int registrazioneRegistrazione=0x7f050008;
+        public static final int tBlankUserOrPassword=0x7f050021;
         public static final int tBtnAdd=0x7f05001b;
         public static final int tBtnContinue=0x7f05001c;
         public static final int tCancelDelete=0x7f050016;
@@ -124,6 +125,7 @@ public final class R {
         public static final int tPrice=0x7f05001f;
         public static final int tQuantitative=0x7f050020;
         public static final int tTitleBoxDeleteProduct=0x7f050017;
+        public static final int tUserPasswordWrong=0x7f050022;
         public static final int title_activity_camera=0x7f050011;
         public static final int title_activity_menu=0x7f05000e;
         public static final int title_activity_product_dectail=0x7f05001d;

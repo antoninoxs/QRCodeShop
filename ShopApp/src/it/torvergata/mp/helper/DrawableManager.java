@@ -1,6 +1,6 @@
 
 
-package it.torvergata.mp;
+package it.torvergata.mp.helper;
 
 /*
  Licensed to the Apache Software Foundation (ASF) under one
@@ -20,6 +20,9 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 */
+import it.torvergata.mp.Const;
+import it.torvergata.mp.entity.Product;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;

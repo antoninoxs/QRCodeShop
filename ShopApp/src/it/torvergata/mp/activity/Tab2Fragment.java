@@ -1,7 +1,9 @@
-package it.torvergata.mp;
+package it.torvergata.mp.activity;
 
 
  
+import it.torvergata.mp.R;
+import it.torvergata.mp.R.layout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

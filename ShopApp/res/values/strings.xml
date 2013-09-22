@@ -34,5 +34,7 @@
     <string name="tDescription">Descrizione:</string>
     <string name="tPrice">Prezzo:</string>
     <string name="tQuantitative">Quantità:</string>
+    <string name="tBlankUserOrPassword">Username o Password vuoti</string>
+    <string name="tUserPasswordWrong">Username e pasword errati</string>
 
 </resources>

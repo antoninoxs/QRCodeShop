@@ -1,5 +1,11 @@
-package it.torvergata.mp;
+package it.torvergata.mp.activity;
 
+import it.torvergata.mp.R;
+import it.torvergata.mp.R.id;
+import it.torvergata.mp.R.layout;
+import it.torvergata.mp.R.menu;
+import it.torvergata.mp.R.string;
+import it.torvergata.mp.entity.Product;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

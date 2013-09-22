@@ -5,9 +5,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 public class Const {
-	public static final String IPADDRESS = "192.168.1.127";
-	public static final String IMAGE_URL = "http://192.168.1.127/images/";
-
+	
+	public static final String IPADDRESS = "192.168.1.103";
+	public static final String IMAGE_URL = "http://192.168.1.103/images/";
+	
+	//Nome del file per le Preferences
+	public static final String PREFS_NAME = "FilePreferences";
+	
 	public static final Drawable resize(Drawable image) {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();
 	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 130, 130, false);

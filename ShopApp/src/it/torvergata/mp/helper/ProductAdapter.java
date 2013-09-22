@@ -1,4 +1,4 @@
-package it.torvergata.mp;
+package it.torvergata.mp.helper;
 
 /**
  * This file is part of AdvancedListViewDemo.
@@ -22,6 +22,11 @@ package it.torvergata.mp;
  * The license text is available online and in the LICENSE file accompanying the distribution
  * of this program.
  */
+
+import it.torvergata.mp.R;
+import it.torvergata.mp.R.id;
+import it.torvergata.mp.entity.ListProduct;
+import it.torvergata.mp.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;

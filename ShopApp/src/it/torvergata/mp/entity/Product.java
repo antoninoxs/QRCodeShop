@@ -1,4 +1,4 @@
-package it.torvergata.mp;
+package it.torvergata.mp.entity;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
