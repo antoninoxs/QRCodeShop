@@ -148,7 +148,6 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(getBaseContext(), Registrazione.class);
 				startActivity(intent);
-				finish();
 			}
 		});
 	
@@ -184,7 +183,7 @@ public class MainActivity extends Activity {
 	 */
 	public class LoadData extends AsyncTask<Void, Void, Void> {
 	    ProgressDialog progressDialog;
-	    //declare other objects as per your need
+	    
 	    @Override
 	    protected void onPreExecute()
 	    {

@@ -14,17 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProductDectailActivity extends Activity {
-	ImageView ivImage;
-	TextView tvTitle; 
-	TextView tvDescription; 
-	TextView tvPrice; 
-	TextView tvQuantitative;
-	TextView tvSimplePrice;
+	private ImageView ivImage;
+	private TextView tvTitle,tvDescription,tvSimplePrice,tvQuantitative,tvPrice;
 	@Override
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_detail);
-
+		
+		//Inizializzazione
 		ivImage = (ImageView) findViewById(R.id.ivDetailImage);
 		tvTitle = (TextView) findViewById(R.id.tvTitleDetail);
 		tvDescription = (TextView) findViewById(R.id.tvDescriptionDetail);
@@ -32,12 +30,13 @@ public class ProductDectailActivity extends Activity {
 		tvQuantitative = (TextView) findViewById(R.id.tvQuantitativeDetail);
 		tvSimplePrice = (TextView) findViewById(R.id.tvSimplePrice);
 
+		//Cattura del prodotto
 		Intent i = getIntent();
 		Product tempProduct = (Product) i.getParcelableExtra("PRODUCT");
 
+		//Costruzione della View
 		String price =Double.toString(tempProduct.getPrezzoTotale());
 		price=price.replace('.',',');
-		
 		ivImage.setImageDrawable(tempProduct.getImmagine());
 		tvTitle.setText(tempProduct.getNome());
 		tvDescription.setText(tempProduct.getDescrizione());

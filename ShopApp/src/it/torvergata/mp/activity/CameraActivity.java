@@ -1,5 +1,6 @@
 package it.torvergata.mp.activity;
 import it.torvergata.mp.Const;
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
@@ -184,22 +185,7 @@ public class CameraActivity extends ListActivity {
 	 * @param is
 	 * @return answer
 	 */
-	private StringBuilder inputStreamToString(InputStream is) {
-		String rLine = "";
-		StringBuilder answer = new StringBuilder();
-		BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
-		try {
-			while ((rLine = rd.readLine()) != null) {
-				answer.append(rLine);
-			}
-		}
-
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		return answer;
-	}
+	
 
 	/**
 	 * Metodo per il lancio della scansione dei QrCode
@@ -303,7 +289,7 @@ public class CameraActivity extends ListActivity {
 				HttpResponse response = httpclient.execute(httppost);
 				
 				//Conersione da inputString a JsonResult
-				String jsonResult = inputStreamToString(
+				String jsonResult =GenericFunctions.inputStreamToString(
 						response.getEntity().getContent()).toString();
 				Log.i("JsonResult", "[" + jsonResult + "]");
 				JSONObject object = new JSONObject(jsonResult);

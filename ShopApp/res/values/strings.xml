@@ -36,5 +36,7 @@
     <string name="tQuantitative">Quantità:</string>
     <string name="tBlankUserOrPassword">Username o Password vuoti</string>
     <string name="tUserPasswordWrong">Username e pasword errati</string>
+    <string name="tBlankField">Uno dei campi necessari alla registrazione è vuoto</string>
+    <string name="tPasswordMismatch">Le password non coincidono</string>
 
 </resources>
