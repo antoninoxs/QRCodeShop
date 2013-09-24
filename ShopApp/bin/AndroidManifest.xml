@@ -28,6 +28,7 @@
         <activity
             android:name="it.torvergata.mp.activity.Registrazione"
             android:label="@string/title_activity_registrazione" 
+ 
             >
         </activity>
         <activity

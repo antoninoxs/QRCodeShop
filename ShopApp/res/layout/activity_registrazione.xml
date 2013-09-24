@@ -2,156 +2,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/radialgradientback"
     android:layout_centerHorizontal="true"
     android:orientation="vertical"
     android:padding="30dp"
     tools:context=".Registrazione" >
 
-    <TextView
-        android:id="@+id/tvTitleRegistration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="25dp"
-        android:text="Registrazione:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp" >
+        android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/TWregistrazioneNome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/registrazioneNome" />
-
-        <EditText
-            android:id="@+id/ETregistrazioneNome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:ems="10" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp" >
-
-        <TextView
-            android:id="@+id/TWregistrazioneCognome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/registrazioneCognome" />
-
-        <EditText
-            android:id="@+id/ETregistrazioneCognome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:ems="10" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp" >
-
-        <TextView
-            android:id="@+id/TWregistrazioneEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/registrazioneEmail" />
-
-        <EditText
-            android:id="@+id/ETregistrazioneEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:ems="10"
-            android:inputType="textEmailAddress" >
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp" >
-
-        <TextView
-            android:id="@+id/TWregistrazioneUsername"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/username" />
-
-        <EditText
-            android:id="@+id/ETregistrazioneUsername"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:ems="10" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp" >
-
-        <TextView
-            android:id="@+id/TWregistrazionePassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/password" />
-
-        <EditText
-            android:id="@+id/ETregistrazionePassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:ems="10"
-            android:inputType="textPassword" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp" >
-
-        <TextView
-            android:id="@+id/TWregistrazionePassword1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="@string/password" />
-
-        <EditText
-            android:id="@+id/ETregistrazionePassword1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <Button
-            android:id="@+id/BregistrazioneRegistrati"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           
-            android:text="@string/registrazioneRegistrati" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvTitleRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="Registrazione:"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
+            <TextView
+                android:id="@+id/TWregistrazioneNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              
+                android:text="@string/registrazioneNome" />
+
+            <EditText
+                android:id="@+id/ETregistrazioneNome"
+              android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/TWregistrazioneCognome"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/registrazioneCognome" />
+
+            <EditText
+                android:id="@+id/ETregistrazioneCognome"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10" />
+
+            <TextView
+                android:id="@+id/TWregistrazioneEmail"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/registrazioneEmail" />
+
+            <EditText
+                android:id="@+id/ETregistrazioneEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/TWregistrazioneUsername"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/username" />
+
+            <EditText
+                android:id="@+id/ETregistrazioneUsername"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10" />
+
+            <TextView
+                android:id="@+id/TWregistrazionePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/password" />
+
+            <EditText
+                android:id="@+id/ETregistrazionePassword"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/TWregistrazionePassword1"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/password" />
+
+            <EditText
+                android:id="@+id/ETregistrazionePassword1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/BregistrazioneRegistrati"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/registrazioneRegistrati" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 
