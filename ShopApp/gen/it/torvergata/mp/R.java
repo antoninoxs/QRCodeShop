@@ -46,6 +46,8 @@ public final class R {
         public static final int ETregistrazionePassword=0x7f08001d;
         public static final int ETregistrazionePassword1=0x7f08001f;
         public static final int ETregistrazioneUsername=0x7f08001b;
+        public static final int EncodeButton=0x7f080024;
+        public static final int ScanButton=0x7f080023;
         public static final int TWregistrazioneCognome=0x7f080007;
         public static final int TWregistrazioneEmail=0x7f080018;
         public static final int TWregistrazioneNome=0x7f080015;
@@ -53,29 +55,31 @@ public final class R {
         public static final int TWregistrazionePassword1=0x7f08001e;
         public static final int TWregistrazioneRegistrazione=0x7f080006;
         public static final int TWregistrazioneUsername=0x7f08001a;
-        public static final int action_settings=0x7f080028;
+        public static final int action_settings=0x7f08002c;
         public static final int btnAdd=0x7f080003;
         public static final int btnContinue=0x7f080004;
-        public static final int btnQrCode=0x7f080027;
+        public static final int btnQrCode=0x7f08002b;
         public static final int btnSalta=0x7f08000b;
         public static final int buttonAccess=0x7f080009;
-        public static final int description=0x7f080024;
+        public static final int cameraPreview=0x7f080021;
+        public static final int description=0x7f080028;
         public static final int editTextPassword=0x7f080008;
         public static final int editTextUsername=0x7f080005;
         public static final int ivDetailImage=0x7f08000d;
-        public static final int list_image=0x7f080022;
-        public static final int option_text=0x7f080021;
-        public static final int price=0x7f080025;
+        public static final int list_image=0x7f080026;
+        public static final int option_text=0x7f080025;
+        public static final int price=0x7f080029;
         public static final int realtabcontent=0x01010000;
+        public static final int scanText=0x7f080022;
         public static final int scrollView1=0x7f080013;
         public static final int textViewRegistrazione=0x7f08000a;
         public static final int thumbnail=0x7f08000c;
-        public static final int title=0x7f080023;
+        public static final int title=0x7f080027;
         public static final int tvDescriptionDetail=0x7f080012;
         public static final int tvDesriptionTitle=0x7f080011;
         public static final int tvPriceDetail=0x7f080002;
         public static final int tvProductID=0x7f080000;
-        public static final int tvQuantitative=0x7f080026;
+        public static final int tvQuantitative=0x7f08002a;
         public static final int tvQuantitativeDetail=0x7f08000f;
         public static final int tvSimplePrice=0x7f080010;
         public static final int tvTitleDetail=0x7f08000e;
@@ -87,12 +91,13 @@ public final class R {
         public static final int activity_main=0x7f030001;
         public static final int activity_product_detail=0x7f030002;
         public static final int activity_registrazione=0x7f030003;
-        public static final int main_list_item=0x7f030004;
-        public static final int new_list_item=0x7f030005;
-        public static final int tab_frag1_layout=0x7f030006;
-        public static final int tab_frag2_layout=0x7f030007;
-        public static final int tab_frag3_layout=0x7f030008;
-        public static final int tabs_layout=0x7f030009;
+        public static final int activity_zbar=0x7f030004;
+        public static final int main_list_item=0x7f030005;
+        public static final int new_list_item=0x7f030006;
+        public static final int tab_frag1_layout=0x7f030007;
+        public static final int tab_frag2_layout=0x7f030008;
+        public static final int tab_frag3_layout=0x7f030009;
+        public static final int tabs_layout=0x7f03000a;
     }
     public static final class menu {
         public static final int camera=0x7f070000;
@@ -101,6 +106,7 @@ public final class R {
         public static final int product_dectail=0x7f070003;
         public static final int registrazione=0x7f070004;
         public static final int tab=0x7f070005;
+        public static final int zbar=0x7f070006;
     }
     public static final class string {
         public static final int Euro=0x7f050019;
@@ -137,6 +143,7 @@ public final class R {
         public static final int title_activity_product_dectail=0x7f05001d;
         public static final int title_activity_registrazione=0x7f05000d;
         public static final int title_activity_tab=0x7f05000f;
+        public static final int title_activity_zbar=0x7f050026;
         public static final int title_tab1=0x7f050010;
         public static final int tvProductID=0x7f050012;
         public static final int tvTotal=0x7f05001a;

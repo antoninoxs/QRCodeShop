@@ -51,7 +51,7 @@ public class Tab1Fragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Log.i("SCAN MODE", "Lancio Activity Camera");
-				Intent intent = new Intent(getActivity(), CameraActivity.class);
+				Intent intent = new Intent(getActivity(), ZbarActivity.class);
 				startActivity(intent);
 			}
 		});

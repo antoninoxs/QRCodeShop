@@ -39,5 +39,6 @@
     <string name="tBlankField">Uno dei campi necessari alla registrazione è vuoto</string>
     <string name="tPasswordMismatch">Le password non coincidono</string>
     <string name="tRegistration">Re</string>
+    <string name="title_activity_zbar">ZbarActivity</string>
 
 </resources>
