@@ -26,6 +26,7 @@ import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.CameraActivity;
 import it.torvergata.mp.activity.CameraPreview;
+import it.torvergata.mp.activity.MainActivity;
 import it.torvergata.mp.activity.ProductDectailActivity;
 import it.torvergata.mp.activity.CameraActivity.LoadDataProduct;
 import it.torvergata.mp.entity.ListProduct;
@@ -37,6 +38,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
@@ -45,6 +47,7 @@ import android.hardware.Camera.Size;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -89,7 +92,7 @@ public class TabScanModeScanningFragment extends Fragment {
 	 * *******************
 	 */
 	private ListProduct productList;
-
+	private Handler handler;
 	/***
 	 * *****************
 	 * 
@@ -129,6 +132,17 @@ public class TabScanModeScanningFragment extends Fragment {
 			}
 		});
 
+		//Handler per il messaggio di risposta del Server, proveniente dal Thread.
+		handler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                String res=(String) message.obj;
+                scanText.setText("Ultimo prodotto Scansionato: " +res);
+					
+                
+            }
+		};
+		
 		if (container == null) {
 			// We have different layouts, and in one of them this
 			// fragment's containing frame doesn't exist. The fragment
@@ -212,7 +226,7 @@ public class TabScanModeScanningFragment extends Fragment {
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
 					String contents = sym.getData();
-					scanText.setText("QrCode result: " + contents);
+					scanText.setText("Ultimo prodotto Scansionato: Loading...");
 					barcodeScanned = true;
 
 					Product tProd = productList.searchById(Integer
@@ -221,18 +235,16 @@ public class TabScanModeScanningFragment extends Fragment {
 						tProd.increment();
 						productList.setIncrementTotalPrice(tProd
 								.getPrezzoUnitario());
+						scanText.setText("Ultimo prodotto Scansionato: " + tProd.getNome());
+							
 
 					} else {
 						LoadDataProduct task = new LoadDataProduct();
 						task.execute(contents);
+							
 					}
 					
-//					barcodeScanned = false;
-//					scanText.setText("Scanning...");
-//					mCamera.setPreviewCallback(previewCb);
-//					mCamera.startPreview();
-//					previewing = true;
-//					mCamera.autoFocus(autoFocusCB);
+
 				}
 			}
 
@@ -315,7 +327,11 @@ public class TabScanModeScanningFragment extends Fragment {
 
 				// Aggiunta del nuovo prodotto alla lista dei prodotti
 				productList.add(tempProd);
-
+				
+				//Comunicazione al Thread principale del nome del prodotto
+				Message message = handler.obtainMessage(1, nome);
+				handler.sendMessage(message);
+				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (ClientProtocolException e) {

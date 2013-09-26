@@ -6,8 +6,8 @@ import android.graphics.drawable.Drawable;
 
 public class Const {
 	
-	public static final String IPADDRESS = "192.168.1.101";
-	public static final String IMAGE_URL = "http://192.168.1.101/images/";
+	public static final String IPADDRESS = "192.168.1.113";
+	public static final String IMAGE_URL = "http://192.168.1.113/images/";
 	
 	//Nome del file per le Preferences
 	public static final String PREFS_NAME = "FilePreferences";
