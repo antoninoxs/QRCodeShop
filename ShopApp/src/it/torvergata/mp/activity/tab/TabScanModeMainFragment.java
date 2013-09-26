@@ -1,4 +1,4 @@
-package it.torvergata.mp.activity;
+package it.torvergata.mp.activity.tab;
 
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
  * @author mwho
  * 
  */
-public class Tab1Fragment extends Fragment {
+public class TabScanModeMainFragment extends Fragment {
 	/**
 	 * (non-Javadoc)
 	 * 
@@ -55,7 +55,7 @@ public class Tab1Fragment extends Fragment {
 				
 				FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment fragment = new Tab12Fragment();
+                Fragment fragment = new TabScanModeScanningFragment();
                 fragmentTransaction.replace(R.id.realtabcontent, fragment);
                 fragmentTransaction.commit();
 				

@@ -1,4 +1,4 @@
-package it.torvergata.mp.activity;
+package it.torvergata.mp.activity.tab;
 
 import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Image;
@@ -8,6 +8,7 @@ import net.sourceforge.zbar.SymbolSet;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.activity.CameraPreview;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -32,7 +33,7 @@ import android.widget.TextView;
  * @author mwho
  * 
  */
-public class Tab12Fragment extends Fragment {
+public class TabScanModeScanningFragment extends Fragment {
 
 	private Camera mCamera;
     private CameraPreview mPreview;

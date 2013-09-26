@@ -1,10 +1,12 @@
-package it.torvergata.mp.activity;
+package it.torvergata.mp.activity.tab;
 
 
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.activity.Tab2Fragment;
+import it.torvergata.mp.activity.Tab3Fragment;
 
 import java.util.HashMap;
 
@@ -111,7 +113,7 @@ public class TabsFragmentActivity extends FragmentActivity implements TabHost.On
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup();
         TabInfo tabInfo = null;
-        TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab1").setIndicator("Scan Mode"), ( tabInfo = new TabInfo("Tab1", Tab1Fragment.class, args)));
+        TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab1").setIndicator("Scan Mode"), ( tabInfo = new TabInfo("Tab1", TabScanModeMainFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
         TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab2").setIndicator("Catalogo"), ( tabInfo = new TabInfo("Tab2", Tab2Fragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
