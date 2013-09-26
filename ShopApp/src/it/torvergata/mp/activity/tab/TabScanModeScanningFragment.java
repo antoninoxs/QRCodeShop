@@ -205,9 +205,9 @@ public class TabScanModeScanningFragment extends Fragment {
 			int result = scanner.scanImage(barcode);
 
 			if (result != 0) {
-				previewing = false;
-				mCamera.setPreviewCallback(null);
-				mCamera.stopPreview();
+//				previewing = false;
+//				mCamera.setPreviewCallback(null);
+//				mCamera.stopPreview();
 
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
@@ -226,14 +226,16 @@ public class TabScanModeScanningFragment extends Fragment {
 						LoadDataProduct task = new LoadDataProduct();
 						task.execute(contents);
 					}
+					
+//					barcodeScanned = false;
+//					scanText.setText("Scanning...");
+//					mCamera.setPreviewCallback(previewCb);
+//					mCamera.startPreview();
+//					previewing = true;
+//					mCamera.autoFocus(autoFocusCB);
 				}
 			}
-			barcodeScanned = false;
-			scanText.setText("Scanning...");
-			mCamera.setPreviewCallback(previewCb);
-			mCamera.startPreview();
-			previewing = true;
-			mCamera.autoFocus(autoFocusCB);
+
 		}
 	};
 
