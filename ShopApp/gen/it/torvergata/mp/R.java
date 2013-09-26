@@ -46,7 +46,7 @@ public final class R {
         public static final int ETregistrazionePassword=0x7f08001d;
         public static final int ETregistrazionePassword1=0x7f08001f;
         public static final int ETregistrazioneUsername=0x7f08001b;
-        public static final int ScanButton=0x7f080024;
+        public static final int FinishScanButton=0x7f080024;
         public static final int TWregistrazioneCognome=0x7f080007;
         public static final int TWregistrazioneEmail=0x7f080018;
         public static final int TWregistrazioneNome=0x7f080015;
@@ -130,6 +130,7 @@ public final class R {
         public static final int tCancelDelete=0x7f050016;
         public static final int tDeleteProduct=0x7f050014;
         public static final int tDescription=0x7f05001e;
+        public static final int tFinishScan=0x7f050028;
         public static final int tMessageDelete=0x7f050015;
         public static final int tMessageDeleteProd=0x7f050018;
         public static final int tPasswordMismatch=0x7f050024;

@@ -201,7 +201,7 @@ public class MainActivity extends Activity {
 	    	 
 			 //Connessione al Server
 			 HttpClient httpclient = new DefaultHttpClient();
-		     HttpPost httppost = new HttpPost("http://"+Const.IPADDRESS+"/login.php");
+		     HttpPost httppost = new HttpPost ("http://"+Const.IPADDRESS+"/login.php");
 			try {
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 

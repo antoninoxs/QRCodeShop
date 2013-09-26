@@ -68,7 +68,7 @@ public class ZbarActivity extends Activity implements OnClickListener
         
         scanText = (TextView)findViewById(R.id.scanText);
 
-        scanButton = (Button)findViewById(R.id.ScanButton);
+        scanButton = (Button)findViewById(R.id.FinishScanButton);
         
         scanButton.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {

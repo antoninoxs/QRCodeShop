@@ -32,11 +32,12 @@
       android:text="Scanning..." />
 
   <Button
-      android:id="@+id/ScanButton"
+      android:id="@+id/FinishScanButton"
       android:layout_width="wrap_content"
       android:layout_height="0dp"
       android:layout_gravity="center"
       android:layout_weight="1.35"
-      android:text="Scan" />
+      android:text="@string/tFinishScan"
+      android:background="@drawable/gradient_back" />
 
 </LinearLayout>

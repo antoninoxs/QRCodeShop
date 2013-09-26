@@ -49,6 +49,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +78,7 @@ public class TabScanModeScanningFragment extends Fragment {
 	private LinearLayout mLinearLayout;
 
 	TextView scanText;
-	Button scanButton;
+	Button FinishScanButton;
 	Button encodeButton;
 
 	ImageScanner scanner;
@@ -117,18 +119,32 @@ public class TabScanModeScanningFragment extends Fragment {
 		
 		scanText = (TextView) mLinearLayout.findViewById(R.id.scanText);
 
-		scanButton = (Button) mLinearLayout.findViewById(R.id.ScanButton);
+		FinishScanButton = (Button) mLinearLayout.findViewById(R.id.FinishScanButton);
 
-		scanButton.setOnClickListener(new OnClickListener() {
+		FinishScanButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				if (barcodeScanned) {
-					barcodeScanned = false;
-					scanText.setText("Scanning...");
-					mCamera.setPreviewCallback(previewCb);
-					mCamera.startPreview();
-					previewing = true;
-					mCamera.autoFocus(autoFocusCB);
+//				if (barcodeScanned) {
+//					barcodeScanned = false;
+//					scanText.setText("Scanning...");
+//					mCamera.setPreviewCallback(previewCb);
+//					mCamera.startPreview();
+//					previewing = true;
+//					mCamera.autoFocus(autoFocusCB);
+//				}
+				previewing = false;
+				mCamera.setPreviewCallback(null);
+				mCamera.stopPreview();
+				FrameLayout preview = (FrameLayout) mLinearLayout
+						.findViewById(R.id.cameraPreview);
+
+				if (preview.getChildCount() > 0) {
+					preview.removeAllViews();
 				}
+				FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment fragment = new TabScanModeListFragment();
+                fragmentTransaction.replace(R.id.realtabcontent, fragment);
+                fragmentTransaction.commit();
 			}
 		});
 
