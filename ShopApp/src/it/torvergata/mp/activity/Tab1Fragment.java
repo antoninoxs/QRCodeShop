@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,9 +52,16 @@ public class Tab1Fragment extends Fragment {
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.i("SCAN MODE", "Lancio Activity Camera");
-				Intent intent = new Intent(getActivity(), ZbarActivity.class);
-				startActivity(intent);
+				
+				FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment fragment = new Tab12Fragment();
+                fragmentTransaction.replace(R.id.realtabcontent, fragment);
+                fragmentTransaction.commit();
+				
+//				Log.i("SCAN MODE", "Lancio Activity Camera");
+//				Intent intent = new Intent(getActivity(), ZbarActivity.class);
+//				startActivity(intent);
 			}
 		});
 		return mLinearLayout;
