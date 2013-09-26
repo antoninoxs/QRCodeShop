@@ -40,5 +40,6 @@
     <string name="tPasswordMismatch">Le password non coincidono</string>
     <string name="tRegistration">Re</string>
     <string name="title_activity_zbar">ZbarActivity</string>
+    <string name="tScanQrCode">Scansionare i QrCode desiderati</string>
 
 </resources>

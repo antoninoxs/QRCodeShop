@@ -5,8 +5,6 @@ import it.torvergata.mp.R;
 import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
-import it.torvergata.mp.activity.Tab2Fragment;
-import it.torvergata.mp.activity.Tab3Fragment;
 
 import java.util.HashMap;
 

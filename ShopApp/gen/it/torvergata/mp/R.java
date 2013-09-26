@@ -46,8 +46,7 @@ public final class R {
         public static final int ETregistrazionePassword=0x7f08001d;
         public static final int ETregistrazionePassword1=0x7f08001f;
         public static final int ETregistrazioneUsername=0x7f08001b;
-        public static final int EncodeButton=0x7f080024;
-        public static final int ScanButton=0x7f080023;
+        public static final int ScanButton=0x7f080024;
         public static final int TWregistrazioneCognome=0x7f080007;
         public static final int TWregistrazioneEmail=0x7f080018;
         public static final int TWregistrazioneNome=0x7f080015;
@@ -61,7 +60,7 @@ public final class R {
         public static final int btnQrCode=0x7f08002b;
         public static final int btnSalta=0x7f08000b;
         public static final int buttonAccess=0x7f080009;
-        public static final int cameraPreview=0x7f080021;
+        public static final int cameraPreview=0x7f080022;
         public static final int description=0x7f080028;
         public static final int editTextPassword=0x7f080008;
         public static final int editTextUsername=0x7f080005;
@@ -70,8 +69,9 @@ public final class R {
         public static final int option_text=0x7f080025;
         public static final int price=0x7f080029;
         public static final int realtabcontent=0x01010000;
-        public static final int scanText=0x7f080022;
+        public static final int scanText=0x7f080023;
         public static final int scrollView1=0x7f080013;
+        public static final int textView1=0x7f080021;
         public static final int textViewRegistrazione=0x7f08000a;
         public static final int thumbnail=0x7f08000c;
         public static final int title=0x7f080027;
@@ -136,6 +136,7 @@ public final class R {
         public static final int tPrice=0x7f05001f;
         public static final int tQuantitative=0x7f050020;
         public static final int tRegistration=0x7f050025;
+        public static final int tScanQrCode=0x7f050027;
         public static final int tTitleBoxDeleteProduct=0x7f050017;
         public static final int tUserPasswordWrong=0x7f050022;
         public static final int title_activity_camera=0x7f050011;

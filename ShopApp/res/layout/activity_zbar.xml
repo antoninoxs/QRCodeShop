@@ -3,33 +3,40 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:background="@drawable/radialgradientback">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.35"
+        android:padding="10dp"
+        android:text="@string/tScanQrCode"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
   <FrameLayout
-    android:id="@+id/cameraPreview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-  />
+      android:id="@+id/cameraPreview"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="10"
+
+      android:padding="10dp" />
 
   <TextView
-    android:id="@+id/scanText"
-    android:text="Scanning..."
-    android:layout_height="wrap_content" 
-    android:layout_width="match_parent">
-  </TextView>
+      android:id="@+id/scanText"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1.35"
+      android:padding="10dp"
+      android:text="Scanning..." />
+
   <Button
-    android:id="@+id/ScanButton"
-    android:text="Scan"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-  />
-  <Button
-    android:id="@+id/EncodeButton"
-    android:text="Encode"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-  />
+      android:id="@+id/ScanButton"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_gravity="center"
+      android:layout_weight="1.35"
+      android:text="Scan" />
+
 </LinearLayout>
