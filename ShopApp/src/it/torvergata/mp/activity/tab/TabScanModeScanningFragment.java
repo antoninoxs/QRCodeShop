@@ -59,8 +59,10 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -76,10 +78,11 @@ public class TabScanModeScanningFragment extends Fragment {
 	private CameraPreview mPreview;
 	private Handler autoFocusHandler;
 	private LinearLayout mLinearLayout;
-
-	TextView scanText;
-	Button FinishScanButton;
-	Button encodeButton;
+	private RelativeLayout mRelativeLayoutLastProduct;
+	private	TextView scanText,tvTitle,tvDescription,tvQuantitative,tvPrice;
+	private ImageView iv;
+	private Button FinishScanButton, ContinueScanButton,encodeButton;
+	private DrawableManager drawab;
 
 	ImageScanner scanner;
 
@@ -108,6 +111,7 @@ public class TabScanModeScanningFragment extends Fragment {
 
 		mLinearLayout = (LinearLayout) inflater.inflate(R.layout.activity_zbar,
 				container, false);
+		
 		autoFocusHandler = new Handler();
 
 		/* Instance barcode scanner */
@@ -117,10 +121,36 @@ public class TabScanModeScanningFragment extends Fragment {
 
 		productList = new ListProduct();
 		
+		drawab = new DrawableManager();
+		
+		
+		
 		scanText = (TextView) mLinearLayout.findViewById(R.id.scanText);
-
+		
+		mRelativeLayoutLastProduct= (RelativeLayout) mLinearLayout.findViewById(R.id.rlProductDetails);
+		
 		FinishScanButton = (Button) mLinearLayout.findViewById(R.id.FinishScanButton);
-
+		ContinueScanButton = (Button) mLinearLayout.findViewById(R.id.ContinueScanButton);
+		
+		mRelativeLayoutLastProduct.setVisibility(View.INVISIBLE);
+		
+		tvTitle 		= (TextView)mLinearLayout.findViewById(R.id.title);
+		tvDescription 	= (TextView)mLinearLayout.findViewById(R.id.description);
+		iv 				= (ImageView)mLinearLayout.findViewById(R.id.list_image);
+		tvQuantitative 	= (TextView)mLinearLayout.findViewById(R.id.tvQuantitative);
+		tvPrice 		= (TextView)mLinearLayout.findViewById(R.id.price);
+		
+		ContinueScanButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+               
+                    scanText.setText("Scanning...");
+                    mCamera.setPreviewCallback(previewCb);
+                    mCamera.startPreview();
+                    previewing = true;
+                    mCamera.autoFocus(autoFocusCB);
+                }
+            }
+        );
 		FinishScanButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 //				if (barcodeScanned) {
@@ -153,8 +183,18 @@ public class TabScanModeScanningFragment extends Fragment {
             @Override
             public void handleMessage(Message message) {
                 String res=(String) message.obj;
-                scanText.setText("Ultimo prodotto Scansionato: " +res);
-					
+                scanText.setText("Ultimo prodotto Scansionato: ");
+                Product temp=productList.get(productList.size()-1);
+                
+                //Imposto visualizzazione ultimo prodotto scansionato
+                mRelativeLayoutLastProduct.setVisibility(View.VISIBLE);
+                tvTitle.setText(temp.getNome());
+        		tvDescription.setText(temp.getDescrizione());
+        		tvQuantitative.setText("Quantità:"+" "+temp.getQuantita());
+        		String price=Double.toString(temp.getPrezzoTotale());
+        		price=price.replace('.',',');
+        		tvPrice.setText(price+" "+"\u20ac"+" ");
+        		drawab.fetchDrawableOnThread(temp, iv);
                 
             }
 		};
@@ -235,9 +275,9 @@ public class TabScanModeScanningFragment extends Fragment {
 			int result = scanner.scanImage(barcode);
 
 			if (result != 0) {
-//				previewing = false;
-//				mCamera.setPreviewCallback(null);
-//				mCamera.stopPreview();
+				previewing = false;
+				mCamera.setPreviewCallback(null);
+				mCamera.stopPreview();
 
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
@@ -251,8 +291,19 @@ public class TabScanModeScanningFragment extends Fragment {
 						tProd.increment();
 						productList.setIncrementTotalPrice(tProd
 								.getPrezzoUnitario());
-						scanText.setText("Ultimo prodotto Scansionato: " + tProd.getNome());
-							
+						scanText.setText("Ultimo prodotto Scansionato: ");
+						 Product temp=productList.get(productList.size()-1);
+			                
+		                //Imposto visualizzazione ultimo prodotto scansionato
+		                
+		                tvTitle.setText(tProd.getNome());
+		        		tvDescription.setText(tProd.getDescrizione());
+		        		tvQuantitative.setText("Quantità:"+" "+tProd.getQuantita());
+		        		String price=Double.toString(tProd.getPrezzoTotale());
+		        		price=price.replace('.',',');
+		        		tvPrice.setText(price+" "+"\u20ac"+" ");
+		        		drawab.fetchDrawableOnThread(tProd, iv);
+								
 
 					} else {
 						LoadDataProduct task = new LoadDataProduct();
@@ -288,7 +339,6 @@ public class TabScanModeScanningFragment extends Fragment {
 
 		@Override
 		protected void onPostExecute(Void result) {
-
 		}
 
 		@Override

@@ -40,13 +40,14 @@ public final class R {
     }
     public static final class id {
         public static final int BregistrazioneRegistrati=0x7f080020;
+        public static final int ContinueScanButton=0x7f08002b;
         public static final int ETregistrazioneCognome=0x7f080017;
         public static final int ETregistrazioneEmail=0x7f080019;
         public static final int ETregistrazioneNome=0x7f080016;
         public static final int ETregistrazionePassword=0x7f08001d;
         public static final int ETregistrazionePassword1=0x7f08001f;
         public static final int ETregistrazioneUsername=0x7f08001b;
-        public static final int FinishScanButton=0x7f080024;
+        public static final int FinishScanButton=0x7f08002a;
         public static final int TWregistrazioneCognome=0x7f080007;
         public static final int TWregistrazioneEmail=0x7f080018;
         public static final int TWregistrazioneNome=0x7f080015;
@@ -54,32 +55,33 @@ public final class R {
         public static final int TWregistrazionePassword1=0x7f08001e;
         public static final int TWregistrazioneRegistrazione=0x7f080006;
         public static final int TWregistrazioneUsername=0x7f08001a;
-        public static final int action_settings=0x7f08002c;
+        public static final int action_settings=0x7f08002e;
         public static final int btnAdd=0x7f080003;
         public static final int btnContinue=0x7f080004;
-        public static final int btnQrCode=0x7f08002b;
+        public static final int btnQrCode=0x7f08002d;
         public static final int btnSalta=0x7f08000b;
         public static final int buttonAccess=0x7f080009;
         public static final int cameraPreview=0x7f080022;
-        public static final int description=0x7f080028;
+        public static final int description=0x7f080027;
         public static final int editTextPassword=0x7f080008;
         public static final int editTextUsername=0x7f080005;
         public static final int ivDetailImage=0x7f08000d;
-        public static final int list_image=0x7f080026;
-        public static final int option_text=0x7f080025;
+        public static final int list_image=0x7f080025;
+        public static final int option_text=0x7f08002c;
         public static final int price=0x7f080029;
         public static final int realtabcontent=0x01010000;
+        public static final int rlProductDetails=0x7f080024;
         public static final int scanText=0x7f080023;
         public static final int scrollView1=0x7f080013;
         public static final int textView1=0x7f080021;
         public static final int textViewRegistrazione=0x7f08000a;
         public static final int thumbnail=0x7f08000c;
-        public static final int title=0x7f080027;
+        public static final int title=0x7f080026;
         public static final int tvDescriptionDetail=0x7f080012;
         public static final int tvDesriptionTitle=0x7f080011;
         public static final int tvPriceDetail=0x7f080002;
         public static final int tvProductID=0x7f080000;
-        public static final int tvQuantitative=0x7f08002a;
+        public static final int tvQuantitative=0x7f080028;
         public static final int tvQuantitativeDetail=0x7f08000f;
         public static final int tvSimplePrice=0x7f080010;
         public static final int tvTitleDetail=0x7f08000e;
@@ -97,7 +99,8 @@ public final class R {
         public static final int tab_frag1_layout=0x7f030007;
         public static final int tab_frag2_layout=0x7f030008;
         public static final int tab_frag3_layout=0x7f030009;
-        public static final int tabs_layout=0x7f03000a;
+        public static final int tab_frag_scan_mode_list_layout=0x7f03000a;
+        public static final int tabs_layout=0x7f03000b;
     }
     public static final class menu {
         public static final int camera=0x7f070000;
@@ -128,6 +131,7 @@ public final class R {
         public static final int tBtnAdd=0x7f05001b;
         public static final int tBtnContinue=0x7f05001c;
         public static final int tCancelDelete=0x7f050016;
+        public static final int tContinueScan=0x7f050029;
         public static final int tDeleteProduct=0x7f050014;
         public static final int tDescription=0x7f05001e;
         public static final int tFinishScan=0x7f050028;

@@ -32,7 +32,7 @@ public class TabScanModeListFragment extends Fragment {
             return null;
         }
        
-        return (LinearLayout)inflater.inflate(R.layout.tab_frag2_layout, container, false);
+        return (LinearLayout)inflater.inflate(R.layout.tab_frag_scan_mode_list_layout, container, false);
         
     }
 }

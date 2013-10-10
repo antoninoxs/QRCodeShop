@@ -41,6 +41,7 @@
     <string name="tRegistration">Re</string>
     <string name="title_activity_zbar">ZbarActivity</string>
     <string name="tScanQrCode">Scansionare i QrCode desiderati</string>
-    <string name="tFinishScan">Terminare acquisizione</string>
+    <string name="tFinishScan">Terminare\nacquisizione</string>
+    <string name="tContinueScan">Scansiona</string>
 
 </resources>
