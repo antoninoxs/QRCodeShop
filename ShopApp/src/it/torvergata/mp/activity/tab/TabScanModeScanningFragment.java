@@ -33,6 +33,7 @@ import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.DrawableManager;
 import it.torvergata.mp.helper.ProductAdapter;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -93,19 +94,16 @@ public class TabScanModeScanningFragment extends Fragment {
 		System.loadLibrary("iconv");
 	}
 
-	/***
-	 * *******************
-	 */
 	private ListProduct productList;
 	private Handler handler;
-	/***
-	 * *****************
-	 * 
-	 */
+	
+	
+	OnTermAcquisitionListener mCallback;
+	// Container Activity must implement this interface
+    public interface OnTermAcquisitionListener {
+        public void ViewListFragment(ListProduct list);
+    }
 
-	/***
-	 * 
-	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
@@ -170,11 +168,16 @@ public class TabScanModeScanningFragment extends Fragment {
 				if (preview.getChildCount() > 0) {
 					preview.removeAllViews();
 				}
-				FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment fragment = new TabScanModeListFragment();
-                fragmentTransaction.replace(R.id.realtabcontent, fragment);
-                fragmentTransaction.commit();
+				
+				mCallback.ViewListFragment(productList);
+//				
+//				FragmentManager fragmentManager = getFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                Fragment fragment = new TabScanModeListFragment();
+//                
+//                
+//                fragmentTransaction.replace(R.id.realtabcontent, fragment);
+//                fragmentTransaction.commit();
 			}
 		});
 
@@ -214,7 +217,19 @@ public class TabScanModeScanningFragment extends Fragment {
 		return mLinearLayout;
 
 	}
-
+	public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnTermAcquisitionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnTermAcquisitionListener");
+        }
+    }
+    
 	public void onResume() {
 		super.onResume();
 

@@ -5,6 +5,7 @@ import it.torvergata.mp.R;
 import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.entity.ListProduct;
 
 import java.util.HashMap;
 
@@ -14,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +31,7 @@ import android.widget.TabHost.TabContentFactory;
  * @author mwho
  *
  */
-public class TabsFragmentActivity extends FragmentActivity implements TabHost.OnTabChangeListener {
+public class TabsFragmentActivity extends FragmentActivity implements TabHost.OnTabChangeListener, TabScanModeScanningFragment.OnTermAcquisitionListener {
  
     private TabHost mTabHost;
     private HashMap mapTabInfo = new HashMap();
@@ -217,5 +219,20 @@ public class TabsFragmentActivity extends FragmentActivity implements TabHost.On
         setTabsBackground();
         
     }
+
+	@Override
+	public void ViewListFragment(ListProduct list) {
+		// TODO Auto-generated method stub
+
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabScanModeListFragment fragment = new TabScanModeListFragment();
+        
+        fragment.updateProductList(list);
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragment);
+        fragmentTransaction.commit();
+
+	}
  
 }
