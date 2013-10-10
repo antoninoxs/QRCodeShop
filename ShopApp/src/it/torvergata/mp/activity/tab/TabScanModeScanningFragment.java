@@ -94,7 +94,7 @@ public class TabScanModeScanningFragment extends Fragment {
 		System.loadLibrary("iconv");
 	}
 
-	private ListProduct productList;
+	private ListProduct productList = new ListProduct();
 	private Handler handler;
 	
 	
@@ -104,6 +104,11 @@ public class TabScanModeScanningFragment extends Fragment {
         public void ViewListFragment(ListProduct list);
     }
 
+    public void updateProductList(ListProduct list) {
+		// TODO Auto-generated method stub
+		
+    	productList=list;
+	}
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
@@ -117,7 +122,7 @@ public class TabScanModeScanningFragment extends Fragment {
 		scanner.setConfig(0, Config.X_DENSITY, 3);
 		scanner.setConfig(0, Config.Y_DENSITY, 3);
 
-		productList = new ListProduct();
+		//productList = new ListProduct();
 		
 		drawab = new DrawableManager();
 		

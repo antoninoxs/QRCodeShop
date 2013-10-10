@@ -31,7 +31,9 @@ import android.widget.TabHost.TabContentFactory;
  * @author mwho
  *
  */
-public class TabsFragmentActivity extends FragmentActivity implements TabHost.OnTabChangeListener, TabScanModeScanningFragment.OnTermAcquisitionListener {
+public class TabsFragmentActivity extends FragmentActivity implements TabHost.OnTabChangeListener, 
+TabScanModeScanningFragment.OnTermAcquisitionListener,
+TabScanModeListFragment.OnAddQrCodeListener{
  
     private TabHost mTabHost;
     private HashMap mapTabInfo = new HashMap();
@@ -233,6 +235,19 @@ public class TabsFragmentActivity extends FragmentActivity implements TabHost.On
         fragmentTransaction.replace(R.id.realtabcontent, fragment);
         fragmentTransaction.commit();
 
+	}
+
+	@Override
+	public void ViewScanningFragment(ListProduct list) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabScanModeScanningFragment fragmentScann = new TabScanModeScanningFragment();
+        
+        fragmentScann.updateProductList(list);
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
 	}
  
 }

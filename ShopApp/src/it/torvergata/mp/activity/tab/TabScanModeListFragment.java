@@ -4,9 +4,11 @@ package it.torvergata.mp.activity.tab;
  
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.helper.ProductAdapter;
 import android.R.id;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,6 +31,14 @@ public class TabScanModeListFragment extends Fragment {
 	private Button btnAdd,BtnContinue;
 	private LinearLayout mLinearLayout;
 	private ProductAdapter adapter;
+	
+	
+	OnAddQrCodeListener mCallback;
+	// Container Activity must implement this interface
+    public interface OnAddQrCodeListener {
+        public void ViewScanningFragment(ListProduct list);
+    }
+	
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -60,12 +70,25 @@ public class TabScanModeListFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				mCallback.ViewScanningFragment(productList);
 			}
 		});
 		
         return mLinearLayout;
         
+    }
+    
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnAddQrCodeListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnTermAcquisitionListener");
+        }
     }
 	public void updateProductList(ListProduct list) {
 		// TODO Auto-generated method stub
