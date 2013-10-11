@@ -31,11 +31,16 @@ public class ListProduct extends ArrayList<Product> {
 		
 	}
 	
-	public Product searchById(int id){
+	public Product searchByIdAndUpdateLast(int id){
 		
 		for(int i=0;i<super.size();i++){
-			if(super.get(i).getId()==id)return super.get(i);
+			if(super.get(i).getId()==id){
+				Product t=super.get(i);
+				updateLast(i);
+				return t;	
+			}
 		}
+		
 		return null;
 		
 	}
@@ -57,4 +62,12 @@ public class ListProduct extends ArrayList<Product> {
 		// TODO Auto-generated method stub
 		totalPrice+=prezzoUnitarioProdotto;
 	}
+
+	public void updateLast(int pos) {
+		Product t=this.get(pos);
+		this.remove(pos);
+		this.add(t);
+		
+	}
+	
 }

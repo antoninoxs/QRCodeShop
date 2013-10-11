@@ -221,7 +221,7 @@ public class CameraActivity extends ListActivity {
 				// Si gestisce la scansione corretta di un QrCode
 				Log.i("Contenuto: ", contents);
 		
-				Product tProd =productList.searchById(Integer.parseInt(contents));
+				Product tProd =productList.searchByIdAndUpdateLast(Integer.parseInt(contents));
 				if (tProd!=null){
 					tProd.increment();
 					productList.setIncrementTotalPrice(tProd.getPrezzoUnitario());

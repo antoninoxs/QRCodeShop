@@ -3,6 +3,9 @@ package it.torvergata.mp.activity.tab;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
+import it.torvergata.mp.entity.ListProduct;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +31,14 @@ public class TabScanModeMainFragment extends Fragment {
 	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
 	 *      android.view.ViewGroup, android.os.Bundle)
 	 */
+	
+	OnStartAcquisitionListener mCallback;
+	// Container Activity must implement this interface
+    public interface OnStartAcquisitionListener {
+        public void ViewScanningFragment();
+    }
+
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
@@ -53,18 +64,24 @@ public class TabScanModeMainFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				
-				FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment fragment = new TabScanModeScanningFragment();
-                fragmentTransaction.replace(R.id.realtabcontent, fragment);
-                fragmentTransaction.commit();
-				
-//				Log.i("SCAN MODE", "Lancio Activity Camera");
-//				Intent intent = new Intent(getActivity(), ZbarActivity.class);
-//				startActivity(intent);
+				mCallback.ViewScanningFragment();
+
 			}
 		});
 		return mLinearLayout;
 
 	}
+
+	public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnStartAcquisitionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnStartAcquisitionListener");
+        }
+    }
 }

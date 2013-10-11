@@ -135,13 +135,16 @@ public class TabScanModeScanningFragment extends Fragment {
 		FinishScanButton = (Button) mLinearLayout.findViewById(R.id.FinishScanButton);
 		ContinueScanButton = (Button) mLinearLayout.findViewById(R.id.ContinueScanButton);
 		
-		mRelativeLayoutLastProduct.setVisibility(View.INVISIBLE);
+		
 		
 		tvTitle 		= (TextView)mLinearLayout.findViewById(R.id.title);
 		tvDescription 	= (TextView)mLinearLayout.findViewById(R.id.description);
 		iv 				= (ImageView)mLinearLayout.findViewById(R.id.list_image);
 		tvQuantitative 	= (TextView)mLinearLayout.findViewById(R.id.tvQuantitative);
 		tvPrice 		= (TextView)mLinearLayout.findViewById(R.id.price);
+		
+		if(productList.size()==0)mRelativeLayoutLastProduct.setVisibility(View.INVISIBLE);
+		else showLastProduct();
 		
 		ContinueScanButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -191,18 +194,8 @@ public class TabScanModeScanningFragment extends Fragment {
             @Override
             public void handleMessage(Message message) {
                 String res=(String) message.obj;
-                scanText.setText("Ultimo prodotto Scansionato: ");
-                Product temp=productList.get(productList.size()-1);
+                showLastProduct();
                 
-                //Imposto visualizzazione ultimo prodotto scansionato
-                mRelativeLayoutLastProduct.setVisibility(View.VISIBLE);
-                tvTitle.setText(temp.getNome());
-        		tvDescription.setText(temp.getDescrizione());
-        		tvQuantitative.setText("Quantità:"+" "+temp.getQuantita());
-        		String price=Double.toString(temp.getPrezzoTotale());
-        		price=price.replace('.',',');
-        		tvPrice.setText(price+" "+"\u20ac"+" ");
-        		drawab.fetchDrawableOnThread(temp, iv);
                 
             }
 		};
@@ -284,6 +277,20 @@ public class TabScanModeScanningFragment extends Fragment {
 		}
 	};
 
+	private void showLastProduct(){
+		//Imposto visualizzazione ultimo prodotto scansionato
+		scanText.setText("Ultimo prodotto Scansionato: ");
+		Product temp=productList.get(productList.size()-1);
+        if(mRelativeLayoutLastProduct.getVisibility()==View.INVISIBLE)mRelativeLayoutLastProduct.setVisibility(View.VISIBLE);
+        tvTitle.setText(temp.getNome());
+		tvDescription.setText(temp.getDescrizione());
+		tvQuantitative.setText("Quantità:"+" "+temp.getQuantita());
+		String price=Double.toString(temp.getPrezzoTotale());
+		price=price.replace('.',',');
+		tvPrice.setText(price+" "+"\u20ac"+" ");
+		drawab.fetchDrawableOnThread(temp, iv);
+	}
+	
 	PreviewCallback previewCb = new PreviewCallback() {
 		public void onPreviewFrame(byte[] data, Camera camera) {
 			Camera.Parameters parameters = camera.getParameters();
@@ -305,24 +312,15 @@ public class TabScanModeScanningFragment extends Fragment {
 					scanText.setText("Ultimo prodotto Scansionato: Loading...");
 					barcodeScanned = true;
 
-					Product tProd = productList.searchById(Integer
+					Product tProd = productList.searchByIdAndUpdateLast(Integer
 							.parseInt(contents));
 					if (tProd != null) {
 						tProd.increment();
+						
+						
 						productList.setIncrementTotalPrice(tProd
 								.getPrezzoUnitario());
-						scanText.setText("Ultimo prodotto Scansionato: ");
-						 Product temp=productList.get(productList.size()-1);
-			                
-		                //Imposto visualizzazione ultimo prodotto scansionato
-		                
-		                tvTitle.setText(tProd.getNome());
-		        		tvDescription.setText(tProd.getDescrizione());
-		        		tvQuantitative.setText("Quantità:"+" "+tProd.getQuantita());
-		        		String price=Double.toString(tProd.getPrezzoTotale());
-		        		price=price.replace('.',',');
-		        		tvPrice.setText(price+" "+"\u20ac"+" ");
-		        		drawab.fetchDrawableOnThread(tProd, iv);
+						showLastProduct();
 								
 
 					} else {
