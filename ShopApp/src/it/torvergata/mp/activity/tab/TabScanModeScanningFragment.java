@@ -73,7 +73,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
  * @author mwho
  * 
  */
-public class TabScanModeScanningFragment extends Fragment {
+public class TabScanModeScanningFragment extends Fragment{
 
 	private Camera mCamera;
 	private CameraPreview mPreview;
@@ -149,7 +149,7 @@ public class TabScanModeScanningFragment extends Fragment {
 		ContinueScanButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                
-                    scanText.setText("Scanning...");
+                    scanText.setText(R.string.tScanning);
                     mCamera.setPreviewCallback(previewCb);
                     mCamera.startPreview();
                     previewing = true;
@@ -309,27 +309,39 @@ public class TabScanModeScanningFragment extends Fragment {
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
 					String contents = sym.getData();
-					scanText.setText("Ultimo prodotto Scansionato: Loading...");
-					barcodeScanned = true;
-
-					Product tProd = productList.searchByIdAndUpdateLast(Integer
-							.parseInt(contents));
-					if (tProd != null) {
-						tProd.increment();
-						
-						
-						productList.setIncrementTotalPrice(tProd
-								.getPrezzoUnitario());
-						showLastProduct();
-								
-
-					} else {
-						LoadDataProduct task = new LoadDataProduct();
-						task.execute(contents);
-							
+					int id=0;
+					if(contents.length()!=Const.IDFORMAT){
+						AlertDialog dialogBox = NotValidQrCorde();
+						dialogBox.show();
 					}
-					
-
+					else{
+						try{
+							id=Integer.parseInt(contents);
+						}
+						catch(NumberFormatException e){
+							Log.d("ERR","Errore");
+							
+						}
+						scanText.setText("Ultimo prodotto Scansionato: Loading...");
+						barcodeScanned = true;
+	
+						Product tProd = productList.searchByIdAndUpdateLast(id);
+						if (tProd != null) {
+							tProd.increment();
+							
+							
+							productList.setIncrementTotalPrice(tProd
+									.getPrezzoUnitario());
+							showLastProduct();
+									
+	
+						} else {
+							LoadDataProduct task = new LoadDataProduct();
+							task.execute(contents);
+								
+						}
+						
+					}	
 				}
 			}
 
@@ -429,5 +441,24 @@ public class TabScanModeScanningFragment extends Fragment {
 			return null;
 		};
 	}
-
+	private AlertDialog NotValidQrCorde() {
+		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+				.setTitle(R.string.tWarning)
+				.setMessage(R.string.tQrCodeNotValid)
+				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setPositiveButton(R.string.tContinueScan,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								scanText.setText(R.string.tScanning);
+				                    mCamera.setPreviewCallback(previewCb);
+				                    mCamera.startPreview();
+				                    previewing = true;
+				                    mCamera.autoFocus(autoFocusCB);
+							}
+						})
+				.create();
+		return alertDialog;
+	}
 }

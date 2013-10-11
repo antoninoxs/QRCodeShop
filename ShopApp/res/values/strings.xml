@@ -42,6 +42,9 @@
     <string name="title_activity_zbar">ZbarActivity</string>
     <string name="tScanQrCode">Scansionare i QrCode desiderati</string>
     <string name="tFinishScan">Terminare\nacquisizione</string>
-    <string name="tContinueScan">Scansiona</string>
+    <string name="tWarning">Attenzione</string>
+    <string name="tQrCodeNotValid">QrCode scansionato non valido</string>
+    <string name="tContinueScan">Continua con la scansione</string>
+    <string name="tScanning">Scanning...</string>
 
 </resources>

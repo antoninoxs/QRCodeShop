@@ -131,7 +131,7 @@ public final class R {
         public static final int tBtnAdd=0x7f05001b;
         public static final int tBtnContinue=0x7f05001c;
         public static final int tCancelDelete=0x7f050016;
-        public static final int tContinueScan=0x7f050029;
+        public static final int tContinueScan=0x7f05002b;
         public static final int tDeleteProduct=0x7f050014;
         public static final int tDescription=0x7f05001e;
         public static final int tFinishScan=0x7f050028;
@@ -139,11 +139,14 @@ public final class R {
         public static final int tMessageDeleteProd=0x7f050018;
         public static final int tPasswordMismatch=0x7f050024;
         public static final int tPrice=0x7f05001f;
+        public static final int tQrCodeNotValid=0x7f05002a;
         public static final int tQuantitative=0x7f050020;
         public static final int tRegistration=0x7f050025;
         public static final int tScanQrCode=0x7f050027;
+        public static final int tScanning=0x7f05002c;
         public static final int tTitleBoxDeleteProduct=0x7f050017;
         public static final int tUserPasswordWrong=0x7f050022;
+        public static final int tWarning=0x7f050029;
         public static final int title_activity_camera=0x7f050011;
         public static final int title_activity_menu=0x7f05000e;
         public static final int title_activity_product_dectail=0x7f05001d;
