@@ -192,10 +192,15 @@ public class TabScanModeScanningFragment extends Fragment{
 		//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
             @Override
-            public void handleMessage(Message message) {
-                String res=(String) message.obj;
-                showLastProduct();
-                
+            public void handleMessage(Message mess) {
+            	
+            	int res = mess.arg1;
+               	
+            	if(res==Const.KO){
+                	AlertDialog dialogBox = ProductNotFound();
+					dialogBox.show();
+                }
+                else showLastProduct();
                 
             }
 		};
@@ -394,40 +399,50 @@ public class TabScanModeScanningFragment extends Fragment{
 						response.getEntity().getContent()).toString();
 				Log.i("JsonResult", "[" + jsonResult + "]");
 				JSONObject object = new JSONObject(jsonResult);
-
-				// Lettura dell'oggetto Json
-				String idProdotto = object.getString("idProdotto");
-				String nome = object.getString("nome");
-				double prezzo = object.getDouble("prezzo");
-				String scadenza = object.getString("scadenza");
-				String disponibilita = object.getString("disponibilita");
-				String descrizione = object.getString("descrizione");
-				String fileImmagine = object.getString("file_immagine");
-
-				Log.i("idProdotto: ", idProdotto);
-				Log.i("nome: ", nome);
-				Log.i("prezzo: ", Double.toString(prezzo));
-				Log.i("scadenza: ", scadenza);
-				Log.i("descrizione: ", descrizione);
-				Log.i("disponibilita: ", disponibilita);
-				Log.i("file_immagine: ", fileImmagine);
-
-				// Creazione del nuovo Prodotto
-				tempProd.setId(Integer.parseInt(idProdotto));
-				tempProd.setNome(nome);
-				tempProd.setPrezzoUnitario(prezzo);
-				tempProd.setScadenza(scadenza);
-				tempProd.setDescrizione(descrizione);
-				tempProd.setDisponibilita(Integer.parseInt(disponibilita));
-				tempProd.setFileImmagine(fileImmagine);
-
-				// Aggiunta del nuovo prodotto alla lista dei prodotti
-				productList.add(tempProd);
+				String result = object.getString("result");
+				if (Integer.parseInt(result)==Const.OK){
 				
-				//Comunicazione al Thread principale del nome del prodotto
-				Message message = handler.obtainMessage(1, nome);
-				handler.sendMessage(message);
+					// Lettura dell'oggetto Json
+					String idProdotto = object.getString("idProdotto");
+					String nome = object.getString("nome");
+					double prezzo = object.getDouble("prezzo");
+					String scadenza = object.getString("scadenza");
+					String disponibilita = object.getString("disponibilita");
+					String descrizione = object.getString("descrizione");
+					String fileImmagine = object.getString("file_immagine");
+	
+					Log.i("idProdotto: ", idProdotto);
+					Log.i("nome: ", nome);
+					Log.i("prezzo: ", Double.toString(prezzo));
+					Log.i("scadenza: ", scadenza);
+					Log.i("descrizione: ", descrizione);
+					Log.i("disponibilita: ", disponibilita);
+					Log.i("file_immagine: ", fileImmagine);
+	
+					// Creazione del nuovo Prodotto
+					tempProd.setId(Integer.parseInt(idProdotto));
+					tempProd.setNome(nome);
+					tempProd.setPrezzoUnitario(prezzo);
+					tempProd.setScadenza(scadenza);
+					tempProd.setDescrizione(descrizione);
+					tempProd.setDisponibilita(Integer.parseInt(disponibilita));
+					tempProd.setFileImmagine(fileImmagine);
+	
+					// Aggiunta del nuovo prodotto alla lista dei prodotti
+					productList.add(tempProd);
 				
+					//Comunicazione al Thread principale del nome del prodotto
+					Message message = handler.obtainMessage(1, Const.OK, 0);
+				
+					handler.sendMessage(message);
+				}
+				else{
+					//Comunicazione al Thread principale del nome del prodotto
+					//Message message = handler.obtainMessage(1, Const.KO);
+					Message message = handler.obtainMessage(1, Const.KO, 0);
+					handler.sendMessage(message);
+					
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (ClientProtocolException e) {
@@ -445,6 +460,26 @@ public class TabScanModeScanningFragment extends Fragment{
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.tWarning)
 				.setMessage(R.string.tQrCodeNotValid)
+				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setPositiveButton(R.string.tContinueScan,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								scanText.setText(R.string.tScanning);
+				                    mCamera.setPreviewCallback(previewCb);
+				                    mCamera.startPreview();
+				                    previewing = true;
+				                    mCamera.autoFocus(autoFocusCB);
+							}
+						})
+				.create();
+		return alertDialog;
+	}
+	private AlertDialog ProductNotFound() {
+		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+				.setTitle(R.string.tWarning)
+				.setMessage(R.string.tProductNotFound)
 				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
 				.setPositiveButton(R.string.tContinueScan,
 						new DialogInterface.OnClickListener() {

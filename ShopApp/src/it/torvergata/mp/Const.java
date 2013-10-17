@@ -8,6 +8,8 @@ public class Const {
 	
 	public static final String IPADDRESS = "tesi.dyndns.tv:88";
 	public static final String IMAGE_URL = "http://tesi.dyndns.tv:88/images/";
+	public static final int OK = 1;
+	public static final int KO = 0;
 	//Numero di cifre in un id di un prodotto.
 	public static final int IDFORMAT = 6;
 	//Nome del file per le Preferences
