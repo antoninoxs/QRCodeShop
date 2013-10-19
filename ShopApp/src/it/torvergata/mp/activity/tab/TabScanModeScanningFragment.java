@@ -4,14 +4,20 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -202,9 +208,15 @@ public class TabScanModeScanningFragment extends Fragment{
                 	AlertDialog dialogBox = ProductNotFound();
 					dialogBox.show();
                 }
+            	
+                else if(res==Const.TIMEOUT){
+                	AlertDialog dialogBox = ConnectionTimeout();
+    				dialogBox.show();
+                }
                 else showLastProduct();
+                }
                 
-            }
+            
 		};
 		
 		if (container == null) {
@@ -397,17 +409,32 @@ public class TabScanModeScanningFragment extends Fragment{
 			nameValuePairs.add(new BasicNameValuePair("id", productId));
 
 			try {
+
 				// Connessione al Server
-				HttpClient httpclient = new DefaultHttpClient();
+	
+				HttpParams httpParameters = new BasicHttpParams();
+				// Set the timeout in milliseconds until a connection is established.
+				int timeoutConnection = 3000;
+	
+				HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+				// Set the default socket timeout (SO_TIMEOUT) 
+				// in milliseconds which is the timeout for waiting for data.
+				int timeoutSocket = 3000;
+				
+				HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+				DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
+						
 				HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
 						+ "/info_download.php");
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				// Ricezione della risposta
-				HttpResponse response = httpclient.execute(httppost);
+				BasicHttpResponse httpResponse = (BasicHttpResponse)  httpClient.execute(httppost);
+				//HttpResponse response = httpClient.execute(httppost);
 
 				// Conersione da inputString a JsonResult
 				String jsonResult = GenericFunctions.inputStreamToString(
-						response.getEntity().getContent()).toString();
+						httpResponse.getEntity().getContent()).toString();
 				Log.i("JsonResult", "[" + jsonResult + "]");
 				JSONObject object = new JSONObject(jsonResult);
 				String result = object.getString("result");
@@ -454,6 +481,12 @@ public class TabScanModeScanningFragment extends Fragment{
 					handler.sendMessage(message);
 					
 				}
+			} catch (ConnectTimeoutException e) {
+				Log.e("TIMEOUT", "Timeout connection: " + e.toString());
+				Message message = handler.obtainMessage(1, Const.TIMEOUT, 0);
+				handler.sendMessage(message);
+				
+				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (ClientProtocolException e) {
@@ -512,6 +545,23 @@ public class TabScanModeScanningFragment extends Fragment{
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.tWarning)
 				.setMessage(R.string.tActivateConnection)
+				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setPositiveButton(R.string.tOk,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								
+							}
+						})
+				.create();
+		return alertDialog;
+	}
+	
+	private AlertDialog ConnectionTimeout() {
+		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+				.setTitle(R.string.tWarning)
+				.setMessage(R.string.tTimeout)
 				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
 				.setPositiveButton(R.string.tOk,
 						new DialogInterface.OnClickListener() {
