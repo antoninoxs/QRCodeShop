@@ -30,12 +30,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.R.string;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -84,7 +88,10 @@ public class MainActivity extends Activity {
 		btnSalta 			= (Button) findViewById(R.id.btnSalta);
 	
 		final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-			
+		
+	
+		
+		 		
 		bAccesso.setOnClickListener(new OnClickListener() {			
 			public void onClick(View v) {
 				
@@ -135,10 +142,17 @@ public class MainActivity extends Activity {
 			                
 			            }
 					};
-				
-					//Lancio dell'AsyncTask Thread che effettua il login al Server
-					LoadData task = new LoadData();
-					task.execute();
+					//Determiniamo se c'è una connessione ad internet
+					boolean isConnected = Const.verifyConnection(getBaseContext());
+					if(isConnected){
+						//Lancio dell'AsyncTask Thread che effettua il login al Server
+						LoadData task = new LoadData();
+						task.execute();
+					}else{
+						AlertDialog dialogBox = ConnectionNotFound();
+						dialogBox.show();
+						
+					}
 								
 				}
 			}
@@ -248,5 +262,20 @@ public class MainActivity extends Activity {
 	    };
 	 }
 	
-	
+	private AlertDialog ConnectionNotFound() {
+		AlertDialog alertDialog = new AlertDialog.Builder(this)
+				.setTitle(R.string.tWarning)
+				.setMessage(R.string.tActivateConnection)
+				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setPositiveButton(R.string.tOk,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								
+							}
+						})
+				.create();
+		return alertDialog;
+	}
 }

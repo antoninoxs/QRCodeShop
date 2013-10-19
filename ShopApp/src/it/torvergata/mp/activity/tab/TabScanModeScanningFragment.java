@@ -1,6 +1,7 @@
 package it.torvergata.mp.activity.tab;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
@@ -29,6 +30,7 @@ import it.torvergata.mp.activity.CameraPreview;
 import it.torvergata.mp.activity.MainActivity;
 import it.torvergata.mp.activity.ProductDectailActivity;
 import it.torvergata.mp.activity.CameraActivity.LoadDataProduct;
+import it.torvergata.mp.activity.MainActivity.LoadData;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.DrawableManager;
@@ -341,9 +343,18 @@ public class TabScanModeScanningFragment extends Fragment{
 									
 	
 						} else {
-							LoadDataProduct task = new LoadDataProduct();
-							task.execute(contents);
-								
+							
+							//Determiniamo se c'è una connessione ad internet
+							boolean isConnected = Const.verifyConnection(getActivity());
+							if(isConnected){
+								//Lancio dell'AsyncTask Thread che effettua il download delle informazioni dal Server
+								LoadDataProduct task = new LoadDataProduct();
+								task.execute(contents);
+							}else{
+								AlertDialog dialogBox = ConnectionNotFound();
+								dialogBox.show();
+							}
+																				
 						}
 						
 					}	
@@ -491,6 +502,23 @@ public class TabScanModeScanningFragment extends Fragment{
 				                    mCamera.startPreview();
 				                    previewing = true;
 				                    mCamera.autoFocus(autoFocusCB);
+							}
+						})
+				.create();
+		return alertDialog;
+	}
+	
+	private AlertDialog ConnectionNotFound() {
+		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+				.setTitle(R.string.tWarning)
+				.setMessage(R.string.tActivateConnection)
+				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setPositiveButton(R.string.tOk,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								
 							}
 						})
 				.create();
