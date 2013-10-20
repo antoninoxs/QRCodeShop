@@ -40,6 +40,7 @@ import it.torvergata.mp.activity.MainActivity.LoadData;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.DrawableManager;
+import it.torvergata.mp.helper.HttpConnection;
 import it.torvergata.mp.helper.ProductAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -404,39 +405,12 @@ public class TabScanModeScanningFragment extends Fragment{
 			String productId = params[0];
 
 			final Product tempProd = new Product(Integer.parseInt(productId));
-			// Preparazione delle informazioni da inviare al server
-			final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("id", productId));
-
-			try {
-
-				// Connessione al Server
-	
-				HttpParams httpParameters = new BasicHttpParams();
-				// Set the timeout in milliseconds until a connection is established.
-				int timeoutConnection = 3000;
-	
-				HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-				// Set the default socket timeout (SO_TIMEOUT) 
-				// in milliseconds which is the timeout for waiting for data.
-				int timeoutSocket = 3000;
+			
+				try {
+				HttpConnection connection = new HttpConnection();
 				
-				HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-
-				DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
-						
-				HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
-						+ "/info_download.php");
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-				// Ricezione della risposta
-				BasicHttpResponse httpResponse = (BasicHttpResponse)  httpClient.execute(httppost);
-				//HttpResponse response = httpClient.execute(httppost);
-
-				// Conersione da inputString a JsonResult
-				String jsonResult = GenericFunctions.inputStreamToString(
-						httpResponse.getEntity().getContent()).toString();
-				Log.i("JsonResult", "[" + jsonResult + "]");
-				JSONObject object = new JSONObject(jsonResult);
+				JSONObject object = connection.connect("info_download", "id", productId, handler);
+								
 				String result = object.getString("result");
 				if (Integer.parseInt(result)==Const.OK){
 				
@@ -481,17 +455,7 @@ public class TabScanModeScanningFragment extends Fragment{
 					handler.sendMessage(message);
 					
 				}
-			} catch (ConnectTimeoutException e) {
-				Log.e("TIMEOUT", "Timeout connection: " + e.toString());
-				Message message = handler.obtainMessage(1, Const.TIMEOUT, 0);
-				handler.sendMessage(message);
-				
-				
 			} catch (JSONException e) {
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				Log.e("log_tag", "Error in http connection: " + e.toString());
