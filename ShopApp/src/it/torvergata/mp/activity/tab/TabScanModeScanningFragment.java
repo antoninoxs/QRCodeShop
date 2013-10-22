@@ -12,12 +12,15 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -408,8 +411,11 @@ public class TabScanModeScanningFragment extends Fragment{
 			
 				try {
 				HttpConnection connection = new HttpConnection();
-				
-				JSONObject object = connection.connect("info_download", "id", productId, handler);
+					
+				JSONObject json = new JSONObject();
+				json.put("id", productId);
+							
+				JSONObject object = connection.connect("info_download", json, handler);
 								
 				String result = object.getString("result");
 				if (Integer.parseInt(result)==Const.OK){

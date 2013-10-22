@@ -9,10 +9,11 @@ import android.net.NetworkInfo;
 
 public class Const {
 	
-	//public static final String IPADDRESS = "tesi.dyndns.tv:88";
-	//public static final String IMAGE_URL = "http://tesi.dyndns.tv:88/images/";
-	public static final String IPADDRESS = "151.24.36.7:88";
-	public static final String IMAGE_URL = "http://151.24.36.7:88/images/";
+	public static final String IPADDRESS = "http://shopapp.dyndns.org:88/";
+	//public static final String IPADDRESS = "192.168.1.15";
+	
+	
+	public static final String IMAGE_URL = "http://"+IPADDRESS+"/images/";
 	public static final int OK = 1;
 	public static final int KO = 0;
 	public static final int TIMEOUT = 2;

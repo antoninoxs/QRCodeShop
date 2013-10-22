@@ -7,6 +7,7 @@ import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
 import it.torvergata.mp.activity.tab.TabsFragmentActivity;
+import it.torvergata.mp.helper.HttpConnection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -113,7 +114,7 @@ public class MainActivity extends Activity {
 			            @Override
 			            public void handleMessage(Message message) {
 			                res=(String) message.obj;
-			                if(res.toString().equals("YES")){
+			                if(Integer.parseInt(res)==1){
 								Toast.makeText(MainActivity.this, "Connesso",
 										Toast.LENGTH_SHORT).show();
 								
@@ -134,7 +135,7 @@ public class MainActivity extends Activity {
 								//back, l'applicazione torni alla schermata di login
 								finish();
 			                }
-							else if(res.toString().equals("FALSE")){
+							else if(Integer.parseInt(res)==0){
 								dialog.dismiss();
 								Toast.makeText(MainActivity.this, R.string.tUserPasswordWrong,
 										Toast.LENGTH_SHORT).show();
@@ -209,49 +210,33 @@ public class MainActivity extends Activity {
 	    protected Void doInBackground(Void... params)
 	    {   
 	    	//Preparazione delle informazioni di login da inviare al server
-	    	final ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			 nameValuePairs.add(new BasicNameValuePair("u",user));
-			 nameValuePairs.add(new BasicNameValuePair("p",password));
-	    	 
-			 //Connessione al Server
-			 HttpClient httpclient = new DefaultHttpClient();
-		     HttpPost httppost = new HttpPost ("http://"+Const.IPADDRESS+"/login.php");
+	    
+		
+		
+			
+			String result = null;
 			try {
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-				//Gestione della risposta, InputStram->BufferReader->String
-				HttpResponse response = httpclient.execute(httppost);
-				HttpEntity entity = response.getEntity();
-				is = entity.getContent();
-				Log.i("tag", is.toString());
-
-				BufferedReader reader = new BufferedReader(
-						new InputStreamReader(is, "iso-8859-1"), 8);
-				StringBuilder sb = new StringBuilder();
-				String line = null;
-				while ((line = reader.readLine()) != null) {
-					sb.append(line);
-				}
-				Log.i("tag1", is.toString());
-				is.close();
-				String result = sb.toString();
-				Log.i("result", result);
+			
 				
-				//Comunicazione al Thread principale dell'esito dell'operazione di accesso
-				Message message = handler.obtainMessage(1, result);
-				handler.sendMessage(message);
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
+				
+				JSONObject json = new JSONObject();
+				json.put("user", user);
+				json.put("password", password);
+				
+				HttpConnection connection = new HttpConnection();
+				JSONObject object = connection.connect("login", json, handler);
+				
+				result = object.getString("result");
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-	        return null;
+			
+			//Comunicazione al Thread principale dell'esito dell'operazione di accesso
+			Message message = handler.obtainMessage(1, result);
+			handler.sendMessage(message);
+	
+			return null;
 	    }       
 	    @Override
 	    protected void onPostExecute(Void result)
