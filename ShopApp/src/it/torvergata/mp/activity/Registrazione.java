@@ -7,6 +7,7 @@ import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
 import it.torvergata.mp.activity.CameraActivity.LoadDataProduct;
+import it.torvergata.mp.crypto.CryptoAES256JB;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.HttpConnection;
 
@@ -57,11 +58,13 @@ public class Registrazione extends Activity {
 	private Button bRegistrati;
 	private InputStream is = null, ins = null;
 	private Handler handler;
+	private CryptoAES256JB crypto;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registrazione);
 
+		crypto= new CryptoAES256JB();
 		edNome = (EditText) findViewById(R.id.ETregistrazioneNome);
 		edCognome = (EditText) findViewById(R.id.ETregistrazioneCognome);
 		edEmail = (EditText) findViewById(R.id.ETregistrazioneEmail);
@@ -92,7 +95,15 @@ public class Registrazione extends Activity {
 					String email = edEmail.getText().toString();
 					String username = edUsername.getText().toString();
 					String password = edPassword.getText().toString();
-					insertToDB(nome, cognome, email, username, password);
+					String passwordCrypto="";
+					try {
+						passwordCrypto = crypto.encrypt(password, password);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						
+					insertToDB(nome, cognome, email, username, passwordCrypto);
 				}
 			}
 		});
@@ -170,30 +181,7 @@ public class Registrazione extends Activity {
 	    {   
 		
 	    	try {
-	    		
-//	    		URL url = new URL("http://" + Const.IPADDRESS+ "/registrazione.php");
-//
-//				JSONObject json = new JSONObject();
-//				json.put("Name", params[0]);
-//				json.put("Surname", params[1]);
-//				json.put("Email", params[2]);
-//				json.put("User", params[3]);
-//				json.put("Password", params[4]);	
-//
-//				HttpClient httpClient = new DefaultHttpClient();
-//				HttpPost httpPost = new HttpPost(url.toURI());
-//
-//				// Prepare JSON to send by setting the entity
-//				httpPost.setEntity(new StringEntity(json.toString(), "UTF-8"));
-//
-//				// Set up the header types needed to properly transfer JSON
-//				httpPost.setHeader("Content-Type", "application/json");
-//				httpPost.setHeader("Accept-Encoding", "application/json");
-//				httpPost.setHeader("Accept-Language", "en-US");
-//
-//				// Execute POST
-//				HttpResponse response = httpClient.execute(httpPost);
-//				
+	    	
 	    		JSONObject json = new JSONObject();
 	    		json.put("Name", params[0]);
 				json.put("Surname", params[1]);
@@ -203,36 +191,6 @@ public class Registrazione extends Activity {
 				
 				HttpConnection connection = new HttpConnection();
 				JSONObject object = connection.connect("registrazione", json, handler);
-				
-			
-				
-//				String res = "";
-//				HttpClient httpclient = new DefaultHttpClient();
-//				HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
-//						+ "/registrazione.php");
-//				
-//				//Impacchettamento delle informazioni
-//				JSONObject json = new JSONObject();
-//				json.put("Name", params[0]);
-//				json.put("Surname", params[1]);
-//				json.put("Email", params[2]);
-//				json.put("User", params[3]);
-//				json.put("Password", params[4]);	
-//				StringEntity se = new StringEntity(json.toString());
-//				
-//				se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
-//				"application/json"));
-//				httppost.setEntity(se);
-//			
-//				HttpResponse response = httpclient.execute(httppost);
-//				
-			
-//				
-//				//Conversione da inputString a JsonResult
-//				String jsonResult = GenericFunctions.inputStreamToString(
-//						response.getEntity().getContent()).toString();
-//				Log.i("JsonResult", "[" + jsonResult + "]");
-//				JSONObject object = new JSONObject(jsonResult);
 
 				//Lettura dell'oggetto Json
 				String mess = object.getString("Message");

@@ -7,6 +7,7 @@ import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
 import it.torvergata.mp.activity.tab.TabsFragmentActivity;
+import it.torvergata.mp.crypto.CryptoAES256JB;
 import it.torvergata.mp.helper.HttpConnection;
 
 import java.io.BufferedReader;
@@ -60,9 +61,12 @@ public class MainActivity extends Activity {
 	private	Button bAccesso,btnSalta;
 	private	String res="",
 			user="",
-			password="";
+			password="",
+			passwordCrypto="";
 	private InputStream is = null;
 	private	Handler handler;
+	private CryptoAES256JB crypto;
+	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,7 +85,7 @@ public class MainActivity extends Activity {
 		}
 				
 		setContentView(R.layout.activity_main);
-
+		crypto= new CryptoAES256JB();
 		edUsername 			= (EditText) findViewById(R.id.editTextUsername);
 		edPassword 			= (EditText) findViewById(R.id.editTextPassword);
 		tvRegistrazione 	= (TextView) findViewById(R.id.textViewRegistrazione);
@@ -106,8 +110,15 @@ public class MainActivity extends Activity {
 					user = edUsername.getText().toString();
 					password = edPassword.getText().toString();
 					
+					try {
+						passwordCrypto = crypto.encrypt(password, password);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+							
 					Log.i("USER", user);
-					Log.i("PASS", password);
+					Log.i("PASS", passwordCrypto);
 					
 					//Handler per il messaggio di risposta del Server, proveniente dal Thread che effettua il login.
 					handler = new Handler() {
@@ -217,11 +228,9 @@ public class MainActivity extends Activity {
 			String result = null;
 			try {
 			
-				
-				
 				JSONObject json = new JSONObject();
 				json.put("user", user);
-				json.put("password", password);
+				json.put("password", passwordCrypto);
 				
 				HttpConnection connection = new HttpConnection();
 				JSONObject object = connection.connect("login", json, handler);
