@@ -6,6 +6,7 @@ import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.entity.ListProduct;
+import it.torvergata.mp.entity.Product;
 
 import java.util.HashMap;
 
@@ -260,5 +261,26 @@ TabScanModeMainFragment.OnStartAcquisitionListener{
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 	}
+
+	@Override
+	public void ViewScanningFragment(Product product) {
+		// TODO Auto-generated method stub
+		Log.i("ERR", "MSG");
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabScanModeDetailItemFragment fragmentScann = new TabScanModeDetailItemFragment();
+         
+        fragmentScann.updateProduct(product);
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
+	}
+	
+	
+
+
+
+	
+ 
  
 }

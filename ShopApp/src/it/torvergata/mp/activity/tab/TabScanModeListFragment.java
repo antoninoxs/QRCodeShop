@@ -2,13 +2,17 @@ package it.torvergata.mp.activity.tab;
 
 
  
+import it.torvergata.mp.Const;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
+import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.ProductAdapter;
 import android.R.id;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,6 +20,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,10 +41,14 @@ public class TabScanModeListFragment extends Fragment {
 	
 	
 	OnAddQrCodeListener mCallback;
+
 	// Container Activity must implement this interface
     public interface OnAddQrCodeListener {
         public void ViewScanningFragment(ListProduct list);
-    }
+        public void ViewScanningFragment(Product product);
+		
+ }
+  
 	
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +75,45 @@ public class TabScanModeListFragment extends Fragment {
 		adapter =new ProductAdapter(getActivity(),
 				R.layout.new_list_item, productList);
 		list.setAdapter(adapter);
+		
+		list.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					final int arg2, long arg3) {
+				
+				final AlertDialog dialogBox = DeleteDialog(arg2);
+				dialogBox.show();
+				Button deleteButton = dialogBox
+						.getButton(DialogInterface.BUTTON_POSITIVE);
+				deleteButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						try{
+						productList.remove(arg2);
+						adapter.notifyDataSetChanged();
+						//setTotalPrice(totalPrice);
+						}catch (IndexOutOfBoundsException e){
+							adapter.notifyDataSetChanged();
+						}
+						dialogBox.dismiss();	
+					}
+				});
+				
+				return false;
+			}
+		});
+		
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				mCallback.ViewScanningFragment(productList.get(arg2));
+			}
+		});
 		
 		btnAdd.setOnClickListener(new OnClickListener() {
 			
@@ -94,4 +144,26 @@ public class TabScanModeListFragment extends Fragment {
 		// TODO Auto-generated method stub
 		productList=list;
 	}
+	private AlertDialog DeleteDialog(final int position) {
+		Product prod = productList.get(position);
+		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+				.setTitle(prod.getNome())
+				.setMessage(R.string.tMessageDelete)
+				.setIcon(Const.resize(prod.getImmagine()))
+				.setPositiveButton(R.string.tDeleteProduct,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {							}
+						})
+				.setNegativeButton(R.string.tCancelDelete,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								
+							}
+						}).create();
+		return alertDialog;
+	}
+
 }
