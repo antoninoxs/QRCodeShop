@@ -8,6 +8,7 @@ import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
 import it.torvergata.mp.activity.CameraActivity.LoadDataProduct;
 import it.torvergata.mp.entity.Product;
+import it.torvergata.mp.helper.HttpConnection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -170,30 +171,40 @@ public class Registrazione extends Activity {
 		
 	    	try {
 	    		
-	    		URL url = new URL("http://" + Const.IPADDRESS+ "/registrazione.php");
-
-				JSONObject json = new JSONObject();
-				json.put("Name", params[0]);
+//	    		URL url = new URL("http://" + Const.IPADDRESS+ "/registrazione.php");
+//
+//				JSONObject json = new JSONObject();
+//				json.put("Name", params[0]);
+//				json.put("Surname", params[1]);
+//				json.put("Email", params[2]);
+//				json.put("User", params[3]);
+//				json.put("Password", params[4]);	
+//
+//				HttpClient httpClient = new DefaultHttpClient();
+//				HttpPost httpPost = new HttpPost(url.toURI());
+//
+//				// Prepare JSON to send by setting the entity
+//				httpPost.setEntity(new StringEntity(json.toString(), "UTF-8"));
+//
+//				// Set up the header types needed to properly transfer JSON
+//				httpPost.setHeader("Content-Type", "application/json");
+//				httpPost.setHeader("Accept-Encoding", "application/json");
+//				httpPost.setHeader("Accept-Language", "en-US");
+//
+//				// Execute POST
+//				HttpResponse response = httpClient.execute(httpPost);
+//				
+	    		JSONObject json = new JSONObject();
+	    		json.put("Name", params[0]);
 				json.put("Surname", params[1]);
 				json.put("Email", params[2]);
 				json.put("User", params[3]);
-				json.put("Password", params[4]);	
-
-				HttpClient httpClient = new DefaultHttpClient();
-				HttpPost httpPost = new HttpPost(url.toURI());
-
-				// Prepare JSON to send by setting the entity
-				httpPost.setEntity(new StringEntity(json.toString(), "UTF-8"));
-
-				// Set up the header types needed to properly transfer JSON
-				httpPost.setHeader("Content-Type", "application/json");
-				httpPost.setHeader("Accept-Encoding", "application/json");
-				httpPost.setHeader("Accept-Language", "en-US");
-
-				// Execute POST
-				HttpResponse response = httpClient.execute(httpPost);
+				json.put("Password", params[4]);
 				
+				HttpConnection connection = new HttpConnection();
+				JSONObject object = connection.connect("registrazione", json, handler);
 				
+			
 				
 //				String res = "";
 //				HttpClient httpclient = new DefaultHttpClient();
@@ -216,12 +227,12 @@ public class Registrazione extends Activity {
 //				HttpResponse response = httpclient.execute(httppost);
 //				
 			
-				
-				//Conversione da inputString a JsonResult
-				String jsonResult = GenericFunctions.inputStreamToString(
-						response.getEntity().getContent()).toString();
-				Log.i("JsonResult", "[" + jsonResult + "]");
-				JSONObject object = new JSONObject(jsonResult);
+//				
+//				//Conversione da inputString a JsonResult
+//				String jsonResult = GenericFunctions.inputStreamToString(
+//						response.getEntity().getContent()).toString();
+//				Log.i("JsonResult", "[" + jsonResult + "]");
+//				JSONObject object = new JSONObject(jsonResult);
 
 				//Lettura dell'oggetto Json
 				String mess = object.getString("Message");

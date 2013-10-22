@@ -4,10 +4,13 @@ import it.torvergata.mp.Const;
 import it.torvergata.mp.GenericFunctions;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
@@ -58,17 +61,31 @@ public class HttpConnection {
 
 			
 			DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
-					
-			HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
+				
+			
+			//********************
+			
+			URL url = new URL("http://" + Const.IPADDRESS
 					+ "/"+phpFile+".php");
 			
-			StringEntity se = new StringEntity(json.toString());
+			HttpPost httpPost = new HttpPost(url.toURI());
+
+			// Prepare JSON to send by setting the entity
+			httpPost.setEntity(new StringEntity(json.toString(), "UTF-8"));
+
+			// Set up the header types needed to properly transfer JSON
+			httpPost.setHeader("Content-Type", "application/json");
+			httpPost.setHeader("Accept-Encoding", "application/json");
+			httpPost.setHeader("Accept-Language", "en-US");
+
+			// Execute POST
+			//HttpResponse response = httpClient.execute(httpPost);
 			
-			se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
-			"application/json"));
-			httppost.setEntity(se);
+			//**********************
+			
+			
 			// Ricezione della risposta
-			BasicHttpResponse httpResponse = (BasicHttpResponse)  httpClient.execute(httppost);
+			BasicHttpResponse httpResponse = (BasicHttpResponse)  httpClient.execute(httpPost);
 			
 			// Conersione da inputString a JsonResult
 			String jsonResult = GenericFunctions.inputStreamToString(

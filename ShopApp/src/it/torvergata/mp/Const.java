@@ -18,7 +18,7 @@ public class Const {
 	public static final int KO = 0;
 	public static final int TIMEOUT = 2;
 	//Numero di cifre in un id di un prodotto.
-	public static final int IDFORMAT = 6;
+	public static final int IDFORMAT = 7;
 	//Nome del file per le Preferences
 	public static final String PREFS_NAME = "FilePreferences";
 	
