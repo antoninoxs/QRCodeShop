@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 
 public class GenericFunctions {
 	public static StringBuilder inputStreamToString(InputStream is) {
@@ -21,5 +22,10 @@ public class GenericFunctions {
 			e.printStackTrace();
 		}
 		return answer;
+	}
+	public static String currencyStamp(double d){
+		double price=d;
+		DecimalFormat df= new DecimalFormat ("#.00");
+		return df.format(price);
 	}
 }

@@ -1,5 +1,7 @@
 package it.torvergata.mp;
 
+import java.text.DecimalFormat;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -37,4 +39,7 @@ public class Const {
 		                      activeNetwork.isConnectedOrConnecting();
 		return isConnected;
 	}
+	
+	
 }
+

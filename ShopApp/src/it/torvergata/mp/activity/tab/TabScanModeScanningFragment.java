@@ -309,9 +309,11 @@ public class TabScanModeScanningFragment extends Fragment{
         tvTitle.setText(temp.getNome());
 		tvDescription.setText(temp.getDescrizione());
 		tvQuantitative.setText("Quantità:"+" "+temp.getQuantita());
-		String price=Double.toString(temp.getPrezzoTotale());
-		price=price.replace('.',',');
+	
+		
+		String price=GenericFunctions.currencyStamp(temp.getPrezzoTotale());
 		tvPrice.setText(price+" "+"\u20ac"+" ");
+		
 		drawab.fetchDrawableOnThread(temp, iv);
 	}
 	

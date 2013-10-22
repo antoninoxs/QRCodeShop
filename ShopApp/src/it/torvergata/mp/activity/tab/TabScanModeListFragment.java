@@ -2,7 +2,10 @@ package it.torvergata.mp.activity.tab;
 
 
  
+import java.text.DecimalFormat;
+
 import it.torvergata.mp.Const;
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
@@ -68,13 +71,16 @@ public class TabScanModeListFragment extends Fragment {
 				container, false);
         
     	totalPrice 			= (TextView) mLinearLayout.findViewById(R.id.tvTotalPrice);
-		Button btnAdd 		= (Button) mLinearLayout.findViewById(R.id.btnAdd);
+		
+    	Button btnAdd 		= (Button) mLinearLayout.findViewById(R.id.btnAdd);
 		Button btnContinue 	= (Button) mLinearLayout.findViewById(R.id.btnContinue);
 		final ListView list = (ListView) mLinearLayout.findViewById(id.list);
         
 		adapter =new ProductAdapter(getActivity(),
 				R.layout.new_list_item, productList);
 		list.setAdapter(adapter);
+		
+		setTotalPrice(totalPrice);
 		
 		list.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -143,6 +149,12 @@ public class TabScanModeListFragment extends Fragment {
 	public void updateProductList(ListProduct list) {
 		// TODO Auto-generated method stub
 		productList=list;
+	}
+	
+	public void setTotalPrice(TextView totalPrice){
+		String price = GenericFunctions.currencyStamp(productList.getTotalPrice());
+		totalPrice.setText(getString(R.string.tvTotal)+" "+price+" "+getString(R.string.Euro));
+		
 	}
 	private AlertDialog DeleteDialog(final int position) {
 		Product prod = productList.get(position);

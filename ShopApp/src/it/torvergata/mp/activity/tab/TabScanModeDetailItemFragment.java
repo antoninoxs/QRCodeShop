@@ -2,6 +2,7 @@ package it.torvergata.mp.activity.tab;
 
 
  
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.entity.ListProduct;
@@ -52,14 +53,12 @@ public class TabScanModeDetailItemFragment extends Fragment {
         
         
         
-		String price =Double.toString(prod.getPrezzoTotale());
-		price=price.replace('.',',');
 		ivImage.setImageDrawable(prod.getImmagine());
 		tvTitle.setText(prod.getNome());
 		tvDescription.setText(prod.getDescrizione());
-		tvPrice.setText(getString(R.string.tvTotal)+" "+price+"  "+getString(R.string.Euro));
+		tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
 		tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
-		tvSimplePrice.setText(getString(R.string.tPrice)+" "+prod.getPrezzoUnitario()+" "+getString(R.string.Euro));
+		tvSimplePrice.setText(getString(R.string.tPrice)+" "+GenericFunctions.currencyStamp(prod.getPrezzoUnitario())+" "+getString(R.string.Euro));
         
         return mLinearLayout;
         

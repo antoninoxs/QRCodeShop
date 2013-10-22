@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ListProduct extends ArrayList<Product> {
 	
-	double totalPrice=0;
+	double totalPrice=0.00;
 	
 	public ListProduct(){
 		super();
@@ -25,7 +25,6 @@ public class ListProduct extends ArrayList<Product> {
 		super.add(prod);
 		
 		totalPrice+=prod.getPrezzoTotale();
-		
 		totalPrice=round(totalPrice,2);
 		return true;
 		

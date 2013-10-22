@@ -23,6 +23,7 @@ package it.torvergata.mp.helper;
  * of this program.
  */
 
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.entity.ListProduct;
@@ -92,8 +93,11 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		tvTitle.setText(productList.get(position).getNome());
 		tvDescription.setText(productList.get(position).getDescrizione());
 		tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
-		String price=Double.toString(productList.get(position).getPrezzoTotale());
-		price=price.replace('.',',');
+		
+		
+		
+		String price = GenericFunctions.currencyStamp(productList.get(position).getPrezzoTotale());
+		
 		
 		tvPrice.setText(price+" "+"\u20ac"+" ");
 		
