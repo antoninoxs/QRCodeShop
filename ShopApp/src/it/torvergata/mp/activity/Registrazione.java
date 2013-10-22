@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
@@ -168,26 +169,52 @@ public class Registrazione extends Activity {
 	    {   
 		
 	    	try {
-				String res = "";
-				HttpClient httpclient = new DefaultHttpClient();
-				HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
-						+ "/registrazione.php");
-				
-				//Impacchettamento delle informazioni
+	    		
+	    		URL url = new URL("http://" + Const.IPADDRESS+ "/registrazione.php");
+
 				JSONObject json = new JSONObject();
 				json.put("Name", params[0]);
 				json.put("Surname", params[1]);
 				json.put("Email", params[2]);
 				json.put("User", params[3]);
 				json.put("Password", params[4]);	
-				StringEntity se = new StringEntity(json.toString());
+
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpPost httpPost = new HttpPost(url.toURI());
+
+				// Prepare JSON to send by setting the entity
+				httpPost.setEntity(new StringEntity(json.toString(), "UTF-8"));
+
+				// Set up the header types needed to properly transfer JSON
+				httpPost.setHeader("Content-Type", "application/json");
+				httpPost.setHeader("Accept-Encoding", "application/json");
+			//	httpPost.setHeader("Accept-Language", "en-US");
+
+				// Execute POST
+				HttpResponse response = httpClient.execute(httpPost);
 				
-				se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
-				"application/json"));
-				httppost.setEntity(se);
-			
-				HttpResponse response = httpclient.execute(httppost);
 				
+				
+//				String res = "";
+//				HttpClient httpclient = new DefaultHttpClient();
+//				HttpPost httppost = new HttpPost("http://" + Const.IPADDRESS
+//						+ "/registrazione.php");
+//				
+//				//Impacchettamento delle informazioni
+//				JSONObject json = new JSONObject();
+//				json.put("Name", params[0]);
+//				json.put("Surname", params[1]);
+//				json.put("Email", params[2]);
+//				json.put("User", params[3]);
+//				json.put("Password", params[4]);	
+//				StringEntity se = new StringEntity(json.toString());
+//				
+//				se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
+//				"application/json"));
+//				httppost.setEntity(se);
+//			
+//				HttpResponse response = httpclient.execute(httppost);
+//				
 			
 				
 				//Conversione da inputString a JsonResult
