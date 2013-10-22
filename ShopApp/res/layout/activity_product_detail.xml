@@ -98,22 +98,6 @@
         android:id="@+id/tvPriceDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:text="@string/tBtnAdd" />
-
-        <Button
-            android:id="@+id/btnContinue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:text="@string/tBtnContinue" />
     </LinearLayout>
 
 </LinearLayout>

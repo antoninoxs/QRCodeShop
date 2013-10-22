@@ -230,6 +230,7 @@ TabScanModeMainFragment.OnStartAcquisitionListener{
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack("Scanning");
         TabScanModeListFragment fragment = new TabScanModeListFragment();
         
         fragment.updateProductList(list);
@@ -256,6 +257,7 @@ TabScanModeMainFragment.OnStartAcquisitionListener{
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.addToBackStack("Main");
         TabScanModeScanningFragment fragmentScann = new TabScanModeScanningFragment();
         
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
@@ -263,13 +265,13 @@ TabScanModeMainFragment.OnStartAcquisitionListener{
 	}
 
 	@Override
-	public void ViewScanningFragment(Product product) {
+	public void ViewProductDetailFragment(Product product) {
 		// TODO Auto-generated method stub
-		Log.i("ERR", "MSG");
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabScanModeDetailItemFragment fragmentScann = new TabScanModeDetailItemFragment();
-         
+        fragmentTransaction.addToBackStack("Scanning");
+        
         fragmentScann.updateProduct(product);
         
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);

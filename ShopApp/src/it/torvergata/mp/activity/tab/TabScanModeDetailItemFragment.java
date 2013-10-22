@@ -8,6 +8,8 @@ import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +64,7 @@ public class TabScanModeDetailItemFragment extends Fragment {
         return mLinearLayout;
         
     }
-
+    
 	public void updateProduct(Product pr) {
 		// TODO Auto-generated method stub
 		prod=pr;

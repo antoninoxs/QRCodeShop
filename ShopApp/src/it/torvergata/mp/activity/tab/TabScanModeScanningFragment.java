@@ -274,6 +274,7 @@ public class TabScanModeScanningFragment extends Fragment{
 		releaseCamera();
 	}
 
+
 	/** A safe way to get an instance of the Camera object. */
 	public static Camera getCameraInstance() {
 		Camera c = null;
