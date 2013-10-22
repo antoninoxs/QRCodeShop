@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
 
 public class Const {
 	
-	public static final String IPADDRESS = "http://shopapp.dyndns.org:88/";
+	public static final String IPADDRESS = "shopapp.dyndns.org:88/";
 	//public static final String IPADDRESS = "192.168.1.15";
 	
 	

@@ -188,7 +188,7 @@ public class Registrazione extends Activity {
 				// Set up the header types needed to properly transfer JSON
 				httpPost.setHeader("Content-Type", "application/json");
 				httpPost.setHeader("Accept-Encoding", "application/json");
-			//	httpPost.setHeader("Accept-Language", "en-US");
+				httpPost.setHeader("Accept-Language", "en-US");
 
 				// Execute POST
 				HttpResponse response = httpClient.execute(httpPost);
