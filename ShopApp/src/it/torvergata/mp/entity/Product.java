@@ -32,6 +32,7 @@ public class Product implements Parcelable{
 		disponibilita=0;
 		descrizione="";
 		fileImmagine="";
+		immagine= null;
 		
 	}
 	

@@ -277,6 +277,20 @@ TabScanModeMainFragment.OnStartAcquisitionListener{
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 	}
+
+	@Override
+	public void ViewOrderFragment(ListProduct product) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabSendOrderFragment fragmentScann = new TabSendOrderFragment();
+        fragmentTransaction.addToBackStack("Order");
+        
+        fragmentScann.updateProduct(product);
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
+	}
 	
 	
 

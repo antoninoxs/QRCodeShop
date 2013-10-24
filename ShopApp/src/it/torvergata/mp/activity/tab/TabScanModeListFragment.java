@@ -49,6 +49,7 @@ public class TabScanModeListFragment extends Fragment {
     public interface OnAddQrCodeListener {
         public void ViewScanningFragment(ListProduct list);
         public void ViewProductDetailFragment(Product product);
+        public void ViewOrderFragment(ListProduct list);
 		
  }
   
@@ -127,6 +128,13 @@ public class TabScanModeListFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				mCallback.ViewScanningFragment(productList);
+			}
+		});
+		btnContinue.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mCallback.ViewOrderFragment(productList);
 			}
 		});
 		

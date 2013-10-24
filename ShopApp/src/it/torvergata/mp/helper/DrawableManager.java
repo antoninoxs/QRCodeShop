@@ -81,7 +81,7 @@ public class DrawableManager {
         final String urlString=Const.IMAGE_URL+product.getFileImmagine();
     	if (drawableMap.containsKey(urlString)) {
             imageView.setImageDrawable(drawableMap.get(urlString));
-            product.setImmagine(drawableMap.get(urlString));
+            //product.setImmagine(drawableMap.get(urlString));
         }
 
         final Handler handler = new Handler() {
