@@ -50,5 +50,6 @@
     <string name="tContinueScan">Continua con la scansione</string>
     <string name="tScanning">Scanning...</string>
     <string name="tActivateConnection">Attivare la connessione internet</string>
+    <string name="tProductList">Lista Prodotti</string>
 
 </resources>

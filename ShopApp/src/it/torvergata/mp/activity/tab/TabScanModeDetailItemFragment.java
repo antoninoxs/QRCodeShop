@@ -12,8 +12,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View.OnClickListener;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class TabScanModeDetailItemFragment extends Fragment {
 	private Product prod;
 	private LinearLayout mLinearLayout;
 	private TextView tvTitle,tvDescription,tvPrice,tvQuantitative,tvSimplePrice;
+	private Button btnListProduct;
 	private ImageView ivImage;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -50,7 +53,8 @@ public class TabScanModeDetailItemFragment extends Fragment {
       		tvPrice = (TextView)  mLinearLayout.findViewById(R.id.tvTotalPrice);
       		tvQuantitative = (TextView)  mLinearLayout.findViewById(R.id.tvQuantitativeDetail);
       		tvSimplePrice = (TextView)  mLinearLayout.findViewById(R.id.tvSimplePrice);
-        
+      		btnListProduct = (Button)  mLinearLayout.findViewById(R.id.btnListProduct);
+            
         
         
 		ivImage.setImageDrawable(prod.getImmagine());
@@ -60,6 +64,15 @@ public class TabScanModeDetailItemFragment extends Fragment {
 		tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 		tvSimplePrice.setText(getString(R.string.tPrice)+" "+GenericFunctions.currencyStamp(prod.getPrezzoUnitario())+" "+getString(R.string.Euro));
         
+		btnListProduct.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				getFragmentManager().popBackStack();
+			}
+		});
+		
         return mLinearLayout;
         
     }

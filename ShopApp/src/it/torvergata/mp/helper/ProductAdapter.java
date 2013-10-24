@@ -85,9 +85,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		ImageView iv = (ImageView)convertView.findViewById(R.id.list_image);
 		TextView tvQuantitative = (TextView)convertView.findViewById(R.id.tvQuantitative);
 		
-		
-		
-		
 		TextView tvPrice = (TextView)convertView.findViewById(R.id.price);
 		
 		tvTitle.setText(productList.get(position).getNome());
@@ -100,9 +97,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		
 		
 		tvPrice.setText(price+" "+"\u20ac"+" ");
-		
-	
-		
+				
 		drawab.fetchDrawableOnThread(productList.get(position), iv);
 		
 		//iv.setImageDrawable(drawab.fetchDrawable(Const.IMAGE_URL));
