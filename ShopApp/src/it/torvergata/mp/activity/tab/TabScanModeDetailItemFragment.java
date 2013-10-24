@@ -7,17 +7,28 @@ import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager.LayoutParams;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
  
 
@@ -26,7 +37,8 @@ public class TabScanModeDetailItemFragment extends Fragment {
 	private Product prod;
 	private LinearLayout mLinearLayout;
 	private TextView tvTitle,tvDescription,tvPrice,tvQuantitative,tvSimplePrice;
-	private Button btnListProduct;
+	private Button btnListProduct,btnChangeQuantitativeP,btnChangeQuantitativeM;
+	private EditText etQuantitative;
 	private ImageView ivImage;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -54,8 +66,10 @@ public class TabScanModeDetailItemFragment extends Fragment {
       		tvQuantitative = (TextView)  mLinearLayout.findViewById(R.id.tvQuantitativeDetail);
       		tvSimplePrice = (TextView)  mLinearLayout.findViewById(R.id.tvSimplePrice);
       		btnListProduct = (Button)  mLinearLayout.findViewById(R.id.btnListProduct);
-            
-        
+      		btnChangeQuantitativeP = (Button)  mLinearLayout.findViewById(R.id.btnChangeQuantitativeP);
+      		btnChangeQuantitativeM = (Button)  mLinearLayout.findViewById(R.id.btnChangeQuantitativeM);
+            etQuantitative = (EditText) mLinearLayout.findViewById(R.id.etQuantitative);
+       	
         
 		ivImage.setImageDrawable(prod.getImmagine());
 		tvTitle.setText(prod.getNome());
@@ -63,7 +77,36 @@ public class TabScanModeDetailItemFragment extends Fragment {
 		tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
 		tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 		tvSimplePrice.setText(getString(R.string.tPrice)+" "+GenericFunctions.currencyStamp(prod.getPrezzoUnitario())+" "+getString(R.string.Euro));
-        
+		etQuantitative.setText(""+prod.getQuantita());
+		etQuantitative.setKeyListener(null);
+		etQuantitative.setEnabled(false);
+		
+		btnChangeQuantitativeM.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(prod.getQuantita()>1){
+					prod.decrement();
+					tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
+					etQuantitative.setText(""+prod.getQuantita());
+					tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
+				}
+			}
+		});
+		
+		btnChangeQuantitativeP.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				prod.increment();
+				tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
+				etQuantitative.setText(""+prod.getQuantita());
+				tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
+			}
+		});
+		
+		
 		btnListProduct.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -76,7 +119,7 @@ public class TabScanModeDetailItemFragment extends Fragment {
         return mLinearLayout;
         
     }
-    
+ 
 	public void updateProduct(Product pr) {
 		// TODO Auto-generated method stub
 		prod=pr;

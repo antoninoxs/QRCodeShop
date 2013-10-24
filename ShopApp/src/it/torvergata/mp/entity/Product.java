@@ -39,6 +39,9 @@ public class Product implements Parcelable{
 	public void increment(){
 		quantita++;
 	}
+	public void decrement(){
+		quantita--;
+	}
 
 	@Override
 	public int describeContents() {

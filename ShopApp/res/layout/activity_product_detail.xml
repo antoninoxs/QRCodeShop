@@ -65,6 +65,7 @@
         </LinearLayout>
 
     </LinearLayout>
+    
 
     <TextView
         android:id="@+id/tvDesriptionTitle"
@@ -82,28 +83,74 @@
         android:layout_weight="10.12"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/tvTotalPrice"
+	<TextView
+                android:id="@+id/tvQuantitativeChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tChangeQuantitative"
+                android:textSize="15dip"
+        		android:textStyle="bold"
+                />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:padding="10dp"
-        android:text="price"
-        android:textColor="#10bcc9"
-        android:textSize="20dip"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnChangeQuantitativeM"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tChangeQuantitativeM" />
+
+        <EditText
+            android:id="@+id/etQuantitative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="1" >
+
+            <requestFocus />
+        </EditText>
+            
+         <Button
+            android:id="@+id/btnChangeQuantitativeP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tChangeQuantitativeP" />
+       
+
+        <TextView
+            android:id="@+id/tvTotalPrice"
+               android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="right"
+            android:padding="10dp"
+            android:text="price"
+            android:textColor="#10bcc9"
+            android:textSize="20dip"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="vertical" >
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/tvPriceDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+        
         <Button
             android:id="@+id/btnListProduct"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/tProductList" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tProductList"
+android:layout_weight="1"/>
 
     </LinearLayout>
 
