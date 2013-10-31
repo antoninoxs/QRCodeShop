@@ -68,5 +68,23 @@ public class ListProduct extends ArrayList<Product> {
 		this.add(t);
 		
 	}
+
+	public ArrayList<Integer> getListIdForOrder() {
+		
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for(int i=0;i<this.size();i++){
+			if(this.get(i).getQuantita()!=1){
+				for (int j=0;j<this.get(i).getQuantita();j++){
+					result.add(this.get(i).getId());
+				}
+			}else{
+			result.add(this.get(i).getId());
+			}
+		}
+		
+		return result;
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

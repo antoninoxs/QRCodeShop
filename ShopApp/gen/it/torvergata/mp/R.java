@@ -55,7 +55,7 @@ public final class R {
         public static final int TWregistrazionePassword1=0x7f080023;
         public static final int TWregistrazioneRegistrazione=0x7f080006;
         public static final int TWregistrazioneUsername=0x7f08001f;
-        public static final int action_settings=0x7f080033;
+        public static final int action_settings=0x7f080035;
         public static final int btnAdd=0x7f080003;
         public static final int btnChangeQuantitativeM=0x7f080015;
         public static final int btnChangeQuantitativeP=0x7f080017;
@@ -69,6 +69,7 @@ public final class R {
         public static final int editTextPassword=0x7f080008;
         public static final int editTextUsername=0x7f080005;
         public static final int etQuantitative=0x7f080016;
+        public static final int ibSendOrder=0x7f080034;
         public static final int ivDetailImage=0x7f08000d;
         public static final int list_image=0x7f08002a;
         public static final int option_text=0x7f080031;
@@ -78,6 +79,7 @@ public final class R {
         public static final int scanText=0x7f080028;
         public static final int scrollView1=0x7f080012;
         public static final int textView1=0x7f080026;
+        public static final int textView2=0x7f080033;
         public static final int textViewRegistrazione=0x7f08000a;
         public static final int thumbnail=0x7f08000c;
         public static final int title=0x7f08002b;

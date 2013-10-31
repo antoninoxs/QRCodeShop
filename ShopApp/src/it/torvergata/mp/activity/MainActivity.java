@@ -41,6 +41,7 @@ import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -72,7 +73,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		//Gestione della Sessione
-		SharedPreferences settings = getSharedPreferences(Const.PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(Const.PREFS_NAME,0 );
 		//Si prende il valore LoggedIn, se questo non esiste, ritorna falso
 		boolean hasLoggedIn = settings.getBoolean("LoggedIn", false);
 
@@ -136,6 +137,11 @@ public class MainActivity extends Activity {
 								SharedPreferences.Editor editor = settings.edit();
 								//Impostiamo LoggedIn a True
 								editor.putBoolean("LoggedIn", true);
+								
+								//Impostiamo LoggedIn a True
+								editor.putString("User", user);
+								
+								
 								//Eseguiamo il Commit
 								editor.commit();
 								
