@@ -4,6 +4,10 @@ package it.torvergata.mp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ListProduct extends ArrayList<Product> {
 	
 	double totalPrice=0.00;
@@ -69,20 +73,33 @@ public class ListProduct extends ArrayList<Product> {
 		
 	}
 
-	public ArrayList<Integer> getListIdForOrder() {
+	public JSONObject getListIdForOrder(String user) {
+		JSONArray jsonArray= new JSONArray();
+		JSONObject jsonObjU = new JSONObject();
+		JSONObject json = new JSONObject();
 		
-		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		try {
+			jsonObjU.put("user", user);
+		
+		
 		for(int i=0;i<this.size();i++){
-			if(this.get(i).getQuantita()!=1){
-				for (int j=0;j<this.get(i).getQuantita();j++){
-					result.add(this.get(i).getId());
-				}
-			}else{
-			result.add(this.get(i).getId());
-			}
+			JSONObject temp = new JSONObject();
+			temp.put("Q", this.get(i).getQuantita());
+			temp.put("id", this.get(i).getId());
+			jsonArray.put(temp);
 		}
+
 		
-		return result;
+		json.put("User", jsonObjU);
+		json.put("Products", jsonArray);
+		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json;
+		
 		// TODO Auto-generated method stub
 		
 	}

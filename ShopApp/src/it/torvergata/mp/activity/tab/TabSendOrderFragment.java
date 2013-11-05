@@ -4,6 +4,7 @@ package it.torvergata.mp.activity.tab;
  
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -86,7 +87,11 @@ public class TabSendOrderFragment extends Fragment {
         
         ibSendOrder= (ImageButton) mLinearLayout.findViewById(R.id.ibSendOrder);
         
-        final ArrayList<Integer> listIdForOrder =productList.getListIdForOrder();
+      //Gestione della Sessione
+		SharedPreferences settings = getActivity().getSharedPreferences(Const.PREFS_NAME, 0);
+	
+		String user = settings.getString("User","a");
+        final JSONObject listIdForOrder =productList.getListIdForOrder(user);
         		
         
         ibSendOrder.setOnClickListener(new OnClickListener() {
@@ -115,7 +120,7 @@ public class TabSendOrderFragment extends Fragment {
 		productList=productl;
 	}
 	
-	public class SendOrder extends AsyncTask<ArrayList<Integer>, Void, Void> {
+	public class SendOrder extends AsyncTask<JSONObject, Void, Void> {
 		ProgressDialog progressDialog;
 
 		@Override
@@ -127,31 +132,17 @@ public class TabSendOrderFragment extends Fragment {
 		}
 
 		@Override
-		protected Void doInBackground(ArrayList<Integer>... params) {
-			ArrayList<Integer> listIdOrder = params[0];
+		protected Void doInBackground(JSONObject... params) {
+			JSONObject json = params[0];
 	
 				try {
 				HttpConnection connection = new HttpConnection();
 				
-				JSONObject json = new JSONObject();
-				
-				//Gestione della Sessione
-				SharedPreferences settings = getActivity().getSharedPreferences(Const.PREFS_NAME, 0);
-			
-				String user = settings.getString("User","");
-				
-				json.put("user", user);
-//				json.put("1", "1111111");
-//				json.put("2", "2222222");
-//				json.put("3", "3333333");
-//				
-				for (int i=0;i<listIdOrder.size();i++){
-					json.put(""+i, listIdOrder.get(i));
-				}
-				
+				String jsonStr = json.toString();
+
 				Log.i("Json Inviato: ", json.toString(4));
 							
-				JSONObject object = connection.connect("order", json, handler);
+				JSONObject object = connection.connect("ordernew", json, handler);
 								
 				String result = object.getString("result");
 				if (Integer.parseInt(result)==Const.OK){
