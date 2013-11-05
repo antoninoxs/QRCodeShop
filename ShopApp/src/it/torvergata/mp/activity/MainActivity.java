@@ -112,7 +112,9 @@ public class MainActivity extends Activity {
 					password = edPassword.getText().toString();
 					
 					try {
+						Log.i("BEFORE CRYPTO", password);
 						passwordCrypto = crypto.encrypt(password, password);
+						Log.i("AFTER CRYPTO", passwordCrypto);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -140,7 +142,7 @@ public class MainActivity extends Activity {
 								
 								//Impostiamo LoggedIn a True
 								editor.putString("User", user);
-								
+								Log.i("USER SALVATO IN PREFERENCES", user);
 								
 								//Eseguiamo il Commit
 								editor.commit();
@@ -237,7 +239,7 @@ public class MainActivity extends Activity {
 				JSONObject json = new JSONObject();
 				json.put("user", user);
 				json.put("password", passwordCrypto);
-				
+				Log.i("PASSWORD NEL JSON", passwordCrypto);
 				HttpConnection connection = new HttpConnection();
 				JSONObject object = connection.connect("login", json, handler);
 				

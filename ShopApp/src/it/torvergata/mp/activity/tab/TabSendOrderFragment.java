@@ -90,7 +90,9 @@ public class TabSendOrderFragment extends Fragment {
       //Gestione della Sessione
 		SharedPreferences settings = getActivity().getSharedPreferences(Const.PREFS_NAME, 0);
 	
-		String user = settings.getString("User","a");
+		String user = settings.getString("User","*");
+		Log.i("USER RECUPERATO DA PREFERENCES", user);
+		
         final JSONObject listIdForOrder =productList.getListIdForOrder(user);
         		
         

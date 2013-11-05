@@ -69,7 +69,7 @@ public class HttpConnection {
 					+ "/"+phpFile+".php");
 			
 			HttpPost httpPost = new HttpPost(url.toURI());
-
+			Log.i("PASSWORD PRIMA IN SET ENTITY",json.toString(4) );
 			// Prepare JSON to send by setting the entity
 			httpPost.setEntity(new StringEntity(json.toString(), "UTF-8"));
 
@@ -82,7 +82,7 @@ public class HttpConnection {
 			//HttpResponse response = httpClient.execute(httpPost);
 			
 			//**********************
-			
+			Log.i("Json Inviato: ", json.toString(4));
 			
 			// Ricezione della risposta
 			BasicHttpResponse httpResponse = (BasicHttpResponse)  httpClient.execute(httpPost);
