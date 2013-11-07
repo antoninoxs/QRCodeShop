@@ -11,6 +11,7 @@ import org.json.JSONObject;
 public class ListProduct extends ArrayList<Product> {
 	
 	double totalPrice=0.00;
+	int count=0;
 	
 	public ListProduct(){
 		super();
@@ -21,6 +22,9 @@ public class ListProduct extends ArrayList<Product> {
 		return totalPrice;
 	}
 
+	public int getCount() {
+		return  this.count;
+	}
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
@@ -30,6 +34,7 @@ public class ListProduct extends ArrayList<Product> {
 		
 		totalPrice+=prod.getPrezzoTotale();
 		totalPrice=round(totalPrice,2);
+		count++;
 		return true;
 		
 	}
@@ -51,6 +56,7 @@ public class ListProduct extends ArrayList<Product> {
 	public Product remove(int position){
 		totalPrice-=super.get(position).getPrezzoTotale();
 		totalPrice=round(totalPrice,2);
+		count--;
 		super.remove(position);
 		return null;
 	}
@@ -63,6 +69,7 @@ public class ListProduct extends ArrayList<Product> {
 
 	public void setIncrementTotalPrice(double prezzoUnitarioProdotto) {
 		// TODO Auto-generated method stub
+		count++;
 		totalPrice+=prezzoUnitarioProdotto;
 	}
 

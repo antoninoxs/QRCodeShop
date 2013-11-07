@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import it.torvergata.mp.Const;
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.MainActivity;
@@ -33,6 +34,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
  
 /**
  * @author mwho
@@ -46,6 +48,8 @@ public class TabSendOrderFragment extends Fragment {
 	private LinearLayout mLinearLayout;
 	private ListProduct productList;
 	private ImageButton ibSendOrder;
+	private TextView   tvNumberProducts,tvTotalCost;
+	
 	private Handler handler;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -92,6 +96,10 @@ public class TabSendOrderFragment extends Fragment {
 				container, false);
         
         ibSendOrder= (ImageButton) mLinearLayout.findViewById(R.id.ibSendOrder);
+        tvNumberProducts =(TextView) mLinearLayout.findViewById(R.id.tvNumberProductsTabOrder);
+        tvTotalCost =(TextView) mLinearLayout.findViewById(R.id.tvTotalCostTabOrder);
+        
+        setTotalProductAndTotalPrice(tvNumberProducts,tvTotalCost);
         
       //Gestione della Sessione
 		SharedPreferences settings = getActivity().getSharedPreferences(Const.PREFS_NAME, 0);
@@ -179,7 +187,7 @@ public class TabSendOrderFragment extends Fragment {
 	private AlertDialog chrashSendOrder() {
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.tWarning)
-				.setMessage("Invio ordine non riuscito")
+				.setMessage(R.string.tOrderSendWrong)
 				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
 				.setPositiveButton(R.string.tOk,
 						new DialogInterface.OnClickListener() {
@@ -229,8 +237,8 @@ public class TabSendOrderFragment extends Fragment {
 	
 	private AlertDialog successSendOrder() {
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle("ShopApp")
-				.setMessage("Ordine inviato correttamente")
+				.setTitle(R.string.tShopApp)
+				.setMessage(R.string.tOrderSendSuccess)
 				.setIcon(android.R.drawable.ic_dialog_info)//.setIcon(R.drawable.img_delete)
 				.setPositiveButton(R.string.tOk,
 						new DialogInterface.OnClickListener() {
@@ -243,5 +251,9 @@ public class TabSendOrderFragment extends Fragment {
 				.create();
 		return alertDialog;
 	}
-
+	public void setTotalProductAndTotalPrice(TextView totalProducts,TextView totalPrice){
+		String price = GenericFunctions.currencyStamp(productList.getTotalPrice());
+		totalPrice.setText(price+" "+getString(R.string.Euro));
+		totalProducts.setText(""+productList.getCount()); 
+	}
 }

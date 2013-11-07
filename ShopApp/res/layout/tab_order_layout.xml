@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#cfcfcf"
+    android:background="@drawable/radialgradientback"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp" >
+        
     </LinearLayout>
 
     <LinearLayout
@@ -16,37 +17,10 @@
         android:padding="20dp" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tvSummaryTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Large Text"
+            android:text="Riepilogo: "
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
@@ -56,17 +30,37 @@
         android:padding="20dp" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tvNumberProductsLabelTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Large Text"
+            android:text="@string/tProductsInOrder"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvNumberProductsTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Large Text"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp" >
+
+        <TextView
+            android:id="@+id/tvTotalCostLabelTabOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tTotalImport"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTotalCostTabOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
