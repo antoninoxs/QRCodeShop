@@ -48,7 +48,7 @@ public class TabScanModeListFragment extends Fragment {
 	// Container Activity must implement this interface
     public interface OnAddQrCodeListener {
         public void ViewScanningFragment(ListProduct list);
-        public void ViewProductDetailFragment(Product product);
+        public void ViewProductDetailFragment(ListProduct list,int pos);
         public void ViewOrderFragment(ListProduct list);
 		
  }
@@ -118,7 +118,7 @@ public class TabScanModeListFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				mCallback.ViewProductDetailFragment(productList.get(arg2));
+				mCallback.ViewProductDetailFragment(productList,arg2);
 			}
 		});
 		

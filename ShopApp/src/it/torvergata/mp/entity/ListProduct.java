@@ -110,5 +110,12 @@ public class ListProduct extends ArrayList<Product> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setDecrementTotalPrice(double prezzoUnitarioProdotto) {
+		// TODO Auto-generated method stub
+		count--;
+		totalPrice-=prezzoUnitarioProdotto;
+	}
+
 	
 }

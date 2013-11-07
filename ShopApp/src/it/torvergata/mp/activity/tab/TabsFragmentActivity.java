@@ -35,7 +35,8 @@ import android.widget.TabHost.TabContentFactory;
 public class TabsFragmentActivity extends FragmentActivity implements TabHost.OnTabChangeListener, 
 TabScanModeScanningFragment.OnTermAcquisitionListener,
 TabScanModeListFragment.OnAddQrCodeListener,
-TabScanModeMainFragment.OnStartAcquisitionListener{
+TabScanModeMainFragment.OnStartAcquisitionListener,
+TabScanModeDetailItemFragment.OnReturnListListener{
  
     private TabHost mTabHost;
     private HashMap mapTabInfo = new HashMap();
@@ -264,19 +265,7 @@ TabScanModeMainFragment.OnStartAcquisitionListener{
         fragmentTransaction.commit();
 	}
 
-	@Override
-	public void ViewProductDetailFragment(Product product) {
-		// TODO Auto-generated method stub
-		FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TabScanModeDetailItemFragment fragmentScann = new TabScanModeDetailItemFragment();
-        fragmentTransaction.addToBackStack("Scanning");
-        
-        fragmentScann.updateProduct(product);
-        
-        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
-        fragmentTransaction.commit();
-	}
+
 
 	@Override
 	public void ViewOrderFragment(ListProduct product) {
@@ -287,6 +276,20 @@ TabScanModeMainFragment.OnStartAcquisitionListener{
         fragmentTransaction.addToBackStack("Order");
         
         fragmentScann.updateProduct(product);
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
+	}
+
+	@Override
+	public void ViewProductDetailFragment(ListProduct list, int pos) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabScanModeDetailItemFragment fragmentScann = new TabScanModeDetailItemFragment();
+        fragmentTransaction.addToBackStack("Scanning");
+        
+        fragmentScann.updateProduct(list,pos);
         
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();

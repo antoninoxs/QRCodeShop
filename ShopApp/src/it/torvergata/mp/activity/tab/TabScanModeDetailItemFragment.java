@@ -5,8 +5,11 @@ package it.torvergata.mp.activity.tab;
 import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.activity.tab.TabScanModeListFragment.OnAddQrCodeListener;
+import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -40,6 +43,15 @@ public class TabScanModeDetailItemFragment extends Fragment {
 	private Button btnListProduct,btnChangeQuantitativeP,btnChangeQuantitativeM;
 	private EditText etQuantitative;
 	private ImageView ivImage;
+	private ListProduct productlist;
+	private int position;
+	
+	OnReturnListListener mCallback;
+	// Container Activity must implement this interface
+    public interface OnReturnListListener {
+        public void ViewListFragment(ListProduct list);
+    }
+	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         if (container == null) {
@@ -58,7 +70,7 @@ public class TabScanModeDetailItemFragment extends Fragment {
         
         tvTitle 			= (TextView) mLinearLayout.findViewById(R.id.tvTitleDetail);
         
-      //Inizializzazione
+        //Inizializzazione
       		ivImage = (ImageView)  mLinearLayout.findViewById(R.id.ivDetailImage);
       		tvTitle = (TextView)  mLinearLayout.findViewById(R.id.tvTitleDetail);
       		tvDescription = (TextView)  mLinearLayout.findViewById(R.id.tvDescriptionDetail);
@@ -88,9 +100,13 @@ public class TabScanModeDetailItemFragment extends Fragment {
 				// TODO Auto-generated method stub
 				if(prod.getQuantita()>1){
 					prod.decrement();
+					
+					productlist.set(position, prod);
+					productlist.setDecrementTotalPrice(prod.getPrezzoUnitario());
 					tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 					etQuantitative.setText(""+prod.getQuantita());
 					tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
+					
 				}
 			}
 		});
@@ -100,6 +116,9 @@ public class TabScanModeDetailItemFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				prod.increment();
+				
+				productlist.set(position, prod);
+				productlist.setIncrementTotalPrice(prod.getPrezzoUnitario());
 				tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 				etQuantitative.setText(""+prod.getQuantita());
 				tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
@@ -112,17 +131,32 @@ public class TabScanModeDetailItemFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				getFragmentManager().popBackStack();
+				mCallback.ViewListFragment(productlist);
 			}
 		});
 		
-        return mLinearLayout;
-        
+        return mLinearLayout;   
     }
  
-	public void updateProduct(Product pr) {
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnReturnListListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnReturnListListener ");
+        }
+    }
+	public void updateProduct(ListProduct list,int pos) {
 		// TODO Auto-generated method stub
-		prod=pr;
+		productlist = new ListProduct();
+		productlist	=	list;
+		prod		=	list.get(pos);
+		position	= 	pos;
+		
 	}
 
 }
