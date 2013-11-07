@@ -69,13 +69,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.24" >
 
-        <ImageButton
-            android:id="@+id/ibSendOrder"
-            android:layout_width="140dp"
+        <ImageView
+            android:id="@+id/ivSendOrder"
+             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_centerHorizontal="true"
+           android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/orderlist" />
 
     </RelativeLayout>
 

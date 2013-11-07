@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
  
@@ -47,7 +48,7 @@ public class TabSendOrderFragment extends Fragment {
 	
 	private LinearLayout mLinearLayout;
 	private ListProduct productList;
-	private ImageButton ibSendOrder;
+	private ImageView ivSendOrder;
 	private TextView   tvNumberProducts,tvTotalCost;
 	
 	private Handler handler;
@@ -95,7 +96,7 @@ public class TabSendOrderFragment extends Fragment {
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_order_layout,
 				container, false);
         
-        ibSendOrder= (ImageButton) mLinearLayout.findViewById(R.id.ibSendOrder);
+        ivSendOrder= (ImageView) mLinearLayout.findViewById(R.id.ivSendOrder);
         tvNumberProducts =(TextView) mLinearLayout.findViewById(R.id.tvNumberProductsTabOrder);
         tvTotalCost =(TextView) mLinearLayout.findViewById(R.id.tvTotalCostTabOrder);
         
@@ -110,7 +111,7 @@ public class TabSendOrderFragment extends Fragment {
         final JSONObject listIdForOrder =productList.getListIdForOrder(user);
         		
         
-        ibSendOrder.setOnClickListener(new OnClickListener() {
+        ivSendOrder.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

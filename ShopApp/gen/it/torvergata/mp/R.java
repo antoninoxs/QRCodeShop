@@ -27,16 +27,17 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
         public static final int image_back=0x7f020004;
         public static final int img_delete=0x7f020005;
-        public static final int radialgradientback=0x7f020006;
-        public static final int tab=0x7f020007;
-        public static final int tab_bs_not_selected=0x7f020008;
-        public static final int tab_bs_selected=0x7f020009;
-        public static final int tab_not_selected=0x7f02000a;
-        public static final int tab_or_not_selected=0x7f02000b;
-        public static final int tab_or_selected=0x7f02000c;
-        public static final int tab_qr_not_selected=0x7f02000d;
-        public static final int tab_qr_selected=0x7f02000e;
-        public static final int tab_selected=0x7f02000f;
+        public static final int orderlist=0x7f020006;
+        public static final int radialgradientback=0x7f020007;
+        public static final int tab=0x7f020008;
+        public static final int tab_bs_not_selected=0x7f020009;
+        public static final int tab_bs_selected=0x7f02000a;
+        public static final int tab_not_selected=0x7f02000b;
+        public static final int tab_or_not_selected=0x7f02000c;
+        public static final int tab_or_selected=0x7f02000d;
+        public static final int tab_qr_not_selected=0x7f02000e;
+        public static final int tab_qr_selected=0x7f02000f;
+        public static final int tab_selected=0x7f020010;
     }
     public static final class id {
         public static final int BregistrazioneRegistrati=0x7f080025;
@@ -69,8 +70,8 @@ public final class R {
         public static final int editTextPassword=0x7f080008;
         public static final int editTextUsername=0x7f080005;
         public static final int etQuantitative=0x7f080016;
-        public static final int ibSendOrder=0x7f080037;
         public static final int ivDetailImage=0x7f08000d;
+        public static final int ivSendOrder=0x7f080037;
         public static final int list_image=0x7f08002a;
         public static final int option_text=0x7f080031;
         public static final int price=0x7f08002e;
