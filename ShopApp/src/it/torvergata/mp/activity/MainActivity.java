@@ -264,6 +264,23 @@ public class MainActivity extends Activity {
 	    };
 	 }
 	
+	private AlertDialog ConnectionTimeout() {
+		AlertDialog alertDialog = new AlertDialog.Builder(this)
+				.setTitle(R.string.tWarning)
+				.setMessage(R.string.tTimeout)
+				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setPositiveButton(R.string.tOk,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								
+							}
+						})
+				.create();
+		return alertDialog;
+	}
+	
 	private AlertDialog ConnectionNotFound() {
 		AlertDialog alertDialog = new AlertDialog.Builder(this)
 				.setTitle(R.string.tWarning)

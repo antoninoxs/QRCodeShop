@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import it.torvergata.mp.Const;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.activity.MainActivity;
 import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.LoadDataProduct;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
@@ -57,15 +58,20 @@ public class TabSendOrderFragment extends Fragment {
     	            	int res = mess.arg1;
     	               	
     	            	if(res==Const.KO){
-    	                	AlertDialog dialogBox = ProductNotFound();
+    	                	AlertDialog dialogBox = chrashSendOrder();
     						dialogBox.show();
     	                }
     	            	
     	                else if(res==Const.TIMEOUT){
-    	                	AlertDialog dialogBox = ConnectionTimeout();
+    	                	AlertDialog dialogBox = successSendOrder();
     	    				dialogBox.show();
     	                }
-    	                else Log.i("Ordine", "OK");
+    	                else {
+    	                	Log.i("Ordine", "OK");
+    	                	AlertDialog dialogBox = successSendOrder();
+    	    				dialogBox.show();
+    	                	
+    	                }
     	                }
     	                
     	            
@@ -127,10 +133,14 @@ public class TabSendOrderFragment extends Fragment {
 
 		@Override
 		protected void onPreExecute() {
+			//Creazione di un Dialog di attesa per il login
+	        progressDialog= ProgressDialog.show(getActivity(), "ShopApp","Invio Ordine...", true);
 		};
 
 		@Override
 		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+	        progressDialog.dismiss();
 		}
 
 		@Override
@@ -148,24 +158,12 @@ public class TabSendOrderFragment extends Fragment {
 								
 				String result = object.getString("result");
 				if (Integer.parseInt(result)==Const.OK){
-				
-					
-					String idCliente = object.getString("idCliente");
-					Log.i("idCliente: ", idCliente);
-					
-					
-				
-					//Comunicazione al Thread principale del nome del prodotto
 					Message message = handler.obtainMessage(1, Const.OK, 0);
-				
 					handler.sendMessage(message);
 				}
 				else{
-					//Comunicazione al Thread principale del nome del prodotto
-					//Message message = handler.obtainMessage(1, Const.KO);
 					Message message = handler.obtainMessage(1, Const.KO, 0);
 					handler.sendMessage(message);
-					
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -178,12 +176,12 @@ public class TabSendOrderFragment extends Fragment {
 
 	
 	}
-	private AlertDialog ProductNotFound() {
+	private AlertDialog chrashSendOrder() {
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tProductNotFound)
+				.setMessage("Invio ordine non riuscito")
 				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tContinueScan,
+				.setPositiveButton(R.string.tOk,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
@@ -217,6 +215,23 @@ public class TabSendOrderFragment extends Fragment {
 				.setTitle(R.string.tWarning)
 				.setMessage(R.string.tTimeout)
 				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setPositiveButton(R.string.tOk,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								
+							}
+						})
+				.create();
+		return alertDialog;
+	}
+	
+	private AlertDialog successSendOrder() {
+		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+				.setTitle("ShopApp")
+				.setMessage("Ordine inviato correttamente")
+				.setIcon(android.R.drawable.ic_dialog_info)//.setIcon(R.drawable.img_delete)
 				.setPositiveButton(R.string.tOk,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
