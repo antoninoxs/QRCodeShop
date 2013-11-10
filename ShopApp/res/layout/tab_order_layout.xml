@@ -7,12 +7,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp" >
-        
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp" >
 
@@ -21,7 +15,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Riepilogo: "
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="italic" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -34,14 +30,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tProductsInOrder"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tvNumberProductsTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="italic" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -54,14 +53,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tTotalImport"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tvTotalCostTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#e02f2f"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -76,6 +79,16 @@
            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:src="@drawable/orderlist" />
+
+		<TextView
+		    android:id="@+id/tvTotalCostLabelTabOrder"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/ivSendOrder"
+		    android:layout_centerHorizontal="true"
+		    android:text="@string/tSendOrder"
+		    android:textAppearance="?android:attr/textAppearanceMedium"
+		    android:textStyle="italic" />
 
     </RelativeLayout>
 

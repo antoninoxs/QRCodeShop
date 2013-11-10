@@ -497,7 +497,7 @@ public class TabScanModeScanningFragment extends Fragment{
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.tWarning)
 				.setMessage(R.string.tProductNotFound)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setIcon(R.drawable.productnotfound)//.setIcon(R.drawable.img_delete)
 				.setPositiveButton(R.string.tContinueScan,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
@@ -535,7 +535,7 @@ public class TabScanModeScanningFragment extends Fragment{
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.tWarning)
 				.setMessage(R.string.tTimeout)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
+				.setIcon(R.drawable.timeout)//.setIcon(R.drawable.img_delete)
 				.setPositiveButton(R.string.tOk,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,

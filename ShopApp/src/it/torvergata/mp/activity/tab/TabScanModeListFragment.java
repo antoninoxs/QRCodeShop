@@ -81,7 +81,7 @@ public class TabScanModeListFragment extends Fragment {
 				R.layout.new_list_item, productList);
 		list.setAdapter(adapter);
 		
-		setTotalPrice(totalPrice);
+		setTotalPrice();
 		
 		list.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -98,9 +98,10 @@ public class TabScanModeListFragment extends Fragment {
 					@Override
 					public void onClick(View v) {
 						try{
+						
 						productList.remove(arg2);
 						adapter.notifyDataSetChanged();
-						//setTotalPrice(totalPrice);
+						setTotalPrice();
 						}catch (IndexOutOfBoundsException e){
 							adapter.notifyDataSetChanged();
 						}
@@ -159,7 +160,7 @@ public class TabScanModeListFragment extends Fragment {
 		productList=list;
 	}
 	
-	public void setTotalPrice(TextView totalPrice){
+	public void setTotalPrice(){
 		String price = GenericFunctions.currencyStamp(productList.getTotalPrice());
 		totalPrice.setText(getString(R.string.tvTotal)+" "+price+" "+getString(R.string.Euro));
 		

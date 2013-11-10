@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cfcfcf"
+    android:background="@drawable/radialgradientback"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -57,7 +57,7 @@
                 android:id="@+id/tvSimplePrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#10bcc9"
+                android:textColor="#e02f2f"
                 android:text="Medium Text"
                 android:textSize="15dip"
         		android:textStyle="bold"
@@ -135,7 +135,7 @@
             android:gravity="right"
             android:padding="10dp"
             android:text="price"
-            android:textColor="#10bcc9"
+            android:textColor="#e02f2f"
             android:textSize="20dip"
             android:textStyle="bold" />
 

@@ -22,7 +22,7 @@
     <string name="tvProductID">Prodotti:</string>
     <string name="Loading">Accesso in corso...</string>
     <string name="tDeleteProduct">Elimina</string>
-    <string name="tMessageDelete">Si d\u20acesidera eliminare il prodotto selezionato?</string>
+    <string name="tMessageDelete">Si desidera eliminare il prodotto selezionato?</string>
     <string name="tCancelDelete">Annulla</string>
     <string name="tTitleBoxDeleteProduct">Eliminazione prodotto</string>
     <string name="tMessageDeleteProd">Eliminazione </string>
@@ -60,6 +60,7 @@
      <string name="tOrderSendSuccess">Ordine inviato correttamente</string>
      <string name="tOrderSendWrong">Invio ordine non riuscito</string>
      <string name="tSendingOrger">Invio Ordine...</string>
+     <string name="tSendOrder">Invia ordine</string>
      
     
 

@@ -40,7 +40,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -227,5 +229,20 @@ public class Registrazione extends Activity {
 			progressDialog.dismiss();
 		};
 	}
-
+	private AlertDialog ConnectionTimeout() {
+		AlertDialog alertDialog = new AlertDialog.Builder(this)
+				.setTitle(R.string.tWarning)
+				.setMessage(R.string.tTimeout)
+				.setIcon(R.drawable.timeout)
+				.setPositiveButton(R.string.tOk,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss(); 
+								
+							}
+						})
+				.create();
+		return alertDialog;
+	}
 }

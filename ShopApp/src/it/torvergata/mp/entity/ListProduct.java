@@ -1,12 +1,17 @@
 package it.torvergata.mp.entity;
 
 
+import it.torvergata.mp.GenericFunctions;
+import it.torvergata.mp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.widget.TextView;
 
 public class ListProduct extends ArrayList<Product> {
 	
