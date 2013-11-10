@@ -59,9 +59,12 @@ public class ListProduct extends ArrayList<Product> {
 	}
 	
 	public Product remove(int position){
+		int q=super.get(position).getQuantita();
 		totalPrice-=super.get(position).getPrezzoTotale();
 		totalPrice=round(totalPrice,2);
-		count--;
+		for (int i=0;i<q;i++){
+			count--;
+		}
 		super.remove(position);
 		return null;
 	}
