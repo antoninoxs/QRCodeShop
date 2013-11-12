@@ -57,6 +57,11 @@ import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.media.ToneGenerator;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -160,7 +165,7 @@ public class TabScanModeScanningFragment extends Fragment{
 		
 		ContinueScanButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-               
+            		
                     scanText.setText(R.string.tScanning);
                     mCamera.setPreviewCallback(previewCb);
                     mCamera.startPreview();
@@ -345,9 +350,12 @@ public class TabScanModeScanningFragment extends Fragment{
 						//dialogBox.show();
 					}
 					else{
+						playSound(getActivity());
 						previewing = false;
 						mCamera.setPreviewCallback(null);
 						mCamera.stopPreview();
+						
+						
 						try{
 							id=Integer.parseInt(contents);
 						}
@@ -554,4 +562,15 @@ public class TabScanModeScanningFragment extends Fragment{
 				.create();
 		return alertDialog;
 	}
+	
+	
+	
+	
+	public void playSound(Context context)  {
+
+		MediaPlayer mPlayer = new MediaPlayer();
+	    mPlayer = MediaPlayer.create(context, R.raw.beep);
+	    mPlayer.start();
+
+}
 }
