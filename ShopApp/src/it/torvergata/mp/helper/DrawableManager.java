@@ -42,7 +42,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 public class DrawableManager {
-	
+	//Statica perchè tutte le Activity o Fragment devono possedere la stessa mappa di caching delle immagini
     public static Map<String, Drawable> drawableMap = new HashMap<String, Drawable>();
     
     public DrawableManager() {
