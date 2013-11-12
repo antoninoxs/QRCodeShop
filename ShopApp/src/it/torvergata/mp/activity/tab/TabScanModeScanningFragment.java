@@ -42,6 +42,7 @@ import it.torvergata.mp.activity.MainActivity.LoadData;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.CameraPreview;
+import it.torvergata.mp.helper.Dialogs;
 import it.torvergata.mp.helper.DrawableManager;
 import it.torvergata.mp.helper.HttpConnection;
 import it.torvergata.mp.helper.ProductAdapter;
@@ -101,6 +102,7 @@ public class TabScanModeScanningFragment extends Fragment{
 	private ImageView iv;
 	private Button FinishScanButton, ContinueScanButton,encodeButton;
 	private DrawableManager drawab;
+	private Dialogs dialogs;
 
 	ImageScanner scanner;
 
@@ -142,7 +144,7 @@ public class TabScanModeScanningFragment extends Fragment{
 		//productList = new ListProduct();
 		
 		drawab = new DrawableManager();
-		
+		dialogs= new Dialogs();
 		
 		
 		scanText = (TextView) mLinearLayout.findViewById(R.id.scanText);
@@ -219,7 +221,7 @@ public class TabScanModeScanningFragment extends Fragment{
                 }
             	
                 else if(res==Const.TIMEOUT){
-                	AlertDialog dialogBox = ConnectionTimeout();
+                	AlertDialog dialogBox = dialogs.ConnectionTimeout(getActivity());
     				dialogBox.show();
                 }
                 else showLastProduct();
@@ -546,22 +548,6 @@ public class TabScanModeScanningFragment extends Fragment{
 		return alertDialog;
 	}
 	
-	private AlertDialog ConnectionTimeout() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tTimeout)
-				.setIcon(R.drawable.timeout)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
 	
 	
 	

@@ -8,6 +8,7 @@ import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
 import it.torvergata.mp.activity.tab.TabsFragmentActivity;
 import it.torvergata.mp.crypto.CryptoSha256;
+import it.torvergata.mp.helper.Dialogs;
 import it.torvergata.mp.helper.HttpConnection;
 
 import java.io.BufferedReader;
@@ -67,11 +68,12 @@ public class MainActivity extends Activity {
 	private InputStream is = null;
 	private	Handler handler;
 	private CryptoSha256 crypto;
+	private Dialogs dialogs;
 	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		final Context ctx=this;
 		//Gestione della Sessione
 		SharedPreferences settings = getSharedPreferences(Const.PREFS_NAME,0 );
 		//Si prende il valore LoggedIn, se questo non esiste, ritorna falso
@@ -87,6 +89,8 @@ public class MainActivity extends Activity {
 				
 		setContentView(R.layout.activity_main);
 		crypto= new CryptoSha256();
+		dialogs= new Dialogs();
+		
 		edUsername 			= (EditText) findViewById(R.id.editTextUsername);
 		edPassword 			= (EditText) findViewById(R.id.editTextPassword);
 		tvRegistrazione 	= (TextView) findViewById(R.id.textViewRegistrazione);
@@ -153,6 +157,10 @@ public class MainActivity extends Activity {
 								//Si chiama il metodo finish per evitare che quando l'utente prema il tasto
 								//back, l'applicazione torni alla schermata di login
 								finish();
+			                }
+			                else if(Integer.parseInt(res)==Const.TIMEOUT){
+			                	AlertDialog dialogBox = dialogs.ConnectionTimeout(ctx);
+			    				dialogBox.show();
 			                }
 							else if(Integer.parseInt(res)==0){
 								dialog.dismiss();
@@ -264,22 +272,7 @@ public class MainActivity extends Activity {
 	    };
 	 }
 	
-	private AlertDialog ConnectionTimeout() {
-		AlertDialog alertDialog = new AlertDialog.Builder(this)
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tTimeout)
-				.setIcon(R.drawable.timeout)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
+	
 	
 	private AlertDialog ConnectionNotFound() {
 		AlertDialog alertDialog = new AlertDialog.Builder(this)

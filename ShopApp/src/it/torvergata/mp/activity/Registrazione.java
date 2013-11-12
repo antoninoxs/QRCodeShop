@@ -9,6 +9,7 @@ import it.torvergata.mp.R.menu;
 
 import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.entity.Product;
+import it.torvergata.mp.helper.Dialogs;
 import it.torvergata.mp.helper.HttpConnection;
 
 import java.io.BufferedReader;
@@ -42,6 +43,7 @@ import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,11 +63,17 @@ public class Registrazione extends Activity {
 	private InputStream is = null, ins = null;
 	private Handler handler;
 	private CryptoSha256 crypto;
+	private Dialogs dialogs;
+	private Context context;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registrazione);
-
+		
+		dialogs= new Dialogs();
+		context=this;
+		
 		crypto= new CryptoSha256();
 		edNome = (EditText) findViewById(R.id.ETregistrazioneNome);
 		edCognome = (EditText) findViewById(R.id.ETregistrazioneCognome);
@@ -121,32 +129,36 @@ public class Registrazione extends Activity {
 		handler = new Handler() {
             @Override
             public void handleMessage(Message message) {
-                
             	Bundle b = message.getData();
             	String mess = b.getString("Message");
             	String res = b.getString("Result");
             	String errQ = b.getString("ErrorQuery");
-            	
-            	//KOU==Ko User, è l'identificativo del messaggio che segnala un Username già presente
-            	if(res.equals("KOU")){
-            		Toast toast = Toast.makeText(Registrazione.this,
-            				mess, Toast.LENGTH_LONG);
-            		toast.show();
+            	if(res.equals(Const.TIMEOUTS)){
+            		AlertDialog dialogBox = dialogs.ConnectionTimeout(context);
+    				dialogBox.show();
             	}
-            	//KO== Gestioamo l'errore Generico, viene stampato l'errore in un Toast
-            	else if(res.equals("KO")){
-                Toast toast = Toast.makeText(Registrazione.this,
-        				errQ, Toast.LENGTH_LONG);
-        		toast.show();
+            	else{		            	
+	            	//KOU==Ko User, è l'identificativo del messaggio che segnala un Username già presente
+	            	if(res.equals("KOU")){
+	            		Toast toast = Toast.makeText(Registrazione.this,
+	            				mess, Toast.LENGTH_LONG);
+	            		toast.show();
+	            	}
+	            	//KO== Gestioamo l'errore Generico, viene stampato l'errore in un Toast
+	            	else if(res.equals("KO")){
+	                Toast toast = Toast.makeText(Registrazione.this,
+	        				errQ, Toast.LENGTH_LONG);
+	        		toast.show();
+	            	}
+	            	//Ok Operazione di registrazione eseguita con successo, torniamo alla schermata di Login
+	            	else if(res.equals("OK")){
+	            		Toast toast = Toast.makeText(Registrazione.this,
+	            				mess, Toast.LENGTH_LONG);
+	            		toast.show();
+	            		finish();
+	            	}
             	}
-            	//Ok Operazione di registrazione eseguita con successo, torniamo alla schermata di Login
-            	else if(res.equals("OK")){
-            		Toast toast = Toast.makeText(Registrazione.this,
-            				mess, Toast.LENGTH_LONG);
-            		toast.show();
-            		finish();
-            	}
-                
+            
             }
 		};
 		
@@ -229,20 +241,5 @@ public class Registrazione extends Activity {
 			progressDialog.dismiss();
 		};
 	}
-	private AlertDialog ConnectionTimeout() {
-		AlertDialog alertDialog = new AlertDialog.Builder(this)
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tTimeout)
-				.setIcon(R.drawable.timeout)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
+	
 }

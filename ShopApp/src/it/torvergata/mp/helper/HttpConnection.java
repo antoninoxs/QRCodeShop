@@ -26,6 +26,7 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -97,9 +98,23 @@ public class HttpConnection {
 			return object;
 			
 		}catch (ConnectTimeoutException e) {
-			Log.e("TIMEOUT", "Timeout connection: " + e.toString());
-			Message message = handler.obtainMessage(1, Const.TIMEOUT, 0);
-			handler.sendMessage(message);
+			if (phpFile=="registrazione")
+			{
+				//Comunicazione al Thread principale dell'esito dell'operazione di Registrazione
+				Message message = handler.obtainMessage();
+				Bundle b = new Bundle();
+				b.putString("Message","");
+				b.putString("Result", Const.TIMEOUTS);
+				b.putString("errorQuery","");
+				message.setData(b);
+				handler.sendMessage(message);
+			}
+			else{
+				Log.e("TIMEOUT", "Timeout connection: " + e.toString());
+				Message message = handler.obtainMessage(1, Const.TIMEOUT, 0);
+				handler.sendMessage(message);
+			}
+			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

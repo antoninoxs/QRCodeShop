@@ -16,6 +16,7 @@ import it.torvergata.mp.activity.MainActivity;
 import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.LoadDataProduct;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
+import it.torvergata.mp.helper.Dialogs;
 import it.torvergata.mp.helper.HttpConnection;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -50,6 +51,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 	private ListProduct productList;
 	private ImageView ivSendOrder;
 	private TextView   tvNumberProducts,tvTotalCost;
+	private Dialogs dialogs;
 	
 	private Handler handler;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +70,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
     	                }
     	            	
     	                else if(res==Const.TIMEOUT){
-    	                	AlertDialog dialogBox = successSendOrder();
+    	                	AlertDialog dialogBox = dialogs.ConnectionTimeout(getActivity());
     	    				dialogBox.show();
     	                }
     	                else {
@@ -96,6 +98,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_order_layout,
 				container, false);
         
+        dialogs=new Dialogs();
         ivSendOrder= (ImageView) mLinearLayout.findViewById(R.id.ivSendOrder);
         tvNumberProducts =(TextView) mLinearLayout.findViewById(R.id.tvNumberProductsTabOrder);
         tvTotalCost =(TextView) mLinearLayout.findViewById(R.id.tvTotalCostTabOrder);
@@ -219,22 +222,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 		return alertDialog;
 	}
 	
-	private AlertDialog ConnectionTimeout() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tTimeout)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
+	
 	
 	private AlertDialog successSendOrder() {
 		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
