@@ -21,6 +21,7 @@ specific language governing permissions and limitations
 under the License.
 */
 import it.torvergata.mp.Const;
+import it.torvergata.mp.R;
 import it.torvergata.mp.entity.Product;
 
 import java.io.IOException;
@@ -99,9 +100,12 @@ public class DrawableManager {
             @Override
             public void run() {
                 //TODO : set imageView to a "pending" image
+            	Drawable d = ctx.getResources().getDrawable( R.drawable.blank );
+            	Message messagea = handler.obtainMessage(1, d);
+                handler.sendMessage(messagea);
                 Drawable drawable = fetchDrawable(urlString,ctx);
-                Message message = handler.obtainMessage(1, drawable);
-                handler.sendMessage(message);
+                Message messageb = handler.obtainMessage(1, drawable);
+                handler.sendMessage(messageb);
             }
         };
         thread.start();
