@@ -328,19 +328,26 @@ public class TabScanModeScanningFragment extends Fragment{
 			int result = scanner.scanImage(barcode);
 
 			if (result != 0) {
-				previewing = false;
-				mCamera.setPreviewCallback(null);
-				mCamera.stopPreview();
+//				previewing = false;
+//				mCamera.setPreviewCallback(null);
+//				mCamera.stopPreview();
 
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
 					String contents = sym.getData();
 					int id=0;
 					if(contents.length()!=Const.IDFORMAT){
-						AlertDialog dialogBox = NotValidQrCorde();
-						dialogBox.show();
+						
+						//do nothing
+						//Log.i("ATTENZIONE", "QRCODE SCANSIONATO NON VALIDO");
+						
+						//AlertDialog dialogBox = NotValidQrCorde();
+						//dialogBox.show();
 					}
 					else{
+						previewing = false;
+						mCamera.setPreviewCallback(null);
+						mCamera.stopPreview();
 						try{
 							id=Integer.parseInt(contents);
 						}
