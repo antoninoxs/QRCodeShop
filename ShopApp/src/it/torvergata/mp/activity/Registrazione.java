@@ -7,7 +7,7 @@ import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
 import it.torvergata.mp.activity.CameraActivity.LoadDataProduct;
-import it.torvergata.mp.crypto.CryptoAES256JB;
+import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.HttpConnection;
 
@@ -60,13 +60,13 @@ public class Registrazione extends Activity {
 	private Button bRegistrati;
 	private InputStream is = null, ins = null;
 	private Handler handler;
-	private CryptoAES256JB crypto;
+	private CryptoSha256 crypto;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registrazione);
 
-		crypto= new CryptoAES256JB();
+		crypto= new CryptoSha256();
 		edNome = (EditText) findViewById(R.id.ETregistrazioneNome);
 		edCognome = (EditText) findViewById(R.id.ETregistrazioneCognome);
 		edEmail = (EditText) findViewById(R.id.ETregistrazioneEmail);
@@ -99,7 +99,7 @@ public class Registrazione extends Activity {
 					String password = edPassword.getText().toString();
 					String passwordCrypto="";
 					try {
-						passwordCrypto = crypto.encrypt(password, password);
+						passwordCrypto = crypto.encrypt(password);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

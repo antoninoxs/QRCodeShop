@@ -7,7 +7,7 @@ import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
 import it.torvergata.mp.activity.tab.TabsFragmentActivity;
-import it.torvergata.mp.crypto.CryptoAES256JB;
+import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.helper.HttpConnection;
 
 import java.io.BufferedReader;
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 			passwordCrypto="";
 	private InputStream is = null;
 	private	Handler handler;
-	private CryptoAES256JB crypto;
+	private CryptoSha256 crypto;
 	
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
 		}
 				
 		setContentView(R.layout.activity_main);
-		crypto= new CryptoAES256JB();
+		crypto= new CryptoSha256();
 		edUsername 			= (EditText) findViewById(R.id.editTextUsername);
 		edPassword 			= (EditText) findViewById(R.id.editTextPassword);
 		tvRegistrazione 	= (TextView) findViewById(R.id.textViewRegistrazione);
@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
 					
 					try {
 						Log.i("BEFORE CRYPTO", password);
-						passwordCrypto = crypto.encrypt(password, password);
+						passwordCrypto = crypto.encrypt(password);
 						Log.i("AFTER CRYPTO", passwordCrypto);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
