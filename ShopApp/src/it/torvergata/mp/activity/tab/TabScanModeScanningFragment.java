@@ -101,7 +101,7 @@ public class TabScanModeScanningFragment extends Fragment{
 	private	TextView scanText,tvTitle,tvDescription,tvQuantitative,tvPrice;
 	private ImageView iv;
 	private Button FinishScanButton, ContinueScanButton,encodeButton;
-	private DrawableManager drawab;
+	
 	private Dialogs dialogs;
 
 	ImageScanner scanner;
@@ -143,7 +143,7 @@ public class TabScanModeScanningFragment extends Fragment{
 
 		//productList = new ListProduct();
 		
-		drawab = new DrawableManager();
+	
 		dialogs= new Dialogs();
 		
 		
@@ -321,7 +321,7 @@ public class TabScanModeScanningFragment extends Fragment{
 		String price=GenericFunctions.currencyStamp(temp.getPrezzoTotale());
 		tvPrice.setText(price+" "+"\u20ac"+" ");
 		
-		drawab.fetchDrawableOnThread(temp, iv);
+		DrawableManager.fetchDrawableOnThread(temp, iv,getActivity());
 	}
 	
 	PreviewCallback previewCb = new PreviewCallback() {

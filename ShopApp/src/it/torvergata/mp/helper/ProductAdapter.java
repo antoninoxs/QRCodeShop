@@ -46,17 +46,18 @@ import android.widget.TextView;
 public class ProductAdapter extends ArrayAdapter<Product> {
 
 	private LayoutInflater mInflater;
+	private Context context;
 	
-	private DrawableManager drawab; 
+	
 	private ListProduct productList =new ListProduct();
 	private int mViewResourceId;
 	
 	public ProductAdapter(Context ctx, int viewResourceId,ListProduct pList) {
 		super(ctx, viewResourceId, pList);
-		
+		context=ctx;
 		mInflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		productList=pList;
-		drawab = new DrawableManager();
+		
 		mViewResourceId = viewResourceId;
 	}
 
@@ -98,7 +99,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		
 		tvPrice.setText(price+" "+"\u20ac"+" ");
 				
-		drawab.fetchDrawableOnThread(productList.get(position), iv);
+		DrawableManager.fetchDrawableOnThread(productList.get(position), iv,context);
 		
 		//iv.setImageDrawable(drawab.fetchDrawable(Const.IMAGE_URL));
 		
