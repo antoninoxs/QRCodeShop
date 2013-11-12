@@ -41,7 +41,7 @@ import android.widget.TextView;
  * @author mwho
  *
  */
-public class TabSendOrderFragment extends Fragment {
+public class TabScanModeSendOrderFragment extends Fragment {
     /** (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */

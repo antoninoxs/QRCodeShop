@@ -6,7 +6,7 @@ import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
-import it.torvergata.mp.activity.CameraActivity.LoadDataProduct;
+
 import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.HttpConnection;

@@ -34,14 +34,14 @@ import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
-import it.torvergata.mp.activity.CameraActivity;
-import it.torvergata.mp.activity.CameraPreview;
+
 import it.torvergata.mp.activity.MainActivity;
-import it.torvergata.mp.activity.ProductDectailActivity;
-import it.torvergata.mp.activity.CameraActivity.LoadDataProduct;
+
+
 import it.torvergata.mp.activity.MainActivity.LoadData;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
+import it.torvergata.mp.helper.CameraPreview;
 import it.torvergata.mp.helper.DrawableManager;
 import it.torvergata.mp.helper.HttpConnection;
 import it.torvergata.mp.helper.ProductAdapter;

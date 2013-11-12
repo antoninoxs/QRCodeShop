@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
  * @author mwho
  *
  */
-public class Tab2Fragment extends Fragment {
+public class TabOrdersMainFragment extends Fragment {
     /** (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */
@@ -31,8 +31,6 @@ public class Tab2Fragment extends Fragment {
             // the view hierarchy; it would just never be used.
             return null;
         }
-       
-        return (LinearLayout)inflater.inflate(R.layout.tab_frag2_layout, container, false);
-        
+        return (LinearLayout)inflater.inflate(R.layout.tab_frag3_layout, container, false);
     }
 }

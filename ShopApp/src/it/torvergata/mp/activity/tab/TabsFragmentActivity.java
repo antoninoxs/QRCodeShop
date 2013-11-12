@@ -120,9 +120,9 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         TabInfo tabInfo = null;
         TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab1").setIndicator("Scan Mode"), ( tabInfo = new TabInfo("Tab1", TabScanModeMainFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
-        TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab2").setIndicator("Catalogo"), ( tabInfo = new TabInfo("Tab2", Tab2Fragment.class, args)));
+        TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab2").setIndicator("Catalogo"), ( tabInfo = new TabInfo("Tab2", TabCatalogMainFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
-        TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab3").setIndicator("Ordini"), ( tabInfo = new TabInfo("Tab3", Tab3Fragment.class, args)));
+        TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab3").setIndicator("Ordini"), ( tabInfo = new TabInfo("Tab3", TabOrdersMainFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
         // Default to first tab
         this.onTabChanged("Tab1");
@@ -272,7 +272,7 @@ TabScanModeDetailItemFragment.OnReturnListListener{
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TabSendOrderFragment fragmentScann = new TabSendOrderFragment();
+        TabScanModeSendOrderFragment fragmentScann = new TabScanModeSendOrderFragment();
         fragmentTransaction.addToBackStack("Order");
         
         fragmentScann.updateProduct(product);
