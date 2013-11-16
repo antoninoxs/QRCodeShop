@@ -55,7 +55,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * Activity iniziale di inserimento credenziali
+ */
 public class MainActivity extends Activity {
 
 	private EditText edUsername,edPassword;
@@ -74,6 +76,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final Context ctx=this;
+		
 		//Gestione della Sessione
 		SharedPreferences settings = getSharedPreferences(Const.PREFS_NAME,0 );
 		//Si prende il valore LoggedIn, se questo non esiste, ritorna falso
@@ -88,8 +91,12 @@ public class MainActivity extends Activity {
 		}
 				
 		setContentView(R.layout.activity_main);
+		
+		/*Inizializzazione dell'oggetto crypto per la crittografia 
+		e dell'oggetto Dialogs per gli alert Dialog*/
 		crypto= new CryptoSha256();
 		dialogs= new Dialogs();
+		
 		
 		edUsername 			= (EditText) findViewById(R.id.editTextUsername);
 		edPassword 			= (EditText) findViewById(R.id.editTextPassword);
@@ -98,10 +105,7 @@ public class MainActivity extends Activity {
 		btnSalta 			= (Button) findViewById(R.id.btnSalta);
 	
 		final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-		
-	
-		
-		 		
+				 		
 		bAccesso.setOnClickListener(new OnClickListener() {			
 			public void onClick(View v) {
 				
@@ -117,6 +121,7 @@ public class MainActivity extends Activity {
 					
 					try {
 						Log.i("BEFORE CRYPTO", password);
+						//Crittografia della password
 						passwordCrypto = crypto.encrypt(password);
 						Log.i("AFTER CRYPTO", passwordCrypto);
 					} catch (Exception e) {
@@ -132,6 +137,14 @@ public class MainActivity extends Activity {
 			            @Override
 			            public void handleMessage(Message message) {
 			                res=(String) message.obj;
+			                
+			                /*
+			                 * Tre Possibilità:
+			                 * res=1 Connesso
+			                 * res=2 Timeout
+			                 * res=0 Non Connesso
+			                 * 
+			                 * */
 			                if(Integer.parseInt(res)==1){
 								Toast.makeText(MainActivity.this, "Connesso",
 										Toast.LENGTH_SHORT).show();
@@ -159,10 +172,12 @@ public class MainActivity extends Activity {
 								finish();
 			                }
 			                else if(Integer.parseInt(res)==Const.TIMEOUT){
+			                	//Caso Timeout
 			                	AlertDialog dialogBox = dialogs.ConnectionTimeout(ctx);
 			    				dialogBox.show();
 			                }
 							else if(Integer.parseInt(res)==0){
+								//Caso Connessione non riuscita
 								dialog.dismiss();
 								Toast.makeText(MainActivity.this, R.string.tUserPasswordWrong,
 										Toast.LENGTH_SHORT).show();
@@ -201,9 +216,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-//				
-				
 				Intent intent = new Intent(getBaseContext(), TabsFragmentActivity.class);
 				startActivity(intent);
 				
@@ -237,17 +249,15 @@ public class MainActivity extends Activity {
 	    protected Void doInBackground(Void... params)
 	    {   
 	    	//Preparazione delle informazioni di login da inviare al server
-	    
-		
-		
-			
-			String result = null;
+	   		String result = null;
 			try {
 			
 				JSONObject json = new JSONObject();
 				json.put("user", user);
 				json.put("password", passwordCrypto);
 				Log.i("PASSWORD NEL JSON", passwordCrypto);
+			
+				//La classe Http Connection provvede a gestire la connessione (timeout, handler etc etc)
 				HttpConnection connection = new HttpConnection();
 				JSONObject object = connection.connect("login", json, handler);
 				
