@@ -21,17 +21,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 /**
- * @author mwho
+ * Classe del Fragment iniziale del Tab Scanning,
+ * in questo fragment viene mostrato il pulsante che avvia la scansione dei qrCode
  * 
  */
 public class TabScanModeMainFragment extends Fragment {
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
-	 *      android.view.ViewGroup, android.os.Bundle)
-	 */
 	
+	//Interfaccia per la transizione al Fragment di acquisizione
 	OnStartAcquisitionListener mCallback;
 	// Container Activity must implement this interface
     public interface OnStartAcquisitionListener {
@@ -43,27 +39,17 @@ public class TabScanModeMainFragment extends Fragment {
 			Bundle savedInstanceState) {
 		
 		if (container == null) {
-			// We have different layouts, and in one of them this
-			// fragment's containing frame doesn't exist. The fragment
-			// may still be created from its saved state, but there is
-			// no reason to try to create its view hierarchy because it
-			// won't be displayed. Note this is not needed -- we could
-			// just run the code below, where we would create and return
-			// the view hierarchy; it would just never be used.
-
 			return null;
 		}
+		//Associazione del layout
 		LinearLayout mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag1_layout,
 				container, false);
 
-		// note that we're looking for a button with id="@+id/myButton" in your
-		// inflated layout
-		// Naturally, this can be any View; it doesn't have to be a button
 		Button mButton = (Button) mLinearLayout.findViewById(R.id.btnQrCode);
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+				//Si lancia la transizione verso il tab di acquisizione
 				mCallback.ViewScanningFragment();
 
 			}
@@ -74,9 +60,11 @@ public class TabScanModeMainFragment extends Fragment {
 
 	public void onAttach(Activity activity) {
         super.onAttach(activity);
-        
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
+        /*
+         * Con questa chiamata ci assicuriamo che l'activity container abbia
+         * correttamente implementato l'interfaccia di callback,
+         * in caso contrario, viene sollevata un eccezione
+         */
         try {
             mCallback = (OnStartAcquisitionListener) activity;
         } catch (ClassCastException e) {

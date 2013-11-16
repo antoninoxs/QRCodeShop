@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
 		btnSalta 			= (Button) findViewById(R.id.btnSalta);
 	
 		final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-				 		
+		
 		bAccesso.setOnClickListener(new OnClickListener() {			
 			public void onClick(View v) {
 				

@@ -71,9 +71,9 @@ public class Registrazione extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registrazione);
 		
+		/*Inizializzazione dell'oggetto Dialog e dell'oggetto crypto*/
 		dialogs= new Dialogs();
 		context=this;
-		
 		crypto= new CryptoSha256();
 		edNome = (EditText) findViewById(R.id.ETregistrazioneNome);
 		edCognome = (EditText) findViewById(R.id.ETregistrazioneCognome);
@@ -88,12 +88,14 @@ public class Registrazione extends Activity {
 		bRegistrati.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				//Se ci sono campi vuoti si avvisa l'utente
 				if (edNome.length() == 0 || edCognome.length() == 0
 						|| edEmail.length() == 0 || edUsername.length() == 0
 						|| edPassword.length() == 0) {
 					Toast toast = Toast.makeText(Registrazione.this,
 							R.string.tBlankField, Toast.LENGTH_LONG);
 					toast.show();
+				//Se le password inserite non coincidono si avvisa l'utente
 				} else if (!((edPassword.getText().toString())
 						.equals(edPassword1.getText().toString()))) {
 					Toast toast = Toast.makeText(Registrazione.this,
@@ -112,7 +114,7 @@ public class Registrazione extends Activity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-						
+					//Si provvede ad inserire nel DB il nuovo utente
 					insertToDB(nome, cognome, email, username, passwordCrypto);
 				}
 			}
@@ -162,11 +164,6 @@ public class Registrazione extends Activity {
             }
 		};
 		
-		
-		// Toast toast = Toast.makeText(Registrazione.this,
-		// "Username già utilizzato", Toast.LENGTH_LONG);
-		// toast.show();
-
 	}
 
 

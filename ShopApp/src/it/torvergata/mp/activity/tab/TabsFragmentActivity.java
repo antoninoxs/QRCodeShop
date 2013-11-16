@@ -29,9 +29,13 @@ import android.widget.TabHost.TabContentFactory;
 
  
 /**
- * @author mwho
- *
+ * Activity Container di gestione del meccanismo tabHost,in questa classe provvediamo alla creazione 
+ * iniziale del tabHost, all'aggiunta dei tre tab principali, nonchè alla loro instaziazione 
+ * questa classe inoltre ha il compito di gestire le transazioni dei fragment,
+ * per adempiere a questo compito, e per passare i parametri durante le transizioni
+ * si serve delle interfacce dei varie classi di TabFragment.
  */
+
 public class TabsFragmentActivity extends FragmentActivity implements TabHost.OnTabChangeListener, 
 TabScanModeScanningFragment.OnTermAcquisitionListener,
 TabScanModeListFragment.OnAddQrCodeListener,
@@ -42,33 +46,37 @@ TabScanModeDetailItemFragment.OnReturnListListener{
     private HashMap mapTabInfo = new HashMap();
     private TabInfo mLastTab = null;
     private Button btnQrCode;
+    
+    /***
+     * Classe di informazioni del tab
+     */
     private class TabInfo {
-         private String tag;
-         private Class clss;
-         private Bundle args;
-         private Fragment fragment;
-         TabInfo(String tag, Class clazz, Bundle args) {
-             this.tag = tag;
-             this.clss = clazz;
-             this.args = args;
-         }
+    	private String tag;
+    	private Class clss;
+    	private Bundle args;
+    	private Fragment fragment;
+    
+    	TabInfo(String tag, Class clazz, Bundle args) {
+    		this.tag = tag;
+    		this.clss = clazz;
+    		this.args = args;
+    	}
  
     }
  
+    /***
+     * Classe di creazione del Tab
+     */
     class TabFactory implements TabContentFactory {
  
         private final Context mContext;
  
-        /**
-         * @param context
-         */
+    
         public TabFactory(Context context) {
             mContext = context;
         }
  
-        /** (non-Javadoc)
-         * @see android.widget.TabHost.TabContentFactory#createTabContent(java.lang.String)
-         */
+     
         public View createTabContent(String tag) {
             View v = new View(mContext);
             v.setMinimumWidth(0);
@@ -77,13 +85,13 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         }
  
     }
-    /** (non-Javadoc)
-     * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
-     */
+  
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    
         // Step 1: Inflate layout
         setContentView(R.layout.tabs_layout);
+        
         // Step 2: Setup TabHost
         initialiseTabHost(savedInstanceState);
        
@@ -94,7 +102,10 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         
         
     }
- 
+    /***
+     * Metodo per ritorno da activity di scansione
+     * @deprecated
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		   if (requestCode == 0) {
 		      if (resultCode == RESULT_OK) {
@@ -113,17 +124,23 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         super.onSaveInstanceState(outState);
     }
  
- 
+    /**
+     * Metodo di inizializzazione del Tabhost 
+     * @param args
+     */
     private void initialiseTabHost(Bundle args) {
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup();
         TabInfo tabInfo = null;
+        
+        //Aggiunta dei tre Tab
         TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab1").setIndicator("Scan Mode"), ( tabInfo = new TabInfo("Tab1", TabScanModeMainFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
         TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab2").setIndicator("Catalogo"), ( tabInfo = new TabInfo("Tab2", TabCatalogMainFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
         TabsFragmentActivity.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab3").setIndicator("Ordini"), ( tabInfo = new TabInfo("Tab3", TabOrdersMainFragment.class, args)));
         this.mapTabInfo.put(tabInfo.tag, tabInfo);
+        
         // Default to first tab
         this.onTabChanged("Tab1");
         //
@@ -132,9 +149,12 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         
      
     }
- 
-    // Settaggio immagine dei Tab
- 	private void setTabsBackground() {
+ 	/***
+ 	 * Metodo per il settaggio delle immagini dei pulsanti del Tab
+ 	 */
+    private void setTabsBackground() {
+ 		
+ 		//Impostazione di tutte le immaggini non selezionate
  		for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
  			switch (i) {
 			case 0:
@@ -157,6 +177,7 @@ TabScanModeDetailItemFragment.OnReturnListListener{
  			
  		}
  		int current= mTabHost.getCurrentTab();
+ 		//Impostazione dell'immagine del tab Selezionato
  		switch (current) {
 		case 0:
 			mTabHost.getTabWidget().getChildAt(current)
@@ -178,14 +199,25 @@ TabScanModeDetailItemFragment.OnReturnListListener{
  		
  	}
  	
-    private static void addTab(TabsFragmentActivity activity, TabHost tabHost, TabHost.TabSpec tabSpec, TabInfo tabInfo) {
-        // Attach a Tab view factory to the spec
-        tabSpec.setContent(activity.new TabFactory(activity));
-        String tag = tabSpec.getTag();
  
-        // Check to see if we already have a fragment for this tab, probably
-        // from a previously saved state.  If so, deactivate it, because our
-        // initial state is that a tab isn't shown.
+ 	/**
+ 	 * Metodo per l'aggiunta di un Tab ad un TabHost
+ 	 * @param activity Principale
+ 	 * @param tabHost su cui aggiungere il tab
+ 	 * @param tabSpec Identificativo ed etichetta del Tab
+ 	 * @param tabInfo per l'associazione del tab ad una classe
+ 	 */
+ 	private static void addTab(TabsFragmentActivity activity, TabHost tabHost, TabHost.TabSpec tabSpec, TabInfo tabInfo) {
+        
+ 		// Instanziazione di una Tab Factory al tabSpec
+        tabSpec.setContent(activity.new TabFactory(activity));
+        
+        String tag = tabSpec.getTag();
+        /*
+         * Bisogna controllare se abbiamo già un fragment per questo tab, 
+         * probabilmente da uno stato salvato in precedenza. Se presente
+         * dobbiamo disabilitarlo.
+         * */
         tabInfo.fragment = activity.getSupportFragmentManager().findFragmentByTag(tag);
         if (tabInfo.fragment != null && !tabInfo.fragment.isDetached()) {
             FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
@@ -193,11 +225,13 @@ TabScanModeDetailItemFragment.OnReturnListListener{
             ft.commit();
             activity.getSupportFragmentManager().executePendingTransactions();
         }
- 
+        //Procediamo all'aggiunta del tab
         tabHost.addTab(tabSpec);
     }
  
-
+ 	/**
+ 	 * Metodo per il passaggio (transizione) da un Tab all'altro
+ 	 */
     public void onTabChanged(String tag) {
         TabInfo newTab = (TabInfo) this.mapTabInfo.get(tag);
         if (mLastTab != newTab) {
@@ -225,6 +259,12 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         
     }
 
+    
+    /**
+     * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione al Fragment della lista 
+     * dei prodotti passandogli tale lista
+     */
 	@Override
 	public void ViewListFragment(ListProduct list) {
 		// TODO Auto-generated method stub
@@ -234,6 +274,7 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         fragmentTransaction.addToBackStack("Scanning");
         TabScanModeListFragment fragment = new TabScanModeListFragment();
         
+        //Si richiama il metodo per impostare la lista prodotti
         fragment.updateProductList(list);
         
         fragmentTransaction.replace(R.id.realtabcontent, fragment);
@@ -241,6 +282,13 @@ TabScanModeDetailItemFragment.OnReturnListListener{
 
 	}
 
+
+    /**
+     * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione dal Fragment lista profotti
+     * al Fragment di Scansione dei prodotti al fine di aggiungere eventuali prodotti
+     * a tale scopo si passa la lista dei prodotti precedente per eventuale aggiornamento
+     */
 	@Override
 	public void ViewScanningFragment(ListProduct list) {
 		// TODO Auto-generated method stub
@@ -248,12 +296,18 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabScanModeScanningFragment fragmentScann = new TabScanModeScanningFragment();
         
+        //Si richiama il metodo per impostare la lista prodotti
         fragmentScann.updateProductList(list);
         
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 	}
 	
+	  /**
+     * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione dal Main Fragment 
+     * al Fragment di Scansione dei prodotti
+     */
 	public void ViewScanningFragment() {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -266,7 +320,11 @@ TabScanModeDetailItemFragment.OnReturnListListener{
 	}
 
 
-
+	  /**
+     * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione dal Fragment della lista prodotti 
+     * al Fragment di invio ordine. A tale scopo si passa la lista dei  prodotti
+     */
 	@Override
 	public void ViewOrderFragment(ListProduct product) {
 		// TODO Auto-generated method stub
@@ -275,12 +333,22 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         TabScanModeSendOrderFragment fragmentScann = new TabScanModeSendOrderFragment();
         fragmentTransaction.addToBackStack("Order");
         
+        //Si richiama il metodo per impostare la lista prodotti
         fragmentScann.updateProduct(product);
         
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 	}
 
+	  /**
+     * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione dal Fragment della lista prodotti 
+     * al Fragment di dettaglio del singolo prodotto.
+     * Ricordando che in questo fragment sarà possibile modificare la
+     * quantità del singolo prodotto e quindi il prezzo complessivo dei prodotti,
+     * si provvede a passare la lista dei  prodotti e la posizione del prodotto di
+     * cui si vuole accedere al dettaglio
+     */
 	@Override
 	public void ViewProductDetailFragment(ListProduct list, int pos) {
 		// TODO Auto-generated method stub
