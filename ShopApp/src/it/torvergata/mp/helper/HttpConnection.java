@@ -120,7 +120,7 @@ public class HttpConnection {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			Log.e("log_tag", "Error in http connection: " + e.toString());
+			Log.e("log_tag", "Error in http crsaFdgsonnection: " + e.toString());
 		}
 		return object;
 	

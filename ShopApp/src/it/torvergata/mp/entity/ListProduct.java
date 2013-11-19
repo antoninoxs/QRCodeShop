@@ -90,11 +90,14 @@ public class ListProduct extends ArrayList<Product> {
 
 	public JSONObject getListIdForOrder(String user) {
 		JSONArray jsonArray= new JSONArray();
+		JSONObject jsonObjH = new JSONObject();
+		
 		JSONObject jsonObjU = new JSONObject();
 		JSONObject json = new JSONObject();
 		
 		
 		try {
+			jsonObjH.put("hashOrder", "4389324798dsewrtewwetwetewtewtewtewrdsarujdw9ddisfh4289");
 			jsonObjU.put("user", user);
 		
 		
@@ -105,9 +108,9 @@ public class ListProduct extends ArrayList<Product> {
 			jsonArray.put(temp);
 		}
 
-		
-		json.put("User", jsonObjU);
-		json.put("Products", jsonArray);
+		json.put("HashID"	, jsonObjH);
+		json.put("User"		, jsonObjU);
+		json.put("Products"	, jsonArray);
 		
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

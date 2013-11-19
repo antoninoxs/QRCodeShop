@@ -167,7 +167,8 @@ public class TabScanModeSendOrderFragment extends Fragment {
 				Log.i("Json Inviato: ", json.toString(4));
 							
 				JSONObject object = connection.connect("ordernew", json, handler);
-								
+				
+				
 				String result = object.getString("result");
 				if (Integer.parseInt(result)==Const.OK){
 					Message message = handler.obtainMessage(1, Const.OK, 0);
