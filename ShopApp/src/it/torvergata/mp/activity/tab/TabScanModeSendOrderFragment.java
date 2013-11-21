@@ -14,6 +14,7 @@ import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.MainActivity;
 import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.LoadDataProduct;
+import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.Dialogs;
@@ -74,7 +75,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
     	    				dialogBox.show();
     	                }
     	                else {
-    	                	Log.i("Ordine", "OK");
+    	                	Log.i("Ordine", "Ordine inviato con successo, Id Assegnato :"+res);
     	                	AlertDialog dialogBox = successSendOrder();
     	    				dialogBox.show();
     	                	
@@ -158,26 +159,43 @@ public class TabScanModeSendOrderFragment extends Fragment {
 		@Override
 		protected Void doInBackground(JSONObject... params) {
 			JSONObject json = params[0];
-	
+			boolean timeout=true;
 				try {
 				HttpConnection connection = new HttpConnection();
 				
 				String jsonStr = json.toString();
 
 				Log.i("Json Inviato: ", json.toString(4));
-							
-				JSONObject object = connection.connect("ordernew", json, handler);
+				for(int i=0;i<Const.ATTEMPTS_RETRANSMISSION;i++){			
+					Log.i("CICLO DI TIMEOUT", "INIZIO ITERAZIONE NUMERO: "+i);
+					JSONObject object;
+					object = connection.connect("ordernew", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
+					
+					String result = object.getString("result");
+					int idOrder=Integer.parseInt(result);
 				
+	//				if (idOrder==Const.KO){
+	//					Message message = handler.obtainMessage(1, Const.KO, 0);
+	//					handler.sendMessage(message);
+	//				}
+					if(idOrder==Const.TIMEOUT){
+						Log.i("CICLO DI TIMEOUT", "CONTINUE ITERAZIONE NUMERO: "+i);
+						
+						continue;
+					}
+					else{
+						Log.i("CICLO DI TIMEOUT", "BREAK ITERAZIONE NUMERO: "+i);
+						timeout=false;
+						Message message = handler.obtainMessage(1, idOrder, 0);
+						handler.sendMessage(message);
+						break;
+					}
 				
-				String result = object.getString("result");
-				if (Integer.parseInt(result)==Const.OK){
-					Message message = handler.obtainMessage(1, Const.OK, 0);
-					handler.sendMessage(message);
 				}
-				else{
-					Message message = handler.obtainMessage(1, Const.KO, 0);
-					handler.sendMessage(message);
-				}
+			if(timeout){
+			Message message = handler.obtainMessage(1, Const.TIMEOUT, 0);
+			handler.sendMessage(message);
+			}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

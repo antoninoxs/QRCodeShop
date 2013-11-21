@@ -259,7 +259,7 @@ public class MainActivity extends Activity {
 			
 				//La classe Http Connection provvede a gestire la connessione (timeout, handler etc etc)
 				HttpConnection connection = new HttpConnection();
-				JSONObject object = connection.connect("login", json, handler);
+				JSONObject object = connection.connect("login", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				
 				result = object.getString("result");
 			} catch (JSONException e) {

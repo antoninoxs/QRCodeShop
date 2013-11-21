@@ -201,7 +201,7 @@ public class Registrazione extends Activity {
 				json.put("Password", params[4]);
 				
 				HttpConnection connection = new HttpConnection();
-				JSONObject object = connection.connect("registrazione", json, handler);
+				JSONObject object = connection.connect("registrazione", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 
 				//Lettura dell'oggetto Json
 				String mess = object.getString("Message");

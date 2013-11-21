@@ -435,7 +435,7 @@ public class TabScanModeScanningFragment extends Fragment{
 				JSONObject json = new JSONObject();
 				json.put("id", productId);
 							
-				JSONObject object = connection.connect("info_download", json, handler);
+				JSONObject object = connection.connect("info_download", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 								
 				String result = object.getString("result");
 				if (Integer.parseInt(result)==Const.OK){
