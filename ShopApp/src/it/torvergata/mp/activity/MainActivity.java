@@ -192,7 +192,7 @@ public class MainActivity extends Activity {
 						LoadData task = new LoadData();
 						task.execute();
 					}else{
-						AlertDialog dialogBox = ConnectionNotFound();
+						AlertDialog dialogBox = dialogs.ConnectionNotFound(ctx);
 						dialogBox.show();
 						
 					}
@@ -284,20 +284,5 @@ public class MainActivity extends Activity {
 	
 	
 	
-	private AlertDialog ConnectionNotFound() {
-		AlertDialog alertDialog = new AlertDialog.Builder(this)
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tActivateConnection)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
+
 }

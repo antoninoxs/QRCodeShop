@@ -11,14 +11,17 @@ import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
+import it.torvergata.mp.helper.Dialogs;
 import it.torvergata.mp.helper.ProductAdapter;
 import android.R.id;
 import android.app.Activity;
 import android.app.AlertDialog;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,7 +44,7 @@ public class TabScanModeListFragment extends Fragment {
 	private Button btnAdd,BtnContinue;
 	private LinearLayout mLinearLayout;
 	private ProductAdapter adapter;
-	
+	private Dialogs dialogs;
 	
 	OnAddQrCodeListener mCallback;
 
@@ -68,6 +71,8 @@ public class TabScanModeListFragment extends Fragment {
             return null;
         }
        
+        
+        dialogs=new Dialogs();
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_scan_mode_list_layout,
 				container, false);
         
@@ -90,7 +95,7 @@ public class TabScanModeListFragment extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					final int arg2, long arg3) {
 				
-				final AlertDialog dialogBox = DeleteDialog(arg2);
+				final AlertDialog dialogBox = dialogs.DeleteDialog(arg2,productList,getActivity());
 				dialogBox.show();
 				Button deleteButton = dialogBox
 						.getButton(DialogInterface.BUTTON_POSITIVE);
@@ -131,6 +136,8 @@ public class TabScanModeListFragment extends Fragment {
 				mCallback.ViewScanningFragment(productList);
 			}
 		});
+	
+		
 		btnContinue.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -142,7 +149,7 @@ public class TabScanModeListFragment extends Fragment {
         return mLinearLayout;
         
     }
-    
+  
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         
@@ -165,26 +172,6 @@ public class TabScanModeListFragment extends Fragment {
 		totalPrice.setText(getString(R.string.tvTotal)+" "+price+" "+getString(R.string.Euro));
 		
 	}
-	private AlertDialog DeleteDialog(final int position) {
-		Product prod = productList.get(position);
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(prod.getNome())
-				.setMessage(R.string.tMessageDelete)
-				.setIcon(Const.resize(prod.getImmagine()))
-				.setPositiveButton(R.string.tDeleteProduct,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {							}
-						})
-				.setNegativeButton(R.string.tCancelDelete,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.dismiss();
-								
-							}
-						}).create();
-		return alertDialog;
-	}
+	
 
 }

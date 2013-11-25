@@ -66,7 +66,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
     	            	int res = mess.arg1;
     	               	
     	            	if(res==Const.KO){
-    	                	AlertDialog dialogBox = chrashSendOrder();
+    	                	AlertDialog dialogBox = dialogs.chrashSendOrder(getActivity());
     						dialogBox.show();
     	                }
     	            	
@@ -76,7 +76,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
     	                }
     	                else {
     	                	Log.i("Ordine", "Ordine inviato con successo, Id Assegnato :"+res);
-    	                	AlertDialog dialogBox = successSendOrder();
+    	                	AlertDialog dialogBox = dialogs.successSendOrder(getActivity());
     	    				dialogBox.show();
     	                	
     	                }
@@ -123,14 +123,18 @@ public class TabScanModeSendOrderFragment extends Fragment {
 				
 				//Determiniamo se c'è una connessione ad internet
 				boolean isConnected = Const.verifyConnection(getActivity());
+				
+				
 				if(isConnected){
 					//Lancio dell'AsyncTask Thread che effettua il download delle informazioni dal Server
 					SendOrder task = new SendOrder();
 					task.execute(listIdForOrder);
 				}else{
-					AlertDialog dialogBox = ConnectionNotFound();
+					AlertDialog dialogBox = dialogs.ConnectionNotFound(getActivity());
 					dialogBox.show();
 				}
+				
+				
 			}
 		});
 		
@@ -207,58 +211,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 
 	
 	}
-	private AlertDialog chrashSendOrder() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tOrderSendWrong)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
 	
-	private AlertDialog ConnectionNotFound() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tActivateConnection)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
-	
-	
-	
-	private AlertDialog successSendOrder() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tShopApp)
-				.setMessage(R.string.tOrderSendSuccess)
-				.setIcon(android.R.drawable.ic_dialog_info)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
-	}
 	public void setTotalProductAndTotalPrice(TextView totalProducts,TextView totalPrice){
 		String price = GenericFunctions.currencyStamp(productList.getTotalPrice());
 		totalPrice.setText(price+" "+getString(R.string.Euro));

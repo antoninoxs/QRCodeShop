@@ -87,10 +87,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-/**
- * @author mwho
- * 
- */
+
 public class TabScanModeScanningFragment extends Fragment{
 
 	private Camera mCamera;
@@ -216,8 +213,19 @@ public class TabScanModeScanningFragment extends Fragment{
             	int res = mess.arg1;
                	
             	if(res==Const.KO){
-                	AlertDialog dialogBox = ProductNotFound();
-					dialogBox.show();
+            		//Creiamo l'alert Dialog Product Not Fount On the Fly attraverso il Builder
+                	AlertDialog.Builder dialogBox = new AlertDialog.Builder(getActivity());
+					dialogBox.setPositiveButton(R.string.tContinueScan, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int whichButton) {
+							dialog.dismiss(); 
+							scanText.setText(R.string.tScanning);
+			                    mCamera.setPreviewCallback(previewCb);
+			                    mCamera.startPreview();
+			                    previewing = true;
+			                    mCamera.autoFocus(autoFocusCB);
+						}});
+                	dialogBox.show();
                 }
             	
                 else if(res==Const.TIMEOUT){
@@ -387,7 +395,7 @@ public class TabScanModeScanningFragment extends Fragment{
 								LoadDataProduct task = new LoadDataProduct();
 								task.execute(contents);
 							}else{
-								AlertDialog dialogBox = ConnectionNotFound();
+								AlertDialog dialogBox = dialogs.ConnectionNotFound(getActivity());
 								dialogBox.show();
 							}
 																				
@@ -489,63 +497,6 @@ public class TabScanModeScanningFragment extends Fragment{
 
 			return null;
 		};
-	}
-	private AlertDialog NotValidQrCorde() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tQrCodeNotValid)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tContinueScan,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								scanText.setText(R.string.tScanning);
-				                    mCamera.setPreviewCallback(previewCb);
-				                    mCamera.startPreview();
-				                    previewing = true;
-				                    mCamera.autoFocus(autoFocusCB);
-							}
-						})
-				.create();
-		return alertDialog;
-	}
-	private AlertDialog ProductNotFound() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tProductNotFound)
-				.setIcon(R.drawable.productnotfound)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tContinueScan,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								scanText.setText(R.string.tScanning);
-				                    mCamera.setPreviewCallback(previewCb);
-				                    mCamera.startPreview();
-				                    previewing = true;
-				                    mCamera.autoFocus(autoFocusCB);
-							}
-						})
-				.create();
-		return alertDialog;
-	}
-	
-	private AlertDialog ConnectionNotFound() {
-		AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.tWarning)
-				.setMessage(R.string.tActivateConnection)
-				.setIcon(android.R.drawable.ic_dialog_alert)//.setIcon(R.drawable.img_delete)
-				.setPositiveButton(R.string.tOk,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								dialog.dismiss(); 
-								
-							}
-						})
-				.create();
-		return alertDialog;
 	}
 	
 	
