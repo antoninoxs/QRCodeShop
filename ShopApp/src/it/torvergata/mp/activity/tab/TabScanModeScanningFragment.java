@@ -215,7 +215,11 @@ public class TabScanModeScanningFragment extends Fragment{
             	if(res==Const.KO){
             		//Creiamo l'alert Dialog Product Not Fount On the Fly attraverso il Builder
                 	AlertDialog.Builder dialogBox = new AlertDialog.Builder(getActivity());
-					dialogBox.setPositiveButton(R.string.tContinueScan, new DialogInterface.OnClickListener() {
+					dialogBox.setIcon(R.drawable.productnotfound);
+                	dialogBox.setTitle(R.string.tWarning);
+                	dialogBox.setMessage(R.string.tProductNotFound);
+					
+                	dialogBox.setPositiveButton(R.string.tContinueScan, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,
 								int whichButton) {
 							dialog.dismiss(); 

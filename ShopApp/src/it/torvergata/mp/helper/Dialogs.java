@@ -55,7 +55,7 @@ public class Dialogs {
 						}).create();
 		return alertDialog;
 	}
-	
+
 	
 	public AlertDialog ConnectionNotFound(Context ctx) {
 		AlertDialog alertDialog = new AlertDialog.Builder(ctx)
