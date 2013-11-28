@@ -72,6 +72,15 @@ public class TabScanModeListFragment extends Fragment {
         }
        
         
+        Product prod1= new Product(1111111);
+        prod1.setNome("Gocciole");
+        prod1.setDescrizione("Gocciole Pavesi");
+        prod1.setDisponibilita(22);
+        prod1.setPrezzoUnitario(2.0);
+        prod1.setScadenza("2015-01-01");
+        prod1.setFileImmagine("gocciole.png");
+        productList.add(prod1);
+        
         dialogs=new Dialogs();
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_scan_mode_list_layout,
 				container, false);

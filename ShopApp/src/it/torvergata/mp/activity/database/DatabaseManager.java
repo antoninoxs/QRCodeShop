@@ -1,7 +1,9 @@
 package it.torvergata.mp.activity.database;
 
 
+import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
+import it.torvergata.mp.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +71,21 @@ public class DatabaseManager {
 		ContentValues OrderValues =new ContentValues();
 		OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_ID, res);
 		//OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_TIMEE, "16:55:33");
-	
+
+
 		
 		try{
-			
-			db.insert(dbInterface.TABLE_ORDINE, null, OrderValues);
+			String field = dbInterface.TABLE_ORDINE_COLUMN_ID+" = ?";
+			String [] filter = {""+res};
+			Cursor cursor= db.query(dbInterface.TABLE_ORDINE,
+					null ,
+					field,
+					filter,null, null,null);
+			cursor.moveToLast();
+			if(cursor.getCount() == 0) {
+
+				db.insert(dbInterface.TABLE_ORDINE, null, OrderValues);
+			}
 		}
 		catch (Exception e){
 			Log.e("DB Error VALORI TABELLA ORDINE", e.toString());
@@ -128,6 +140,77 @@ public class DatabaseManager {
 		
 		
 
+	}
+
+
+	public ListProduct returnProductListOrder(int idOrder) {
+		ListProduct result= new ListProduct();
+		String field = dbInterface.TABLE_CONTIENE_COLUMN_ID_ORDINE+" = ?";
+		String [] filter = {""+idOrder};
+		Cursor cursor= db.query(dbInterface.TABLE_CONTIENE,
+				null ,
+				field,
+				filter,null, null,null);
+		
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			String idProduct=cursor.getString(1);
+			Log.i("CURSOR ID PRODUCT", idProduct);
+			
+			String fieldP = dbInterface.TABLE_PRODOTTO_COLUMN_ID+" = ?";
+			String [] filterP = {""+idProduct};
+			Cursor cursorP= db.query(dbInterface.TABLE_PRODOTTO,
+					null ,
+					fieldP,
+					filterP,null, null,null);
+			
+			cursorP.moveToFirst();	
+			int idTempProduct=cursorP.getInt(0);
+			Product temp= new Product(idTempProduct);
+			temp.setNome(cursorP.getString(1));
+			temp.setPrezzoUnitario(cursorP.getDouble(2));
+			temp.setScadenza(cursorP.getString(3));
+			temp.setDisponibilita(cursorP.getInt(4));
+			temp.setDescrizione(cursorP.getString(5));
+			temp.setFileImmagine(cursorP.getString(6));
+			
+//			Log.i("CURSORE PRODOTTO COLONNA 0",cursorP.getString(0));
+//			
+//			Log.i("CURSORE PRODOTTO COLONNA 1",cursorP.getString(1));
+//			Log.i("CURSORE PRODOTTO COLONNA 2",cursorP.getString(2));
+//			Log.i("CURSORE PRODOTTO COLONNA 3",cursorP.getString(3));
+//			Log.i("CURSORE PRODOTTO COLONNA 4",cursorP.getString(4));
+//			Log.i("CURSORE PRODOTTO COLONNA 5",cursorP.getString(5));
+//			Log.i("CURSORE PRODOTTO COLONNA 6",cursorP.getString(6));
+			result.add(temp);
+			
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return result;
+		
+	}
+
+
+	public ListOrders returnListOrder() {
+		ListOrders result= new ListOrders();
+			Cursor cursor= db.query(dbInterface.TABLE_CONTIENE,
+				null ,
+				null,
+				null,null, null,null);
+		
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			int idOrder=cursor.getInt(0);
+			ListProduct temp = new ListProduct();
+			temp=returnProductListOrder(idOrder);
+			temp.setAssociateOrderId(idOrder);
+			result.add(temp);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return result;
+		
 	}
 	
 	

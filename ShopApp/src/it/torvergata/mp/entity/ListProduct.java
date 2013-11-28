@@ -22,7 +22,16 @@ public class ListProduct extends ArrayList<Product> {
 	private CryptoSha256 crypto;
 	double totalPrice=0.00;
 	int count=0;
+	int associateOrderId=0;
 	
+	public int getAssociateOrderId() {
+		return associateOrderId;
+	}
+
+	public void setAssociateOrderId(int associateOrderId) {
+		this.associateOrderId = associateOrderId;
+	}
+
 	public ListProduct(){
 		super();
 		crypto=new CryptoSha256();
