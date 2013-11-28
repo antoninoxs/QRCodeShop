@@ -46,13 +46,13 @@ public class TabOrdersMainFragment extends Fragment {
 		private OrdersAdapter adapter;
 		private Dialogs dialogs;
 		
-		OnAddQrCodeListener mCallback;
+		OnOrderDetailListener mCallback;
 
 		// Container Activity must implement this interface
-	    public interface OnAddQrCodeListener {
-	        public void ViewScanningFragment(ListProduct list);
-	        public void ViewProductDetailFragment(ListProduct list,int pos);
-	        public void ViewOrderFragment(ListProduct list);
+	    public interface OnOrderDetailListener {
+	         public void ViewOrderDetailFragment(ListOrders list,int pos);
+
+			
 			
 	 }
 	  
@@ -62,9 +62,8 @@ public class TabOrdersMainFragment extends Fragment {
 	            Bundle savedInstanceState) {
 	    	
 	    	final DatabaseManager db = new DatabaseManager(getActivity());
-	    	ListOrders listOrders= new ListOrders();
 	    	db.open();
-	    	listOrders=db.returnListOrder();
+	    	final ListOrders listOrders=db.returnListOrder();
 	    	//productList=db.returnProductListOrder(236);
 	    	db.close();
 	    	
@@ -90,11 +89,32 @@ public class TabOrdersMainFragment extends Fragment {
 					R.layout.new_list_item, listOrders);
 			list.setAdapter(adapter);
 		
+			list.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+						long arg3) {
+					// TODO Auto-generated method stub
+					mCallback.ViewOrderDetailFragment(listOrders,arg2);
+				}
+			});
+			
 	        return mLinearLayout;
 	        
 	    }
 	  
-	    
+	    public void onAttach(Activity activity) {
+	        super.onAttach(activity);
+	        
+	        // This makes sure that the container activity has implemented
+	        // the callback interface. If not, it throws an exception
+	        try {
+	            mCallback = (OnOrderDetailListener) activity;
+	        } catch (ClassCastException e) {
+	            throw new ClassCastException(activity.toString()
+	                    + " must implement OnOrderDetailListener");
+	        }
+	    }
 		
 	
 		

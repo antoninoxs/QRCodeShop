@@ -6,6 +6,7 @@ import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
+import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 
@@ -42,7 +43,8 @@ TabScanModeScanningFragment.OnTermAcquisitionListener,
 TabScanModeListFragment.OnAddQrCodeListener,
 TabScanModeMainFragment.OnStartAcquisitionListener,
 TabScanModeDetailItemFragment.OnReturnListListener,
-TabScanModeSendOrderFragment.OnFinishOrderListener{
+TabScanModeSendOrderFragment.OnFinishOrderListener,
+TabOrdersMainFragment.OnOrderDetailListener{
  
 	
 	final DatabaseManager db = new DatabaseManager(this);
@@ -237,6 +239,7 @@ TabScanModeSendOrderFragment.OnFinishOrderListener{
                             newTab.clss.getName(), newTab.args);
                     ft.add(R.id.realtabcontent, newTab.fragment, newTab.tag);
                 } else {
+                	
                     ft.attach(newTab.fragment);
                 }
             }
@@ -364,6 +367,23 @@ TabScanModeSendOrderFragment.OnFinishOrderListener{
         db.open();
         db.insertOrder(res,list);
         db.close();
+	}
+
+
+	@Override
+	public void ViewOrderDetailFragment(ListOrders list, int pos) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack("ListOrder");
+        TabOrdersProductListFragment fragment = new TabOrdersProductListFragment();
+        
+        //Si richiama il metodo per impostare la lista prodotti
+        fragment.updateProductList(list.get(pos));
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragment);
+        fragmentTransaction.commit();
+		
 	}
 	
 	

@@ -1,10 +1,13 @@
 package it.torvergata.mp.activity.database;
 
 
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,10 +71,14 @@ public class DatabaseManager {
 
 	public void insertOrder(int res, ListProduct list) {
 		// TODO Auto-generated method stub
+		
 		ContentValues OrderValues =new ContentValues();
+		
 		OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_ID, res);
-		//OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_TIMEE, "16:55:33");
-
+		OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_DATE, GenericFunctions.getDate());
+		OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_TIME, GenericFunctions.getTime());
+		OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_QUANTITATIVE,list.getCount());
+		OrderValues.put(dbInterface.TABLE_ORDINE_COLUMN_TOTAL_PRICE,list.getTotalPrice());
 
 		
 		try{
@@ -194,7 +201,7 @@ public class DatabaseManager {
 
 	public ListOrders returnListOrder() {
 		ListOrders result= new ListOrders();
-			Cursor cursor= db.query(dbInterface.TABLE_CONTIENE,
+			Cursor cursor= db.query(dbInterface.TABLE_ORDINE,
 				null ,
 				null,
 				null,null, null,null);
@@ -202,10 +209,15 @@ public class DatabaseManager {
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			int idOrder=cursor.getInt(0);
-			ListProduct temp = new ListProduct();
-			temp=returnProductListOrder(idOrder);
-			temp.setAssociateOrderId(idOrder);
-			result.add(temp);
+			String dateOrder=cursor.getString(3);
+			String timeOrder=cursor.getString(4);
+			ListProduct tempListProduct = new ListProduct();
+			tempListProduct=returnProductListOrder(idOrder);
+			tempListProduct.setAssociateOrderId(idOrder);
+			tempListProduct.setAssociateOrderDate(dateOrder);
+			tempListProduct.setAssociateOrderTime(timeOrder);
+			
+			result.add(tempListProduct);
 			cursor.moveToNext();
 		}
 		cursor.close();

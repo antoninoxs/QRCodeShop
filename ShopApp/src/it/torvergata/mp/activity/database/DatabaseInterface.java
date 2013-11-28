@@ -20,7 +20,7 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	public static final	String TABLE_ORDINE_COLUMN_QUANTITATIVE="QuantitaTotale";
 	public static final	String TABLE_ORDINE_COLUMN_TOTAL_PRICE="Totale";
 	public static final	String TABLE_ORDINE_COLUMN_DATE="Data";
-	public static final	String TABLE_ORDINE_COLUMN_TIMEE="Orario";
+	public static final	String TABLE_ORDINE_COLUMN_TIME="Orario";
 	public static final	String TABLE_ORDINE_COLUMN_STATE="StatoOrdine";
 	public static final	String TABLE_ORDINE_COLUMN_HASH="HashOrdine";
 	

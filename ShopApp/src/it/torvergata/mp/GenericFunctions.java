@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+
+import android.util.Log;
 
 public class GenericFunctions {
 	public static StringBuilder inputStreamToString(InputStream is) {
@@ -27,5 +31,22 @@ public class GenericFunctions {
 		double price=d;
 		DecimalFormat df= new DecimalFormat ("#.00");
 		return df.format(price);
+	}
+	public static String getDate(){
+		long msTime = System.currentTimeMillis();  
+		Date anotherCurDate = new Date(msTime);  
+		SimpleDateFormat formatterDate = new SimpleDateFormat("EEEE, d MMMM yyy");  
+		String formattedDateString = formatterDate.format(anotherCurDate);
+		Log.i("Data",formattedDateString);
+		
+		return formattedDateString;
+	}
+	public static String getTime(){
+		long msTime = System.currentTimeMillis();  
+		Date anotherCurDate = new Date(msTime);  
+		SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+		String formattedTimeString = formatterTime.format(anotherCurDate);
+		Log.i("Orario",formattedTimeString);
+		return formattedTimeString;
 	}
 }

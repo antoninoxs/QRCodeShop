@@ -23,6 +23,24 @@ public class ListProduct extends ArrayList<Product> {
 	double totalPrice=0.00;
 	int count=0;
 	int associateOrderId=0;
+	String associateOrderDate="";
+	public String getAssociateOrderDate() {
+		return associateOrderDate;
+	}
+
+	public void setAssociateOrderDate(String associateOrderDate) {
+		this.associateOrderDate = associateOrderDate;
+	}
+
+	public String getAssociateOrderTime() {
+		return associateOrderTime;
+	}
+
+	public void setAssociateOrderTime(String associateOrderTime) {
+		this.associateOrderTime = associateOrderTime;
+	}
+
+	String associateOrderTime="";
 	
 	public int getAssociateOrderId() {
 		return associateOrderId;
