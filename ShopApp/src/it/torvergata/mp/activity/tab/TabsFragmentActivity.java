@@ -40,7 +40,8 @@ public class TabsFragmentActivity extends FragmentActivity implements TabHost.On
 TabScanModeScanningFragment.OnTermAcquisitionListener,
 TabScanModeListFragment.OnAddQrCodeListener,
 TabScanModeMainFragment.OnStartAcquisitionListener,
-TabScanModeDetailItemFragment.OnReturnListListener{
+TabScanModeDetailItemFragment.OnReturnListListener,
+TabScanModeSendOrderFragment.OnFinishOrderListener{
  
     private TabHost mTabHost;
     private HashMap mapTabInfo = new HashMap();
@@ -102,22 +103,7 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         
         
     }
-    /***
-     * Metodo per ritorno da activity di scansione
-     * @deprecated
-     */
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		   if (requestCode == 0) {
-		      if (resultCode == RESULT_OK) {
-		         String contents = intent.getStringExtra("SCAN_RESULT");
-		         String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-		         Log.i("QRCODE",contents);
-		         // Handle successful scan
-		      } else if (resultCode == RESULT_CANCELED) {
-		         // Handle cancel
-		      }
-		   }
-		}
+
 
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString("tab", mTabHost.getCurrentTabTag()); //save the tab selected
@@ -360,6 +346,21 @@ TabScanModeDetailItemFragment.OnReturnListListener{
         fragmentScann.updateProduct(list,pos);
         
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
+	}
+
+
+	public void FinishOrder(ListProduct list) {
+		// TODO Auto-generated method stub
+
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+     
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        
+        TabScanModeMainFragment fragmentMain = new TabScanModeMainFragment();
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentMain);
         fragmentTransaction.commit();
 	}
 	

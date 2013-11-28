@@ -14,11 +14,13 @@ import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.MainActivity;
 import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.LoadDataProduct;
+import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.Dialogs;
 import it.torvergata.mp.helper.HttpConnection;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -55,6 +57,15 @@ public class TabScanModeSendOrderFragment extends Fragment {
 	private Dialogs dialogs;
 	
 	private Handler handler;
+	
+	OnFinishOrderListener mCallback;
+	// Container Activity must implement this interface
+    public interface OnFinishOrderListener {
+        public void FinishOrder(ListProduct list);
+    }
+
+	
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         
@@ -78,7 +89,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
     	                	Log.i("Ordine", "Ordine inviato con successo, Id Assegnato :"+res);
     	                	AlertDialog dialogBox = dialogs.successSendOrder(getActivity());
     	    				dialogBox.show();
-    	                	
+    	                	mCallback.FinishOrder(productList);
     	                }
     	                }
     	                
@@ -144,7 +155,19 @@ public class TabScanModeSendOrderFragment extends Fragment {
 		// TODO Auto-generated method stub
 		productList=productl;
 	}
-	
+	public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnFinishOrderListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFinishOrderListener");
+        }
+    }
+    
 	public class SendOrder extends AsyncTask<JSONObject, Void, Void> {
 		ProgressDialog progressDialog;
 
@@ -173,7 +196,10 @@ public class TabScanModeSendOrderFragment extends Fragment {
 				for(int i=0;i<Const.ATTEMPTS_RETRANSMISSION;i++){			
 					Log.i("CICLO DI TIMEOUT", "INIZIO ITERAZIONE NUMERO: "+i);
 					JSONObject object;
+					
 					object = connection.connect("ordernew", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
+					
+					
 					
 					String result = object.getString("result");
 					int idOrder=Integer.parseInt(result);
