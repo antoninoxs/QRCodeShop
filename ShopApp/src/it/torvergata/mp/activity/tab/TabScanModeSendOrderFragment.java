@@ -61,7 +61,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 	OnFinishOrderListener mCallback;
 	// Container Activity must implement this interface
     public interface OnFinishOrderListener {
-        public void FinishOrder(ListProduct list);
+        public void FinishOrder(ListProduct list,int res);
     }
 
 	
@@ -89,7 +89,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
     	                	Log.i("Ordine", "Ordine inviato con successo, Id Assegnato :"+res);
     	                	AlertDialog dialogBox = dialogs.successSendOrder(getActivity());
     	    				dialogBox.show();
-    	                	mCallback.FinishOrder(productList);
+    	                	mCallback.FinishOrder(productList,res);
     	                }
     	                }
     	                

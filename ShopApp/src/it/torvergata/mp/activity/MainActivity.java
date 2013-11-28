@@ -6,6 +6,7 @@ import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.R.menu;
+import it.torvergata.mp.activity.database.DatabaseManager;
 import it.torvergata.mp.activity.tab.TabsFragmentActivity;
 import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.helper.Dialogs;
@@ -76,6 +77,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final Context ctx=this;
+		final DatabaseManager db = new DatabaseManager(ctx);
 		
 		//Gestione della Sessione
 		SharedPreferences settings = getSharedPreferences(Const.PREFS_NAME,0 );
@@ -216,9 +218,9 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(getBaseContext(), TabsFragmentActivity.class);
-				startActivity(intent);
-				
+				db.open();
+				db.addRow();
+				db.close();
 			}
 		});
 	
