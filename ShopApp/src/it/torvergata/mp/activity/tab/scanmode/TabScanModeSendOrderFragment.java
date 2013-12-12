@@ -154,6 +154,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 	public void updateProduct(ListProduct productl) {
 		// TODO Auto-generated method stub
 		productList=productl;
+		
 	}
 	public void onAttach(Activity activity) {
         super.onAttach(activity);

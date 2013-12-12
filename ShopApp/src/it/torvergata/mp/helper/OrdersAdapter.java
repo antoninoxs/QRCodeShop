@@ -89,7 +89,7 @@ public class OrdersAdapter extends ArrayAdapter<ListProduct> {
 		TextView tvPrice = (TextView)convertView.findViewById(R.id.price);
 		
 		String description="";
-		for (int i=0;i<listOrder.get(position).getCount();i++){
+		for (int i=0;i<listOrder.get(position).size();i++){
 			description+=listOrder.get(position).get(i).getNome()+", ";
 		}		
 		tvTitle.setText(listOrder.get(position).getAssociateOrderDate()+", Ore:"+listOrder.get(position).getAssociateOrderTime());

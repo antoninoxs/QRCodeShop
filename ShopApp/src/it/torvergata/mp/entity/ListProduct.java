@@ -66,7 +66,7 @@ public class ListProduct extends ArrayList<Product> {
 	public int getProductsCount() {
 	
 		int result=0;
-		for(int i=0;i<this.count;i++)
+		for(int i=0;i<this.size();i++)
 		{
 			result+=this.get(i).getQuantita();
 		}
@@ -81,7 +81,9 @@ public class ListProduct extends ArrayList<Product> {
 		
 		totalPrice+=prod.getPrezzoTotale();
 		totalPrice=round(totalPrice,2);
-		count++;
+		for (int i=0;i<prod.getQuantita();i++){
+			count++;
+		}
 		return true;
 		
 	}
