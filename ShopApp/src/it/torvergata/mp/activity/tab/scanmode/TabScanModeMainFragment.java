@@ -1,10 +1,10 @@
-package it.torvergata.mp.activity.tab;
+package it.torvergata.mp.activity.tab.scanmode;
 
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
-import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
 import android.app.Activity;
 import android.content.Context;

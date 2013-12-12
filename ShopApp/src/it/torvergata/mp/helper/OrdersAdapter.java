@@ -86,11 +86,16 @@ public class OrdersAdapter extends ArrayAdapter<ListProduct> {
 		TextView tvDescription = (TextView)convertView.findViewById(R.id.description);
 		ImageView iv = (ImageView)convertView.findViewById(R.id.list_image);
 		TextView tvQuantitative = (TextView)convertView.findViewById(R.id.tvQuantitative);
-		
 		TextView tvPrice = (TextView)convertView.findViewById(R.id.price);
-		tvTitle.setText("ID Ordine:"+listOrder.get(position).getAssociateOrderId());
-		tvDescription.setText(listOrder.get(position).getAssociateOrderDate()+listOrder.get(position).getAssociateOrderDate());
-		//tvQuantitative.setText(listOrder.get(position).);
+		
+		String description="";
+		for (int i=0;i<listOrder.get(position).getCount();i++){
+			description+=listOrder.get(position).get(i).getNome()+", ";
+		}		
+		tvTitle.setText(listOrder.get(position).getAssociateOrderDate()+", Ore:"+listOrder.get(position).getAssociateOrderTime());
+		tvDescription.setText(description);
+		tvDescription.setSelected(true);
+		tvQuantitative.setText("Quantità:"+" "+listOrder.get(position).getProductsCount());
 		
 		String price = GenericFunctions.currencyStamp(listOrder.get(position).getTotalPrice());
 		tvPrice.setText(price+" "+"\u20ac"+" ");

@@ -1,4 +1,4 @@
-package it.torvergata.mp.activity.tab;
+package it.torvergata.mp.activity.tab.orders;
 
 
  
@@ -8,7 +8,8 @@ import it.torvergata.mp.Const;
 import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
-import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment.OnAddQrCodeListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.Dialogs;
@@ -47,8 +48,11 @@ public class TabOrdersProductListFragment extends Fragment {
 	private Dialogs dialogs;
 	
 
-  
+	OnProductsList mCallback;
 	
+	public interface OnProductsList{
+		public void viewProductDetail(ListProduct list, int pos);
+	}
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -65,7 +69,7 @@ public class TabOrdersProductListFragment extends Fragment {
        
         
         dialogs=new Dialogs();
-        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_scan_mode_list_layout,
+        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_orders_products_list_layout,
 				container, false);
         
     	totalPrice 			= (TextView) mLinearLayout.findViewById(R.id.tvTotalPrice);
@@ -80,35 +84,7 @@ public class TabOrdersProductListFragment extends Fragment {
 		
 		setTotalPrice();
 		
-		list.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					final int arg2, long arg3) {
-				
-				final AlertDialog dialogBox = dialogs.DeleteDialog(arg2,productList,getActivity());
-				dialogBox.show();
-				Button deleteButton = dialogBox
-						.getButton(DialogInterface.BUTTON_POSITIVE);
-				deleteButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						try{
-						
-						productList.remove(arg2);
-						adapter.notifyDataSetChanged();
-						setTotalPrice();
-						}catch (IndexOutOfBoundsException e){
-							adapter.notifyDataSetChanged();
-						}
-						dialogBox.dismiss();	
-					}
-				});
-				
-				return false;
-			}
-		});
+		
 		
 		list.setOnItemClickListener(new OnItemClickListener() {
 
@@ -116,32 +92,30 @@ public class TabOrdersProductListFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-			
+				mCallback.viewProductDetail(productList, arg2);
 			}
 		});
 		
-		btnAdd.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		
 	
 		
-		btnContinue.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
 		
-			}
-		});
 		
         return mLinearLayout;
         
     }
-  
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnProductsList) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnProductsList");
+        }
+    }
 
 	public void updateProductList(ListProduct list) {
 		// TODO Auto-generated method stub

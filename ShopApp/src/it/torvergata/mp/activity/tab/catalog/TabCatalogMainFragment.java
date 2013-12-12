@@ -1,4 +1,4 @@
-package it.torvergata.mp.activity.tab;
+package it.torvergata.mp.activity.tab.catalog;
 
 
  

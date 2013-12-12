@@ -1,4 +1,4 @@
-package it.torvergata.mp.activity.tab;
+package it.torvergata.mp.activity.tab.scanmode;
 
 
  
@@ -8,7 +8,7 @@ import it.torvergata.mp.Const;
 import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
-import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import it.torvergata.mp.helper.Dialogs;
@@ -98,7 +98,7 @@ public class TabScanModeListFragment extends Fragment {
 //        prod3.setScadenza("2015-01-01");
 //        prod3.setFileImmagine("abbracci.png");
 //        productList.add(prod3);
-//        
+        
         
         dialogs=new Dialogs();
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_scan_mode_list_layout,

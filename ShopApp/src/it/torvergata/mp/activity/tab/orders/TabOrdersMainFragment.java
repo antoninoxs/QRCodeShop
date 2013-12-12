@@ -1,4 +1,4 @@
-package it.torvergata.mp.activity.tab;
+package it.torvergata.mp.activity.tab.orders;
 
 
  
@@ -6,7 +6,7 @@ import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
-import it.torvergata.mp.activity.tab.TabScanModeListFragment.OnAddQrCodeListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment.OnAddQrCodeListener;
 import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.helper.Dialogs;
@@ -81,12 +81,12 @@ public class TabOrdersMainFragment extends Fragment {
 	       
 	        
 	      
-	        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_scan_mode_list_layout,
+	        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_orders_list_layout,
 					container, false);
 	   		final ListView list = (ListView) mLinearLayout.findViewById(id.list);
 	        
 			adapter =new OrdersAdapter(getActivity(),
-					R.layout.new_list_item, listOrders);
+					R.layout.order_list_item, listOrders);
 			list.setAdapter(adapter);
 		
 			list.setOnItemClickListener(new OnItemClickListener() {

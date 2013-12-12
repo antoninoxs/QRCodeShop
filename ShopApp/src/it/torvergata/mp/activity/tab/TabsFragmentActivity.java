@@ -6,6 +6,15 @@ import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
+import it.torvergata.mp.activity.tab.catalog.TabCatalogMainFragment;
+import it.torvergata.mp.activity.tab.orders.TabOrdersDetailItemFragment;
+import it.torvergata.mp.activity.tab.orders.TabOrdersMainFragment;
+import it.torvergata.mp.activity.tab.orders.TabOrdersProductListFragment;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeDetailItemFragment;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeMainFragment;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment;
 import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
@@ -44,7 +53,8 @@ TabScanModeListFragment.OnAddQrCodeListener,
 TabScanModeMainFragment.OnStartAcquisitionListener,
 TabScanModeDetailItemFragment.OnReturnListListener,
 TabScanModeSendOrderFragment.OnFinishOrderListener,
-TabOrdersMainFragment.OnOrderDetailListener{
+TabOrdersMainFragment.OnOrderDetailListener,
+TabOrdersProductListFragment.OnProductsList{
  
 	
 	final DatabaseManager db = new DatabaseManager(this);
@@ -382,6 +392,20 @@ TabOrdersMainFragment.OnOrderDetailListener{
         fragment.updateProductList(list.get(pos));
         
         fragmentTransaction.replace(R.id.realtabcontent, fragment);
+        fragmentTransaction.commit();
+		
+	}
+
+
+	@Override
+	public void viewProductDetail(ListProduct list, int pos) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabOrdersDetailItemFragment fragmentScann = new TabOrdersDetailItemFragment();
+        fragmentTransaction.addToBackStack("ListPoduct");
+        fragmentScann.updateProduct(list,pos);        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 		
 	}

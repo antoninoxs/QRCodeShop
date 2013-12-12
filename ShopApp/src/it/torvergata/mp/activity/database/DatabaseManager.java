@@ -44,7 +44,7 @@ public class DatabaseManager {
 		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_ID, "1212121");
 		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_NAME, "Gocciole");
 		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_DESCRIPTION, "Gocciole Pavesi");
-		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_AVAILABILITY, "25");
+		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_QUANTITATIVE, "25");
 		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_EXPIRE_DATE, "2013-06-12");
 		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_PRICE, "23.00");
 		values.put(dbInterface.TABLE_PRODOTTO_COLUMN_IMAGE_FILE, "gocc.png");
@@ -104,7 +104,7 @@ public class DatabaseManager {
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_ID, 				list.get(i).getId());
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_NAME, 			list.get(i).getNome());
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_DESCRIPTION, 	list.get(i).getDescrizione());
-			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_AVAILABILITY,	list.get(i).getDisponibilita());
+			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_QUANTITATIVE,	list.get(i).getQuantita());
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_EXPIRE_DATE, 	list.get(i).getScadenza());
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_PRICE,			list.get(i).getPrezzoUnitario());
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_IMAGE_FILE, 		list.get(i).getFileImmagine());
@@ -177,7 +177,7 @@ public class DatabaseManager {
 			temp.setNome(cursorP.getString(1));
 			temp.setPrezzoUnitario(cursorP.getDouble(2));
 			temp.setScadenza(cursorP.getString(3));
-			temp.setDisponibilita(cursorP.getInt(4));
+			temp.setQuantita(cursorP.getInt(4));
 			temp.setDescrizione(cursorP.getString(5));
 			temp.setFileImmagine(cursorP.getString(6));
 			

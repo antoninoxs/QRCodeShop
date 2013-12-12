@@ -1,12 +1,12 @@
-package it.torvergata.mp.activity.tab;
+package it.torvergata.mp.activity.tab.orders;
 
 
  
 import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
-import it.torvergata.mp.activity.tab.TabScanModeListFragment.OnAddQrCodeListener;
-import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment.OnAddQrCodeListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 import android.app.Activity;
@@ -35,22 +35,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
  
 
-public class TabScanModeDetailItemFragment extends Fragment {
+public class TabOrdersDetailItemFragment extends Fragment {
     
 	private Product prod;
 	private LinearLayout mLinearLayout;
 	private TextView tvTitle,tvDescription,tvPrice,tvQuantitative,tvSimplePrice;
-	private Button btnListProduct,btnChangeQuantitativeP,btnChangeQuantitativeM;
-	private EditText etQuantitative;
 	private ImageView ivImage;
 	private ListProduct productlist;
 	private int position;
 	
-	OnReturnListListener mCallback;
-	// Container Activity must implement this interface
-    public interface OnReturnListListener {
-        public void ViewListFragment(ListProduct list);
-    }
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -65,7 +58,7 @@ public class TabScanModeDetailItemFragment extends Fragment {
             return null;
         }
        
-        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.activity_product_detail,
+        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_orders_product_detail,
 				container, false);
         
         tvTitle 			= (TextView) mLinearLayout.findViewById(R.id.tvTitleDetail);
@@ -77,79 +70,23 @@ public class TabScanModeDetailItemFragment extends Fragment {
       		tvPrice = (TextView)  mLinearLayout.findViewById(R.id.tvTotalPrice);
       		tvQuantitative = (TextView)  mLinearLayout.findViewById(R.id.tvQuantitativeDetail);
       		tvSimplePrice = (TextView)  mLinearLayout.findViewById(R.id.tvSimplePrice);
-      		btnListProduct = (Button)  mLinearLayout.findViewById(R.id.btnListProduct);
-      		btnChangeQuantitativeP = (Button)  mLinearLayout.findViewById(R.id.btnChangeQuantitativeP);
-      		btnChangeQuantitativeM = (Button)  mLinearLayout.findViewById(R.id.btnChangeQuantitativeM);
-            etQuantitative = (EditText) mLinearLayout.findViewById(R.id.etQuantitative);
-       	
-        
+      	
 		ivImage.setImageDrawable(prod.getImmagine());
 		tvTitle.setText(prod.getNome());
 		tvDescription.setText(prod.getDescrizione());
 		tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
 		tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 		tvSimplePrice.setText(getString(R.string.tPrice)+" "+GenericFunctions.currencyStamp(prod.getPrezzoUnitario())+" "+getString(R.string.Euro));
-		etQuantitative.setText(""+prod.getQuantita());
-		etQuantitative.setKeyListener(null);
-		etQuantitative.setEnabled(false);
-		
-		btnChangeQuantitativeM.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(prod.getQuantita()>1){
-					prod.decrement();
-					
-					productlist.set(position, prod);
-					productlist.setDecrementTotalPrice(prod.getPrezzoUnitario());
-					tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
-					etQuantitative.setText(""+prod.getQuantita());
-					tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
-					
-				}
-			}
-		});
-		
-		btnChangeQuantitativeP.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				prod.increment();
-				
-				productlist.set(position, prod);
-				productlist.setIncrementTotalPrice(prod.getPrezzoUnitario());
-				tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
-				etQuantitative.setText(""+prod.getQuantita());
-				tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
-			}
-		});
+	
 		
 		
-		btnListProduct.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				mCallback.ViewListFragment(productlist);
-			}
-		});
+		
+	
 		
         return mLinearLayout;   
     }
  
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mCallback = (OnReturnListListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnReturnListListener ");
-        }
-    }
+    
 	public void updateProduct(ListProduct list,int pos) {
 		// TODO Auto-generated method stub
 		productlist = new ListProduct();

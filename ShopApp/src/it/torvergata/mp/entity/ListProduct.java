@@ -63,6 +63,15 @@ public class ListProduct extends ArrayList<Product> {
 	public int getCount() {
 		return  this.count;
 	}
+	public int getProductsCount() {
+	
+		int result=0;
+		for(int i=0;i<this.count;i++)
+		{
+			result+=this.get(i).getQuantita();
+		}
+		return  result;
+	}
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}

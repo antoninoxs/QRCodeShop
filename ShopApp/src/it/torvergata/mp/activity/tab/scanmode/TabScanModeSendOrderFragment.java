@@ -1,4 +1,4 @@
-package it.torvergata.mp.activity.tab;
+package it.torvergata.mp.activity.tab.scanmode;
 
 
  
@@ -13,8 +13,8 @@ import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.MainActivity;
-import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.LoadDataProduct;
-import it.torvergata.mp.activity.tab.TabScanModeScanningFragment.OnTermAcquisitionListener;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment.LoadDataProduct;
+import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.crypto.CryptoSha256;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;

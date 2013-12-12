@@ -34,7 +34,7 @@ public class DatabaseInterface extends SQLiteOpenHelper {
 	public static final	String TABLE_PRODOTTO_COLUMN_NAME="Nome";
 	public static final	String TABLE_PRODOTTO_COLUMN_PRICE="Prezzo";
 	public static final	String TABLE_PRODOTTO_COLUMN_EXPIRE_DATE="Scadenza";
-	public static final	String TABLE_PRODOTTO_COLUMN_AVAILABILITY="Disponibilita";
+	public static final	String TABLE_PRODOTTO_COLUMN_QUANTITATIVE="Quantita";
 	public static final	String TABLE_PRODOTTO_COLUMN_DESCRIPTION="Descrizione";
 	public static final	String TABLE_PRODOTTO_COLUMN_IMAGE_FILE="FileImmagine";
 	
