@@ -142,9 +142,9 @@ public class ListProduct extends ArrayList<Product> {
 		long msTime = System.currentTimeMillis();  
 
 		Date anotherCurDate = new Date(msTime);  
-		SimpleDateFormat formatter = new SimpleDateFormat("dMMMMyyy");  
+		SimpleDateFormat formatter = new SimpleDateFormat("dMMMMyyyHHmm");  
 		String formattedDateString = formatter.format(anotherCurDate);
-		Log.i("Data",formattedDateString);
+		Log.i("Data nell'hash:",formattedDateString);
 		
 		
 		/*

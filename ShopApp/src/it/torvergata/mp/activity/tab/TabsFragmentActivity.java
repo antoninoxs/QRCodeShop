@@ -364,7 +364,12 @@ TabOrdersProductListFragment.OnProductsList{
         fragmentTransaction.commit();
 	}
 
-
+	/**
+	 * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione dal Fragment di invio dell'ordine nel tab Scan Mode
+     * al Fragment iniziale del tab ScanMode, questa interfaccia provvede ad inserire
+     * nel db i dettagli dell'ordine appena inviato.
+	 */
 	public void FinishOrder(ListProduct list,int res) {
 		// TODO Auto-generated method stub
 
@@ -379,7 +384,11 @@ TabOrdersProductListFragment.OnProductsList{
         db.close();
 	}
 
-
+	/**
+	 * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione dal Fragment della lista DEGLI ORDINI nel tab Ordini
+     * al Fragment di dettaglio del singolo ORDINE.
+	 */
 	@Override
 	public void ViewOrderDetailFragment(ListOrders list, int pos) {
 		// TODO Auto-generated method stub
@@ -396,14 +405,21 @@ TabOrdersProductListFragment.OnProductsList{
 		
 	}
 
-
+	/**
+	 * Implementazione dell'interfaccia che permette di
+     * eseguire la transazione dal Fragment della lista prodotti nel tab Ordini
+     * al Fragment di dettaglio del singolo prodotto.
+     * Ricordando che in questo fragment NON sarà possibile modificare la
+     * quantità del singolo prodotto e quindi il prezzo complessivo dei prodotti,
+     * 
+	 */
 	@Override
 	public void viewProductDetail(ListProduct list, int pos) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabOrdersDetailItemFragment fragmentScann = new TabOrdersDetailItemFragment();
-        fragmentTransaction.addToBackStack("ListPoduct");
+        fragmentTransaction.addToBackStack("<<");
         fragmentScann.updateProduct(list,pos);        
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
