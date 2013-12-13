@@ -1,6 +1,7 @@
 package it.torvergata.mp;
 
 import it.torvergata.mp.R;
+import it.torvergata.mp.R.layout;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
