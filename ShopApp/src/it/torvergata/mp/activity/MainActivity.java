@@ -2,6 +2,7 @@ package it.torvergata.mp.activity;
 
 
 import it.torvergata.mp.Const;
+import it.torvergata.mp.MainNotificationActivity;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
@@ -220,9 +221,8 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				db.open();
-				db.addRow();
-				db.close();
+				Intent intent = new Intent(getBaseContext(), MainNotificationActivity.class);
+				startActivity(intent);
 			}
 		});
 	
