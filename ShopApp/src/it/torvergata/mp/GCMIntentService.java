@@ -54,7 +54,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         long[] pattern = {100,1000};
         Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(icon).setContentTitle(title).setContentText("CIAOOOOOOOOOOOO");
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(icon).setContentTitle(title).setContentText(Const.APPNAME+" Aggiornamento stato ordine");
         mBuilder.setContentIntent(intent).setVibrate(pattern).setSound(uri);
         notificationManager.notify(0, mBuilder.build());
         

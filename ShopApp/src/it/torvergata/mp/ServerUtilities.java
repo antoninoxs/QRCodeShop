@@ -40,6 +40,7 @@ public final class ServerUtilities {
     private static final int MAX_ATTEMPTS = 5;
     private static final int BACKOFF_MILLI_SECONDS = 2000;
     private static final Random random = new Random();
+    static Handler handler;
     public static void register(final Context context, final String regId) {
 //        String serverUrl = SERVER_URL;
 //        Map<String, String> params = new HashMap<String, String>();
@@ -63,16 +64,16 @@ public final class ServerUtilities {
 //                backoff *= 2;
 //            }
 //        }
-    	Handler handler;
-		//Handler per il messaggio di risposta del Server, proveniente dal Thread.
-		handler = new Handler() {
-            @Override
-            public void handleMessage(Message mess) {
-            	
-            	int res = mess.arg1;
-            }               
-            
-		};
+    	
+//		//Handler per il messaggio di risposta del Server, proveniente dal Thread.
+//		handler = new Handler() {
+//            @Override
+//            public void handleMessage(Message mess) {
+//            	
+//            	int res = mess.arg1;
+//            }               
+//            
+//		};
 		HttpConnection connection = new HttpConnection();
 		JSONObject json = new JSONObject();
 		try {
