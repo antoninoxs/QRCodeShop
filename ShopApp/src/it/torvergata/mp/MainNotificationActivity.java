@@ -19,9 +19,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
-import static it.torvergata.mp.CommonUtilities.DISPLAY_MESSAGE_ACTION;
-import static it.torvergata.mp.CommonUtilities.EXTRA_MESSAGE;
-import static it.torvergata.mp.CommonUtilities.SENDER_ID;
+import static it.torvergata.mp.Const.DISPLAY_MESSAGE_ACTION;
+import static it.torvergata.mp.Const.EXTRA_MESSAGE;
+import static it.torvergata.mp.Const.SENDER_ID;
 
 public class MainNotificationActivity extends Activity {
    ProgressDialog progressBar;

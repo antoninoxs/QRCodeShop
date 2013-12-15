@@ -1,6 +1,6 @@
 package it.torvergata.mp;
 
-import static it.torvergata.mp.CommonUtilities.SERVER_URL;
+import static it.torvergata.mp.Const.SERVER_URL;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;

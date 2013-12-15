@@ -11,8 +11,8 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
  
 import com.google.android.gcm.GCMBaseIntentService;
-import static it.torvergata.mp.CommonUtilities.SENDER_ID;
-import static it.torvergata.mp.CommonUtilities.displayMessage;
+import static it.torvergata.mp.Const.SENDER_ID;
+import static it.torvergata.mp.Const.displayMessage;
   
 public class GCMIntentService extends GCMBaseIntentService {
     public GCMIntentService() {

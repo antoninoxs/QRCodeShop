@@ -3,6 +3,7 @@ package it.torvergata.mp;
 import java.text.DecimalFormat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -29,6 +30,24 @@ public class Const {
 
 
 	public static final int ATTEMPTS_RETRANSMISSION = 3;
+	
+	
+    // indirizzo del server per la registrazione del servizio notifiche
+    static final String SERVER_URL = "http://shopapp.dyndns.org:88/PUSH/register.php"; 
+    // ID del progetto di google
+    //static final String SENDER_ID = "589713569951"; 
+    static final String SENDER_ID = "458575759094"; //Progetto associato a costantino.depetrillo@gmail.com 
+    
+    
+    static final String TAG = "Notifica per android";
+    static final String DISPLAY_MESSAGE_ACTION = "it.torvergata.mp.DISPLAY_MESSAGE";
+    static final String EXTRA_MESSAGE = "message";
+    static void displayMessage(Context context, String message) {
+        Intent intent = new Intent(DISPLAY_MESSAGE_ACTION);
+        intent.putExtra(EXTRA_MESSAGE, message);
+        context.sendBroadcast(intent);
+    }
+	
 	
 	public static final Drawable resize(Drawable image) {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();
