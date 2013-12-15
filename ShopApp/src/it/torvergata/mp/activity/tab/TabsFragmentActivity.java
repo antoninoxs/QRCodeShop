@@ -4,6 +4,7 @@ package it.torvergata.mp.activity.tab;
 import static it.torvergata.mp.Const.DISPLAY_MESSAGE_ACTION;
 import static it.torvergata.mp.Const.EXTRA_MESSAGE;
 import static it.torvergata.mp.Const.SENDER_ID;
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.ServerUtilities;
 import it.torvergata.mp.R;
 import it.torvergata.mp.ServerUtilities;
@@ -177,8 +178,15 @@ TabOrdersProductListFragment.OnProductsList{
             // Sveglia il telefono se è in stand-by
             WakeLocker.acquire(getApplicationContext());
             // Visualizza il messaggio
-            Toast.makeText(getApplicationContext(), "New Message: " + newMessage, Toast.LENGTH_LONG).show();
-            // Rilascia il wavelocker
+            //Toast.makeText(getApplicationContext(), "New Message: " + newMessage, Toast.LENGTH_LONG).show();
+            String[] items = newMessage.split(",");
+            String orderId=items[0];
+            String state=items[1];
+            Toast.makeText(getApplicationContext(), "Id Ordine: " + orderId +" Stato: "+ state, Toast.LENGTH_LONG).show();
+            db.open();
+            db.updateOrder(orderId,state);
+            db.close();
+//            // Rilascia il wavelocker
             WakeLocker.release();
         }
     };

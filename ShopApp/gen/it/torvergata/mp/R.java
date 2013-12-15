@@ -185,6 +185,7 @@ public final class R {
         public static final int tTimeout=0x7f06002b;
         public static final int tTitleBoxDeleteProduct=0x7f060018;
         public static final int tTotalImport=0x7f060036;
+        public static final int tUpdateOrderState=0x7f06003d;
         public static final int tUserPasswordWrong=0x7f060023;
         public static final int tWarning=0x7f06002a;
         public static final int title_activity_camera=0x7f060011;

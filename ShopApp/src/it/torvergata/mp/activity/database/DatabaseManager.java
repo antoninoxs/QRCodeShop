@@ -211,11 +211,13 @@ public class DatabaseManager {
 			int idOrder=cursor.getInt(0);
 			String dateOrder=cursor.getString(3);
 			String timeOrder=cursor.getString(4);
+			int stateOrder=cursor.getInt(5);
 			ListProduct tempListProduct = new ListProduct();
 			tempListProduct=returnProductListOrder(idOrder);
 			tempListProduct.setAssociateOrderId(idOrder);
 			tempListProduct.setAssociateOrderDate(dateOrder);
 			tempListProduct.setAssociateOrderTime(timeOrder);
+			tempListProduct.setAssociateOrderState(stateOrder);
 			
 			result.add(tempListProduct);
 			cursor.moveToNext();
@@ -223,6 +225,27 @@ public class DatabaseManager {
 		cursor.close();
 		return result;
 		
+	}
+
+
+	public void updateOrder(String orderId, String state) {
+		// TODO Auto-generated method stub
+		
+				
+				try{
+					String [] filter = {""+orderId};
+					String strFilter = "idOrdine=" + orderId;
+					ContentValues args = new ContentValues();
+					args.put(dbInterface.TABLE_ORDINE_COLUMN_STATE, state);
+					db.update(dbInterface.TABLE_ORDINE, args, strFilter, null);
+				
+				}
+				catch (Exception e){
+					Log.e("DB Error VALORI TABELLA ORDINE", e.toString());
+					e.printStackTrace();
+				}
+				
+				
 	}
 	
 	

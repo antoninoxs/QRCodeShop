@@ -24,6 +24,12 @@ public class ListProduct extends ArrayList<Product> {
 	int count=0;
 	int associateOrderId=0;
 	String associateOrderDate="";
+	int associateOrderState=-1;
+	
+	public void setAssociateOrderState(int associateOrderState) {
+		this.associateOrderState = associateOrderState;
+	}
+
 	public String getAssociateOrderDate() {
 		return associateOrderDate;
 	}
@@ -209,6 +215,23 @@ public class ListProduct extends ArrayList<Product> {
 		// TODO Auto-generated method stub
 		count--;
 		totalPrice-=prezzoUnitarioProdotto;
+	}
+
+	public String getAssociateOrderState() {
+		String result;
+		switch (associateOrderState) {
+        case 0:  result = "Pervenuto";
+                 break;
+        case 1:  result = "Preso in carico";
+                 break;
+        case 2:  result = "Pronto";
+                 break;
+        case 3:  result = "Ritirato";
+                 break;
+        default: result="";
+                 break;
+    }
+		return result;
 	}
 
 	

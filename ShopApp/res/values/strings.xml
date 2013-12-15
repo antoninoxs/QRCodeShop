@@ -62,6 +62,7 @@
      <string name="tOrderSendWrong">Invio ordine non riuscito</string>
      <string name="tSendingOrger">Invio Ordine...</string>
      <string name="tSendOrder">Invia ordine</string>
+     <string name="tUpdateOrderState">Aggiornamento stato ordine</string>
      
     
 

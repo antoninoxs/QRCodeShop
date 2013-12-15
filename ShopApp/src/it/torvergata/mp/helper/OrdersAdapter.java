@@ -95,7 +95,7 @@ public class OrdersAdapter extends ArrayAdapter<ListProduct> {
 		tvTitle.setText(listOrder.get(position).getAssociateOrderDate()+", Ore:"+listOrder.get(position).getAssociateOrderTime());
 		tvDescription.setText(description);
 		tvDescription.setSelected(true);
-		tvQuantitative.setText("Quantità:"+" "+listOrder.get(position).getProductsCount());
+		tvQuantitative.setText("Quantità:"+" "+listOrder.get(position).getProductsCount()+" Stato : "+listOrder.get(position).getAssociateOrderState());
 		
 		String price = GenericFunctions.currencyStamp(listOrder.get(position).getTotalPrice());
 		tvPrice.setText(price+" "+"\u20ac"+" ");
