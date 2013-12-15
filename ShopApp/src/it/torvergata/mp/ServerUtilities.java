@@ -1,6 +1,8 @@
 package it.torvergata.mp;
 
 import static it.torvergata.mp.Const.SERVER_URL;
+import it.torvergata.mp.helper.HttpConnection;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -21,13 +23,20 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.google.android.gcm.GCMRegistrar;
   
 public final class ServerUtilities {
+	
     private static final int MAX_ATTEMPTS = 5;
     private static final int BACKOFF_MILLI_SECONDS = 2000;
     private static final Random random = new Random();
@@ -54,22 +63,29 @@ public final class ServerUtilities {
 //                backoff *= 2;
 //            }
 //        }
-        
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		nameValuePairs.add(new BasicNameValuePair("i",regId));
-		//http post
-		try{
-		        HttpClient httpclient = new DefaultHttpClient();
-//		        HttpPost httppost = new HttpPost("http://10.0.2.2/login.php?u="+user+"&p="+pass);
-		        HttpPost httppost = new HttpPost(SERVER_URL);
-		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		        HttpResponse response = httpclient.execute(httppost); 
-		        Log.i("RESPONSE", response.toString());
-		        HttpEntity entity = response.getEntity();
-		        Log.i("ENTITY", entity.toString());
-		}catch(Exception e){
-		        Log.e("log_tag", "Error in http connection: "+e.toString());
+    	Handler handler;
+		//Handler per il messaggio di risposta del Server, proveniente dal Thread.
+		handler = new Handler() {
+            @Override
+            public void handleMessage(Message mess) {
+            	
+            	int res = mess.arg1;
+            }               
+            
+		};
+		HttpConnection connection = new HttpConnection();
+		JSONObject json = new JSONObject();
+		try {
+			json.put("regId", regId);
+			JSONObject object = connection.connect("notificationRegister", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+						
+		
+		
+		
     }
     static void unregister(final Context context, final String regId) {
         String serverUrl = SERVER_URL + "/unregister";
