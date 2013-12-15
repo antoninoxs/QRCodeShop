@@ -1,7 +1,6 @@
 package it.torvergata.mp;
 
 import static it.torvergata.mp.CommonUtilities.SERVER_URL;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -32,7 +31,6 @@ public final class ServerUtilities {
     private static final int MAX_ATTEMPTS = 5;
     private static final int BACKOFF_MILLI_SECONDS = 2000;
     private static final Random random = new Random();
-    
     static void register(final Context context, final String regId) {
 //        String serverUrl = SERVER_URL;
 //        Map<String, String> params = new HashMap<String, String>();

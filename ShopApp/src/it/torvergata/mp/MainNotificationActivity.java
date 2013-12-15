@@ -1,7 +1,5 @@
 package it.torvergata.mp;
 
-import it.torvergata.mp.R;
-import it.torvergata.mp.R.layout;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -31,7 +29,7 @@ public class MainNotificationActivity extends Activity {
    @Override
    public void onCreate(Bundle savedInstanceState){
        super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_notification);
+       setContentView(R.layout.activity_main);
        // Il telefono risulta pronto
        GCMRegistrar.checkDevice(this);
        // Il manifesto risulta pronto

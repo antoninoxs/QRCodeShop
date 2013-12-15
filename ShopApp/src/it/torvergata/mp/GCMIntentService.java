@@ -1,8 +1,5 @@
 package it.torvergata.mp;
 
-import it.torvergata.mp.R;
-import it.torvergata.mp.R.drawable;
-import it.torvergata.mp.R.string;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,11 +11,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
  
 import com.google.android.gcm.GCMBaseIntentService;
-
-import static it.torvergata.mp.CommonUtilities.DISPLAY_MESSAGE_ACTION;
-import static it.torvergata.mp.CommonUtilities.EXTRA_MESSAGE;
 import static it.torvergata.mp.CommonUtilities.SENDER_ID;
-import static it.torvergata.mp.CommonUtilities.SERVER_URL;
 import static it.torvergata.mp.CommonUtilities.displayMessage;
   
 public class GCMIntentService extends GCMBaseIntentService {
