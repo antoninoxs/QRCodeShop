@@ -31,7 +31,7 @@ public final class ServerUtilities {
     private static final int MAX_ATTEMPTS = 5;
     private static final int BACKOFF_MILLI_SECONDS = 2000;
     private static final Random random = new Random();
-    static void register(final Context context, final String regId) {
+    public static void register(final Context context, final String regId) {
 //        String serverUrl = SERVER_URL;
 //        Map<String, String> params = new HashMap<String, String>();
 //        params.put("regId", regId);

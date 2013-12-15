@@ -1,5 +1,6 @@
 package it.torvergata.mp;
 
+import it.torvergata.mp.activity.tab.TabsFragmentActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -48,7 +49,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         
         String title = context.getString(R.string.app_name);
-        Intent notificationIntent = new Intent(context,MainNotificationActivity.class);
+        Intent notificationIntent = new Intent(context,TabsFragmentActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         long[] pattern = {100,1000};
