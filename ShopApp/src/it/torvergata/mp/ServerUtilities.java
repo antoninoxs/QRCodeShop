@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -76,8 +77,14 @@ public final class ServerUtilities {
 //		};
 		HttpConnection connection = new HttpConnection();
 		JSONObject json = new JSONObject();
+	    //Gestione della Sessione
+		SharedPreferences settings = context.getSharedPreferences(Const.PREFS_NAME, 0);
+		String user = settings.getString("User","*");
+		Log.i("USER RECUPERATO DA PREFERENCES", user);
 		try {
 			json.put("regId", regId);
+			json.put("user", user);
+			
 			JSONObject object = connection.connect("notificationRegister", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
