@@ -54,16 +54,35 @@
         android:layout_centerVertical="true"
         android:src="@drawable/arrow" />
 
-    <TextView
-        android:id="@+id/tvQuantitative"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_below="@id/description"
-        android:layout_marginTop="5dip"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:textStyle="bold"
-        android:textColor="#343434"
-        android:textSize="10dip" />
+        android:layout_below="@id/description"
+        android:layout_marginTop="1dip"
+        android:layout_toLeftOf="@+id/ivDetailImage"
+        android:layout_toRightOf="@+id/thumbnail" >
+
+        <TextView
+            android:id="@+id/tvStateOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:textColor="#e02f2f"
+            android:textSize="10dip"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvQuantitative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="5dip"
+            android:textColor="#343434"
+            android:textSize="10dip"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/price"

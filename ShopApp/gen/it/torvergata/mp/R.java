@@ -61,13 +61,13 @@ public final class R {
         public static final int TWregistrazionePassword1=0x7f090023;
         public static final int TWregistrazioneRegistrazione=0x7f090006;
         public static final int TWregistrazioneUsername=0x7f09001f;
-        public static final int action_settings=0x7f090038;
+        public static final int action_settings=0x7f090039;
         public static final int btnAdd=0x7f090003;
         public static final int btnChangeQuantitativeM=0x7f090015;
         public static final int btnChangeQuantitativeP=0x7f090017;
         public static final int btnContinue=0x7f090004;
         public static final int btnListProduct=0x7f090018;
-        public static final int btnQrCode=0x7f090032;
+        public static final int btnQrCode=0x7f090033;
         public static final int btnSalta=0x7f09000b;
         public static final int buttonAccess=0x7f090009;
         public static final int cameraPreview=0x7f090027;
@@ -76,7 +76,7 @@ public final class R {
         public static final int editTextUsername=0x7f090005;
         public static final int etQuantitative=0x7f090016;
         public static final int ivDetailImage=0x7f09000d;
-        public static final int ivSendOrder=0x7f090037;
+        public static final int ivSendOrder=0x7f090038;
         public static final int list_image=0x7f09002a;
         public static final int option_text=0x7f090031;
         public static final int price=0x7f09002e;
@@ -89,19 +89,20 @@ public final class R {
         public static final int title=0x7f09002b;
         public static final int tvDescriptionDetail=0x7f090013;
         public static final int tvDesriptionTitle=0x7f090011;
-        public static final int tvNumberProductsLabelTabOrder=0x7f090034;
-        public static final int tvNumberProductsTabOrder=0x7f090035;
+        public static final int tvNumberProductsLabelTabOrder=0x7f090035;
+        public static final int tvNumberProductsTabOrder=0x7f090036;
         public static final int tvPriceDetail=0x7f090002;
         public static final int tvProductID=0x7f090000;
         public static final int tvQuantitative=0x7f09002d;
         public static final int tvQuantitativeChange=0x7f090014;
         public static final int tvQuantitativeDetail=0x7f09000f;
         public static final int tvSimplePrice=0x7f090010;
-        public static final int tvSummaryTabOrder=0x7f090033;
+        public static final int tvStateOrder=0x7f090032;
+        public static final int tvSummaryTabOrder=0x7f090034;
         public static final int tvTitleDetail=0x7f09000e;
         public static final int tvTitleRegistration=0x7f090019;
         public static final int tvTotalCostLabelTabOrder=0x7f090026;
-        public static final int tvTotalCostTabOrder=0x7f090036;
+        public static final int tvTotalCostTabOrder=0x7f090037;
         public static final int tvTotalPrice=0x7f090001;
     }
     public static final class layout {
