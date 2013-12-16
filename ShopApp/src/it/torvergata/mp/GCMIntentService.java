@@ -46,15 +46,19 @@ public class GCMIntentService extends GCMBaseIntentService {
     private static void generateNotification(Context context, String message) {
         int icon = R.drawable.ic_launcher;
         long when = System.currentTimeMillis();
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         
+        String[] items = message.split(",");
+        String state=items[1];
+        String stateOrderText=GenericFunctions.convertOrderState(Integer.parseInt(state));
+        
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String title = context.getString(R.string.app_name);
         Intent notificationIntent = new Intent(context,TabsFragmentActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         long[] pattern = {100,1000};
         Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(icon).setContentTitle(title).setContentText("Aggiornamento stato ordine");
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(icon).setContentTitle(title).setContentText("Aggiornamento stato ordine: "+stateOrderText);
         mBuilder.setContentIntent(intent).setVibrate(pattern).setSound(uri);
         notificationManager.notify(0, mBuilder.build());
         

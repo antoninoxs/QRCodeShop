@@ -11,16 +11,31 @@
     android:weightSum="10"
     tools:context=".CameraActivity" >
 
-    <TextView
-        android:id="@+id/tvProductID"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_weight="1"
-        android:text="@string/tvProductID"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:layout_height="0dp" 
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvProductID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+             android:layout_weight="1"
+            android:text="@string/tvProductID"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+        
+         <TextView
+            android:id="@+id/tvOrderDetailState"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+             android:layout_weight="1"
+            android:text="@string/tvOrderState"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#e02f2f"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@android:id/list"

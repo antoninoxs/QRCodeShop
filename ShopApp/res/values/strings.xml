@@ -20,6 +20,7 @@
     <string name="title_tab1">Acquisizione QrCode</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="tvProductID">Prodotti:</string>
+    <string name="tvOrderState">Stato Ordine: </string>
     <string name="tvOrders">Ordini:</string>
     <string name="Loading">Accesso in corso...</string>
     <string name="tDeleteProduct">Elimina</string>

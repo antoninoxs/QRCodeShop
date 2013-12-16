@@ -219,20 +219,7 @@ public class ListProduct extends ArrayList<Product> {
 
 	public String getAssociateOrderState() {
 		String result;
-		switch (associateOrderState) {
-        case 0:  result = "In attesa di ricezione";
-                 break;
-        case 1:  result = "Pervenuto";
-                 break;
-        case 2:  result = "Preso in Carico";
-                 break;
-        case 3:  result = "Pronto";
-                 break;
-        case 4:  result = "Ritirato";
-        		 break;         
-        default: result="";
-                 break;
-    }
+		result= GenericFunctions.convertOrderState(associateOrderState);
 		return result;
 	}
 

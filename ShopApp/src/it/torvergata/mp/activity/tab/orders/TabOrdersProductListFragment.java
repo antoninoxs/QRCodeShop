@@ -41,7 +41,7 @@ public class TabOrdersProductListFragment extends Fragment {
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */
 	private ListProduct productList;
-	private TextView totalPrice;
+	private TextView totalPrice,tvOrderState;
 	private Button btnAdd,BtnContinue;
 	private LinearLayout mLinearLayout;
 	private ProductAdapter adapter;
@@ -73,6 +73,7 @@ public class TabOrdersProductListFragment extends Fragment {
 				container, false);
         
     	totalPrice 			= (TextView) mLinearLayout.findViewById(R.id.tvTotalPrice);
+    	tvOrderState 			= (TextView) mLinearLayout.findViewById(R.id.tvOrderDetailState);
 		
     	Button btnAdd 		= (Button) mLinearLayout.findViewById(R.id.btnAdd);
 		Button btnContinue 	= (Button) mLinearLayout.findViewById(R.id.btnContinue);
@@ -81,6 +82,8 @@ public class TabOrdersProductListFragment extends Fragment {
 		adapter =new ProductAdapter(getActivity(),
 				R.layout.new_list_item, productList);
 		list.setAdapter(adapter);
+		
+		tvOrderState.setText(getString(R.string.tvOrderState)+productList.getAssociateOrderState());
 		
 		setTotalPrice();
 		
