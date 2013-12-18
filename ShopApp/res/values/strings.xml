@@ -22,6 +22,7 @@
     <string name="tvProductID">Prodotti:</string>
     <string name="tvOrderState">Stato Ordine: </string>
     <string name="tvOrders">Ordini:</string>
+    <string name="tvMacrocategories">Reparto:</string>
     <string name="Loading">Accesso in corso...</string>
     <string name="tDeleteProduct">Elimina</string>
     <string name="tMessageDelete">Si desidera eliminare il prodotto selezionato?</string>

@@ -22,6 +22,7 @@ import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeMainFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment;
+import it.torvergata.mp.entity.ListMacrocategories;
 import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
@@ -68,7 +69,8 @@ TabScanModeMainFragment.OnStartAcquisitionListener,
 TabScanModeDetailItemFragment.OnReturnListListener,
 TabScanModeSendOrderFragment.OnFinishOrderListener,
 TabOrdersMainFragment.OnOrderDetailListener,
-TabOrdersProductListFragment.OnProductsList{
+TabOrdersProductListFragment.OnProductsList,
+TabCatalogMainFragment.OnMacrocategoryDetailListener{
  
 	
 	final DatabaseManager db = new DatabaseManager(this);
@@ -505,6 +507,14 @@ TabOrdersProductListFragment.OnProductsList{
         fragmentScann.updateProduct(list,pos);        
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
+		
+	}
+
+
+	@Override
+	public void ViewMacrocategoryDetailFragment(
+			ListMacrocategories listMacrocategories, int pos) {
+		// TODO Auto-generated method stub
 		
 	}
 	
