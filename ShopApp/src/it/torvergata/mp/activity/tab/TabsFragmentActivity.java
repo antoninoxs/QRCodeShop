@@ -13,6 +13,7 @@ import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
+import it.torvergata.mp.activity.tab.catalog.TabCatalogCategoryFragment;
 import it.torvergata.mp.activity.tab.catalog.TabCatalogMainFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersDetailItemFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersMainFragment;
@@ -70,7 +71,8 @@ TabScanModeDetailItemFragment.OnReturnListListener,
 TabScanModeSendOrderFragment.OnFinishOrderListener,
 TabOrdersMainFragment.OnOrderDetailListener,
 TabOrdersProductListFragment.OnProductsList,
-TabCatalogMainFragment.OnMacrocategoryDetailListener{
+TabCatalogMainFragment.OnMacrocategoryDetailListener,
+TabCatalogCategoryFragment.OnCategoryDetailListener{
  
 	
 	final DatabaseManager db = new DatabaseManager(this);
@@ -513,6 +515,20 @@ TabCatalogMainFragment.OnMacrocategoryDetailListener{
 
 	@Override
 	public void ViewMacrocategoryDetailFragment(
+			ListMacrocategories listMacrocategories, int pos) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabCatalogCategoryFragment fragmentScann = new TabCatalogCategoryFragment();
+        fragmentTransaction.addToBackStack("MacroCategory");
+        fragmentScann.updateCategory(listMacrocategories,pos);        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
+		
+	}
+
+	@Override
+	public void ViewCategoryDetailFragment(
 			ListMacrocategories listMacrocategories, int pos) {
 		// TODO Auto-generated method stub
 		

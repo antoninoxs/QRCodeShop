@@ -70,7 +70,7 @@ public class TabCatalogMainFragment extends Fragment {
             Bundle savedInstanceState) {
     	
     	final DatabaseManager db = new DatabaseManager(getActivity());
-    	
+		dialogs= new Dialogs();
     	boolean isConnected = Const.verifyConnection(getActivity());
     	
     	listMacrocategories= new ListMacrocategories();
@@ -137,6 +137,7 @@ public class TabCatalogMainFragment extends Fragment {
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_macroc_list_layout,
 				container, false);
    		
+        
 		
         return mLinearLayout;
         
@@ -148,14 +149,13 @@ public class TabCatalogMainFragment extends Fragment {
 		@Override
 		protected void onPreExecute() {
 			//Creazione di un Dialog di attesa per il login
-	        progressDialog= ProgressDialog.show(getActivity(), "ShopApp","Invio Ordine...", true);
+	     
 		};
 
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-	        progressDialog.dismiss();
-		}
+	 	}
 
 		@Override
 		protected Void doInBackground(Void...params) {
@@ -206,7 +206,7 @@ public class TabCatalogMainFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         
-        // This makes sure that the c111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111ontainer activity has implemented
+        // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
             mCallback = (OnMacrocategoryDetailListener) activity;
