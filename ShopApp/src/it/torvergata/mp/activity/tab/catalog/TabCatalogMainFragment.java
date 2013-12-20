@@ -206,7 +206,7 @@ public class TabCatalogMainFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         
-        // This makes sure that the c111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111ontainer activity has implemented
+        // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
             mCallback = (OnMacrocategoryDetailListener) activity;
