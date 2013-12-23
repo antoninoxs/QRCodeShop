@@ -12,11 +12,14 @@ import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
 import it.torvergata.mp.activity.tab.orders.TabOrdersMainFragment.OnOrderDetailListener;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment.SendOrder;
+import it.torvergata.mp.entity.Category;
+import it.torvergata.mp.entity.ListCategories;
 import it.torvergata.mp.entity.ListMacrocategories;
 import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Macrocategory;
 import it.torvergata.mp.entity.Product;
+import it.torvergata.mp.helper.CategoriesAdapter;
 import it.torvergata.mp.helper.Dialogs;
 import it.torvergata.mp.helper.HttpConnection;
 import it.torvergata.mp.helper.MacrocategoriesAdapter;
@@ -46,22 +49,25 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author mwho
  *
  */
-public class TabCatalogMainFragment extends Fragment {
+public class TabCatalogCategoryFragment extends Fragment {
 
     /** (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */
 	private ListMacrocategories listMacrocategories;
+	private Macrocategory Mcategory;
+	private ListCategories listCategories;
+	
 	private LinearLayout mLinearLayout;
 	private Dialogs dialogs;
-	private MacrocategoriesAdapter adapter;
+	private CategoriesAdapter adapter;
 	private Handler handler;
 	
-	OnMacrocategoryDetailListener mCallback;
+	OnCategoryDetailListener mCallback;
 
 	// Container Activity must implement this interface
-    public interface OnMacrocategoryDetailListener {
-         public void ViewMacrocategoryDetailFragment(ListMacrocategories listMacrocategories,int pos);	
+    public interface OnCategoryDetailListener {
+         public void ViewCategoryDetailFragment(ListMacrocategories listMacrocategories,int pos);	
  }
   
 	
@@ -72,7 +78,7 @@ public class TabCatalogMainFragment extends Fragment {
     	final DatabaseManager db = new DatabaseManager(getActivity());
 		dialogs= new Dialogs();
     	boolean isConnected = Const.verifyConnection(getActivity());
-    	
+  	
     	listMacrocategories= new ListMacrocategories();
 		
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
@@ -87,10 +93,11 @@ public class TabCatalogMainFragment extends Fragment {
     				dialogBox.show();
                 }
                 else {
+                	
                 	final ListView list = (ListView) mLinearLayout.findViewById(id.list);
                     
-            		adapter =new MacrocategoriesAdapter(getActivity(),
-            				R.layout.macrocategory_list_item, listMacrocategories);
+            		adapter =new CategoriesAdapter(getActivity(),
+            				R.layout.macrocategory_list_item, listCategories);
             		list.setAdapter(adapter);
             	
             		list.setOnItemClickListener(new OnItemClickListener() {
@@ -99,7 +106,7 @@ public class TabCatalogMainFragment extends Fragment {
             			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
             					long arg3) {
             				// TODO Auto-generated method stub
-            				mCallback.ViewMacrocategoryDetailFragment(listMacrocategories,arg2);
+            				//mCallback.ViewCategoryDetailFragment(listCategories,arg2);
             			}
             		});
                 }
@@ -112,8 +119,8 @@ public class TabCatalogMainFragment extends Fragment {
     	if(isConnected){
 			//Lancio dell'AsyncTask Thread che effettua il download delle informazioni dal Server
 			
-			requestMacrocategories task = new requestMacrocategories();
-			task.execute();
+			requestCategories task = new requestCategories();
+			task.execute(""+Mcategory.getId());
 		}else{
 			AlertDialog dialogBox = dialogs.ConnectionNotFound(getActivity());
 			dialogBox.show();
@@ -134,54 +141,63 @@ public class TabCatalogMainFragment extends Fragment {
        
         
       
-        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_macroc_list_layout,
-				container, false);
+        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_category_list_layout,	container, false);
    		
-        
 		
+
         return mLinearLayout;
         
     }
   
-    public class requestMacrocategories extends AsyncTask<Void, Void, Void> {
-		ProgressDialog progressDialog;
+    public void updateCategory(ListMacrocategories list, int pos){
+    	listMacrocategories= new ListMacrocategories();
+      	listMacrocategories=list;
+    	Mcategory =list.get(pos);
+    }
+    public class requestCategories extends AsyncTask<String, Void, Void> {
+		
+    	ProgressDialog progressDialog;
 
 		@Override
 		protected void onPreExecute() {
 			//Creazione di un Dialog di attesa per il login
-	     
+	        
 		};
 
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-	 	}
+	       
+		}
 
 		@Override
-		protected Void doInBackground(Void...params) {
-			
+		protected Void doInBackground(String...params) {
+				String sMacrocategory = params[0];
 
 			
 				try {
 				HttpConnection connection = new HttpConnection();
 					
 				JSONObject json=new JSONObject();
-				json.put("richiesta", "1");
+				json.put("richiesta", "2");
+				json.put("macrocategoria", sMacrocategory);
+				
 				JSONArray arrayObject = connection.connectForCataalog("gestioneCatalogoApp", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
-							
+				Log.i("Lungh array: ", ""+arrayObject.length());
+				listCategories=new ListCategories();
 				for (int i=0;i<arrayObject.length();i++){ 
 					// Lettura dell'oggetto Json
 					JSONObject obj= (JSONObject)arrayObject.get(i);
-					String idMacrocategory = obj.getString("idMacrocategoria");
+					String idCategory = obj.getString("idCategoria");
 					String nome = obj.getString("nome");
-					Macrocategory tempMacro;
+					Category tempCategory;
 					
-					Log.i("idProdotto: ", idMacrocategory);
+					Log.i("idCategoria: ", idCategory);
 					Log.i("nome: ", nome);
 					
-					tempMacro= new Macrocategory(Integer.parseInt(idMacrocategory), nome);
+					tempCategory= new Category(Integer.parseInt(idCategory), nome);
 					
-					listMacrocategories.add(tempMacro);
+					listCategories.add(tempCategory);
 				}
 				
 				Message message = handler.obtainMessage(1, Const.OK, 0);
@@ -209,10 +225,10 @@ public class TabCatalogMainFragment extends Fragment {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            mCallback = (OnMacrocategoryDetailListener) activity;
+            mCallback = (OnCategoryDetailListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnMacrocategoryDetailListener");
+                    + " must implement OnCategoryDetailListener");
         }
     }
 	

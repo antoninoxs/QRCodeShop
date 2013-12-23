@@ -33,16 +33,20 @@ public final class R {
         public static final int orderlist=0x7f020009;
         public static final int productnotfound=0x7f02000a;
         public static final int radialgradientback=0x7f02000b;
-        public static final int tab=0x7f02000c;
-        public static final int tab_bs_not_selected=0x7f02000d;
-        public static final int tab_bs_selected=0x7f02000e;
-        public static final int tab_not_selected=0x7f02000f;
-        public static final int tab_or_not_selected=0x7f020010;
-        public static final int tab_or_selected=0x7f020011;
-        public static final int tab_qr_not_selected=0x7f020012;
-        public static final int tab_qr_selected=0x7f020013;
-        public static final int tab_selected=0x7f020014;
-        public static final int timeout=0x7f020015;
+        public static final int s2=0x7f02000c;
+        public static final int s3=0x7f02000d;
+        public static final int s5=0x7f02000e;
+        public static final int s6=0x7f02000f;
+        public static final int tab=0x7f020010;
+        public static final int tab_bs_not_selected=0x7f020011;
+        public static final int tab_bs_selected=0x7f020012;
+        public static final int tab_not_selected=0x7f020013;
+        public static final int tab_or_not_selected=0x7f020014;
+        public static final int tab_or_selected=0x7f020015;
+        public static final int tab_qr_not_selected=0x7f020016;
+        public static final int tab_qr_selected=0x7f020017;
+        public static final int tab_selected=0x7f020018;
+        public static final int timeout=0x7f020019;
     }
     public static final class id {
         public static final int BregistrazioneRegistrati=0x7f090025;
@@ -120,13 +124,14 @@ public final class R {
         public static final int tab_frag1_layout=0x7f03000a;
         public static final int tab_frag2_layout=0x7f03000b;
         public static final int tab_frag3_layout=0x7f03000c;
-        public static final int tab_frag_catalog_macroc_list_layout=0x7f03000d;
-        public static final int tab_frag_orders_list_layout=0x7f03000e;
-        public static final int tab_frag_orders_product_detail=0x7f03000f;
-        public static final int tab_frag_orders_products_list_layout=0x7f030010;
-        public static final int tab_frag_scan_mode_list_layout=0x7f030011;
-        public static final int tab_order_layout=0x7f030012;
-        public static final int tabs_layout=0x7f030013;
+        public static final int tab_frag_catalog_category_list_layout=0x7f03000d;
+        public static final int tab_frag_catalog_macroc_list_layout=0x7f03000e;
+        public static final int tab_frag_orders_list_layout=0x7f03000f;
+        public static final int tab_frag_orders_product_detail=0x7f030010;
+        public static final int tab_frag_orders_products_list_layout=0x7f030011;
+        public static final int tab_frag_scan_mode_list_layout=0x7f030012;
+        public static final int tab_order_layout=0x7f030013;
+        public static final int tabs_layout=0x7f030014;
     }
     public static final class menu {
         public static final int camera=0x7f080000;
