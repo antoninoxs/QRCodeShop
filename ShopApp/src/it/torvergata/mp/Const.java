@@ -24,7 +24,7 @@ public class Const {
 	public static final int SOCKET_TIMEOUT = 10000;
 	public static final String TIMEOUTS= "T";
 	//Numero di cifre in un id di un prodotto.
-	public static final int IDFORMAT = 7;
+	public static final int IDFORMAT = 13;
 	//Nome del file per le Preferences
 	public static final String PREFS_NAME = "FilePreferences";
 

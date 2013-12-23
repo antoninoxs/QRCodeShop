@@ -67,7 +67,7 @@ public class TabCatalogCategoryFragment extends Fragment {
 
 	// Container Activity must implement this interface
     public interface OnCategoryDetailListener {
-         public void ViewCategoryDetailFragment(ListMacrocategories listMacrocategories,int pos);	
+         public void ViewCategoryDetailFragment(ListCategories listCategories,int pos);	
  }
   
 	
@@ -106,7 +106,7 @@ public class TabCatalogCategoryFragment extends Fragment {
             			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
             					long arg3) {
             				// TODO Auto-generated method stub
-            				//mCallback.ViewCategoryDetailFragment(listCategories,arg2);
+            				mCallback.ViewCategoryDetailFragment(listCategories,arg2);
             			}
             		});
                 }
@@ -149,7 +149,7 @@ public class TabCatalogCategoryFragment extends Fragment {
         
     }
   
-    public void updateCategory(ListMacrocategories list, int pos){
+    public void updateMacrocategory(ListMacrocategories list, int pos){
     	listMacrocategories= new ListMacrocategories();
       	listMacrocategories=list;
     	Mcategory =list.get(pos);

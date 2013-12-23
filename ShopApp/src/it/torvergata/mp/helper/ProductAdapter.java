@@ -74,7 +74,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
 	@Override
 	public long getItemId(int position) {
-		return productList.get(position).getId();
+		return Long.parseLong(productList.get(position).getId());
 	}
 
 	@Override

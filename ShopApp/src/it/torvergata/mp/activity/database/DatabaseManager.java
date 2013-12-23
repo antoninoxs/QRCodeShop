@@ -172,7 +172,7 @@ public class DatabaseManager {
 					filterP,null, null,null);
 			
 			cursorP.moveToFirst();	
-			int idTempProduct=cursorP.getInt(0);
+			String idTempProduct=cursorP.getString(0);
 			Product temp= new Product(idTempProduct);
 			temp.setNome(cursorP.getString(1));
 			temp.setPrezzoUnitario(cursorP.getDouble(2));

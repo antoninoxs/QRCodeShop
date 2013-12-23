@@ -94,10 +94,10 @@ public class ListProduct extends ArrayList<Product> {
 		
 	}
 	
-	public Product searchByIdAndUpdateLast(int id){
+	public Product searchByIdAndUpdateLast(String id){
 		
 		for(int i=0;i<super.size();i++){
-			if(super.get(i).getId()==id){
+			if((super.get(i).getId().equals(id))){
 				Product t=super.get(i);
 				updateLast(i);
 				return t;	
@@ -180,7 +180,7 @@ public class ListProduct extends ArrayList<Product> {
 		for(int i=0;i<this.size();i++){
 			JSONObject temp = new JSONObject();
 			int qnt=this.get(i).getQuantita();
-			int id=this.get(i).getId();
+			String id=this.get(i).getId();
 			toHash+=id;
 			toHash+=qnt;
 			temp.put("Q",qnt );

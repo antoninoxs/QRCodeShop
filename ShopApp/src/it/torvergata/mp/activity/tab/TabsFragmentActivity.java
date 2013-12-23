@@ -14,7 +14,9 @@ import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
 import it.torvergata.mp.activity.tab.catalog.TabCatalogCategoryFragment;
+import it.torvergata.mp.activity.tab.catalog.TabCatalogDetailItemFragment;
 import it.torvergata.mp.activity.tab.catalog.TabCatalogMainFragment;
+import it.torvergata.mp.activity.tab.catalog.TabCatalogProductsFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersDetailItemFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersMainFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersProductListFragment;
@@ -23,6 +25,8 @@ import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeMainFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment;
+import it.torvergata.mp.entity.Category;
+import it.torvergata.mp.entity.ListCategories;
 import it.torvergata.mp.entity.ListMacrocategories;
 import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
@@ -72,7 +76,9 @@ TabScanModeSendOrderFragment.OnFinishOrderListener,
 TabOrdersMainFragment.OnOrderDetailListener,
 TabOrdersProductListFragment.OnProductsList,
 TabCatalogMainFragment.OnMacrocategoryDetailListener,
-TabCatalogCategoryFragment.OnCategoryDetailListener{
+TabCatalogCategoryFragment.OnCategoryDetailListener,
+TabCatalogProductsFragment.OnProductChoiceDetailListener,
+TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
  
 	
 	final DatabaseManager db = new DatabaseManager(this);
@@ -521,17 +527,50 @@ TabCatalogCategoryFragment.OnCategoryDetailListener{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabCatalogCategoryFragment fragmentScann = new TabCatalogCategoryFragment();
         fragmentTransaction.addToBackStack("MacroCategory");
-        fragmentScann.updateCategory(listMacrocategories,pos);        
+        fragmentScann.updateMacrocategory(listMacrocategories,pos);        
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 		
 	}
 
+
+
 	@Override
-	public void ViewCategoryDetailFragment(
-			ListMacrocategories listMacrocategories, int pos) {
+	public void ViewCategoryDetailFragment(ListCategories listCategories,
+			int pos) {
 		// TODO Auto-generated method stub
-		
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabCatalogProductsFragment fragmentScann = new TabCatalogProductsFragment();
+        fragmentTransaction.addToBackStack("Category");
+        fragmentScann.updateCategory(listCategories,pos);        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
+	}
+
+
+
+	@Override
+	public void ViewProductChoiceDetailFragment(ListProduct productList, int pos, Category cat) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabCatalogDetailItemFragment fragmentScann = new TabCatalogDetailItemFragment();
+        fragmentTransaction.addToBackStack("List");
+        fragmentScann.updateProduct(productList,pos,cat);        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
+	}
+
+	@Override
+	public void ViewProductChoiceListFragment(ListProduct list,Category cat) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabCatalogProductsFragment fragmentScann = new TabCatalogProductsFragment();
+        fragmentScann.updateCategory(cat);        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragmentTransaction.commit();
 	}
 	
 	

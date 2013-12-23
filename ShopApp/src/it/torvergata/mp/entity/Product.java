@@ -7,7 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Product implements Parcelable{
-	private int id;
+	private String id;
 	private int quantita;
 	private String nome;
 	private double prezzoUnitario;
@@ -15,6 +15,8 @@ public class Product implements Parcelable{
 	private int disponibilita;
 	private String descrizione;
 	private String fileImmagine;
+	private boolean isChecked;
+	
 	public String getFileImmagine() {
 		return fileImmagine;
 	}
@@ -22,7 +24,7 @@ public class Product implements Parcelable{
 	
 	
 
-	public Product(int i){
+	public Product(String i){
 		id=i;
 		setQuantita(1);
 		nome="";
@@ -33,7 +35,7 @@ public class Product implements Parcelable{
 		descrizione="";
 		fileImmagine="";
 		immagine= null;
-		
+		setChecked(false);
 	}
 	
 	
@@ -53,7 +55,7 @@ public class Product implements Parcelable{
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
-		dest.writeInt(id);
+		dest.writeString(id);
 		dest.writeString(nome);
 		dest.writeDouble(prezzoUnitario);
 		dest.writeInt(quantita);
@@ -66,7 +68,7 @@ public class Product implements Parcelable{
 		
 	}
 	 private Product(Parcel in) {
-	     id = in.readInt();
+	     id = in.readString();
 	     nome=in.readString();
 	     prezzoUnitario=in.readDouble();
 	     quantita=in.readInt();
@@ -115,8 +117,8 @@ public class Product implements Parcelable{
 		return descrizione;
 	}
 
-	public int getId() {
-	return id;
+	public String getId() {
+		return id;
 	}
 	public double getPrezzoTotale() {
 		return prezzoUnitario*quantita;
@@ -154,12 +156,22 @@ public class Product implements Parcelable{
 		this.descrizione = descrizione;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
+	}
+
+
+	public boolean isChecked() {
+		return isChecked;
+	}
+
+
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
 	}
 	
 	

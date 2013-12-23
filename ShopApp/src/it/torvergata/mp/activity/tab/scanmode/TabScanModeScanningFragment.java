@@ -354,7 +354,7 @@ public class TabScanModeScanningFragment extends Fragment{
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
 					String contents = sym.getData();
-					int id=0;
+					String id="";
 					if(contents.length()!=Const.IDFORMAT){
 						
 						//do nothing
@@ -371,7 +371,7 @@ public class TabScanModeScanningFragment extends Fragment{
 						
 						
 						try{
-							id=Integer.parseInt(contents);
+							id=contents;
 						}
 						catch(NumberFormatException e){
 							Log.d("ERR","Errore");
@@ -439,7 +439,7 @@ public class TabScanModeScanningFragment extends Fragment{
 		protected Void doInBackground(String... params) {
 			String productId = params[0];
 
-			final Product tempProd = new Product(Integer.parseInt(productId));
+			final Product tempProd = new Product(productId);
 			
 				try {
 				HttpConnection connection = new HttpConnection();
@@ -470,7 +470,7 @@ public class TabScanModeScanningFragment extends Fragment{
 					Log.i("file_immagine: ", fileImmagine);
 	
 					// Creazione del nuovo Prodotto
-					tempProd.setId(Integer.parseInt(idProdotto));
+					tempProd.setId(idProdotto);
 					tempProd.setNome(nome);
 					tempProd.setPrezzoUnitario(prezzo);
 					tempProd.setScadenza(scadenza);
