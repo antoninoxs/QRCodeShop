@@ -58,7 +58,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 /**
- * Activity iniziale di inserimento credenziali
+ * Activity iniziale di inserimento credenziali utente
  */
 public class MainActivity extends Activity {
 
