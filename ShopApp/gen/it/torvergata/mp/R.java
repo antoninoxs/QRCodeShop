@@ -22,32 +22,27 @@ public final class R {
     }
     public static final class drawable {
         public static final int arrow=0x7f020000;
-        public static final int backlist=0x7f020001;
-        public static final int blank=0x7f020002;
-        public static final int button=0x7f020003;
-        public static final int delete=0x7f020004;
-        public static final int f=0x7f020005;
+        public static final int background=0x7f020001;
+        public static final int backgroundl=0x7f020002;
+        public static final int blank=0x7f020003;
+        public static final int button=0x7f020004;
+        public static final int delete=0x7f020005;
         public static final int gradient_back=0x7f020006;
-        public static final int gradient_cyan=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int image_back=0x7f020009;
-        public static final int img_delete=0x7f02000a;
-        public static final int orderlist=0x7f02000b;
-        public static final int productnotfound=0x7f02000c;
-        public static final int radialgradientback=0x7f02000d;
-        public static final int s2=0x7f02000e;
-        public static final int s3=0x7f02000f;
-        public static final int s7=0x7f020010;
-        public static final int tab=0x7f020011;
-        public static final int tab_bs_not_selected=0x7f020012;
-        public static final int tab_bs_selected=0x7f020013;
-        public static final int tab_not_selected=0x7f020014;
-        public static final int tab_or_not_selected=0x7f020015;
-        public static final int tab_or_selected=0x7f020016;
-        public static final int tab_qr_not_selected=0x7f020017;
-        public static final int tab_qr_selected=0x7f020018;
-        public static final int tab_selected=0x7f020019;
-        public static final int timeout=0x7f02001a;
+        public static final int ic_launcher=0x7f020007;
+        public static final int image_back=0x7f020008;
+        public static final int img_delete=0x7f020009;
+        public static final int orderlist=0x7f02000a;
+        public static final int productnotfound=0x7f02000b;
+        public static final int tab=0x7f02000c;
+        public static final int tab_bs_not_selected=0x7f02000d;
+        public static final int tab_bs_selected=0x7f02000e;
+        public static final int tab_not_selected=0x7f02000f;
+        public static final int tab_or_not_selected=0x7f020010;
+        public static final int tab_or_selected=0x7f020011;
+        public static final int tab_qr_not_selected=0x7f020012;
+        public static final int tab_qr_selected=0x7f020013;
+        public static final int tab_selected=0x7f020014;
+        public static final int timeout=0x7f020015;
     }
     public static final class id {
         public static final int BregistrazioneRegistrati=0x7f090025;
