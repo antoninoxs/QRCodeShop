@@ -12,6 +12,7 @@ import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
 import it.torvergata.mp.activity.tab.orders.TabOrdersMainFragment.OnOrderDetailListener;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment.SendOrder;
+import it.torvergata.mp.entity.ListCategories;
 import it.torvergata.mp.entity.ListMacrocategories;
 import it.torvergata.mp.entity.ListOrders;
 import it.torvergata.mp.entity.ListProduct;
@@ -52,6 +53,9 @@ public class TabCatalogMainFragment extends Fragment {
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */
 	private ListMacrocategories listMacrocategories;
+	private ListCategories listCategories;
+	private ListProduct productList;
+	
 	private LinearLayout mLinearLayout;
 	private Dialogs dialogs;
 	private MacrocategoriesAdapter adapter;
@@ -72,8 +76,12 @@ public class TabCatalogMainFragment extends Fragment {
     	final DatabaseManager db = new DatabaseManager(getActivity());
 		dialogs= new Dialogs();
     	boolean isConnected = Const.verifyConnection(getActivity());
+    	   
+    	mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_macroc_list_layout,
+   				container, false);
+      		
+           
     	
-    	listMacrocategories= new ListMacrocategories();
 		
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
@@ -87,22 +95,7 @@ public class TabCatalogMainFragment extends Fragment {
     				dialogBox.show();
                 }
                 else {
-                	final ListView list = (ListView) mLinearLayout.findViewById(id.list);
-                	list.setCacheColorHint(000000000);
-                	
-            		adapter =new MacrocategoriesAdapter(getActivity(),
-            				R.layout.macrocategory_list_item, listMacrocategories);
-            		list.setAdapter(adapter);
-            	
-            		list.setOnItemClickListener(new OnItemClickListener() {
-
-            			@Override
-            			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-            					long arg3) {
-            				// TODO Auto-generated method stub
-            				mCallback.ViewMacrocategoryDetailFragment(listMacrocategories,arg2);
-            			}
-            		});
+                	showList();
                 }
             }
                 
@@ -112,9 +105,13 @@ public class TabCatalogMainFragment extends Fragment {
     	
     	if(isConnected){
 			//Lancio dell'AsyncTask Thread che effettua il download delle informazioni dal Server
-			
+			if(listMacrocategories==null){
 			requestMacrocategories task = new requestMacrocategories();
 			task.execute();
+			}
+			else{
+				showList();
+			}
 		}else{
 			AlertDialog dialogBox = dialogs.ConnectionNotFound(getActivity());
 			dialogBox.show();
@@ -135,15 +132,30 @@ public class TabCatalogMainFragment extends Fragment {
        
         
       
-        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_macroc_list_layout,
-				container, false);
-   		
-        
+     
 		
         return mLinearLayout;
         
     }
   
+    public void showList(){
+    	final ListView list = (ListView) mLinearLayout.findViewById(id.list);
+    	list.setCacheColorHint(000000000);
+    	
+		adapter =new MacrocategoriesAdapter(getActivity(),
+				R.layout.macrocategory_list_item, listMacrocategories);
+		list.setAdapter(adapter);
+	
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				mCallback.ViewMacrocategoryDetailFragment(listMacrocategories,arg2);
+			}
+		});
+    }
     public class requestMacrocategories extends AsyncTask<Void, Void, Void> {
 		ProgressDialog progressDialog;
 
@@ -169,7 +181,7 @@ public class TabCatalogMainFragment extends Fragment {
 				JSONObject json=new JSONObject();
 				json.put("richiesta", "1");
 				JSONArray arrayObject = connection.connectForCataalog("gestioneCatalogoApp", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
-							
+				listMacrocategories= new ListMacrocategories();			
 				for (int i=0;i<arrayObject.length();i++){ 
 					// Lettura dell'oggetto Json
 					JSONObject obj= (JSONObject)arrayObject.get(i);
@@ -217,7 +229,12 @@ public class TabCatalogMainFragment extends Fragment {
         }
     }
 	
-
+    void update(ListMacrocategories lm,ListCategories lc, ListProduct lp ){
+    	listMacrocategories=lm;
+    	listCategories=lc;
+    	productList=lp;
+    	
+    }
 	
 
 }

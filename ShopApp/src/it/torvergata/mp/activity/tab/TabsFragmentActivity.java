@@ -88,6 +88,11 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
     private TabInfo mLastTab = null;
     private Button btnQrCode;
     
+    
+	public static ListMacrocategories listMacrocategories;
+	public static ListCategories listCategories;
+	public static ListProduct productList;
+    
     /***
      * Classe di informazioni del tab
      */
@@ -568,12 +573,21 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabCatalogProductsFragment fragmentScann = new TabCatalogProductsFragment();
-        fragmentScann.updateCategory(cat);        
+        fragmentScann.updateCategory(cat);       
+        fragmentScann.updateProductList(list);
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
+ 
 	}
-	
-	
+	@Override
+    public void onBackPressed()
+    {
+		Log.i("BACK", "BACK PRESSED");
+        super.onBackPressed();
+       
+    }
+
+
 
 	
  

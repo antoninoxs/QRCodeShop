@@ -102,7 +102,7 @@ public class TabCatalogDetailItemFragment extends Fragment {
 				// TODO Auto-generated method stub
 				if(prod.getQuantita()>1){
 					prod.decrement();
-					
+					prod.setChecked(true);
 					productlist.set(position, prod);
 					productlist.setDecrementTotalPrice(prod.getPrezzoUnitario());
 					tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
@@ -118,6 +118,7 @@ public class TabCatalogDetailItemFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				prod.increment();
+				prod.setChecked(true);
 				
 				productlist.set(position, prod);
 				productlist.setIncrementTotalPrice(prod.getPrezzoUnitario());

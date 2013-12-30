@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +82,10 @@ public class TabCatalogCategoryFragment extends Fragment {
   	
     	listMacrocategories= new ListMacrocategories();
 		
+    	
+    	
+    	
+    	
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
             @Override
@@ -144,12 +149,13 @@ public class TabCatalogCategoryFragment extends Fragment {
       
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_category_list_layout,	container, false);
    		
-		
+        
 
         return mLinearLayout;
         
     }
-  
+
+    
     public void updateMacrocategory(ListMacrocategories list, int pos){
     	listMacrocategories= new ListMacrocategories();
       	listMacrocategories=list;
@@ -233,7 +239,12 @@ public class TabCatalogCategoryFragment extends Fragment {
         }
     }
 	
-
+    public void onBackPressed()
+    {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        Log.i("BACK FROM FRAGMENT", "BACKKKKKKKKKKKKKKKKK");
+        fm.popBackStack();
+    }
 	
 
 }

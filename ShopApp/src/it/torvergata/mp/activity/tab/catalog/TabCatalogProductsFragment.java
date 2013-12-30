@@ -83,6 +83,9 @@ public class TabCatalogProductsFragment extends Fragment {
     	boolean isConnected = Const.verifyConnection(getActivity());
   	
     	listMacrocategories= new ListMacrocategories();
+
+        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_products_list_layout,	container, false);
+    	  
 		
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
@@ -96,24 +99,8 @@ public class TabCatalogProductsFragment extends Fragment {
     				dialogBox.show();
                 }
                 else {
-                	
-                	final ListView list = (ListView) mLinearLayout.findViewById(id.list);
-                    list.setCacheColorHint(000000000);
+                	showList();
                     
-            		adapter =new ProductChoiceAdapter(getActivity(),
-            				R.layout.product_choice_list_item, productList);
-            		list.setAdapter(adapter);
-            	
-            		list.setOnItemClickListener(new OnItemClickListener() {
-
-            			@Override
-            			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-            					long arg3) {
-            				// TODO Auto-generated method stub
-            				productList=adapter.getProductList();
-            				mCallback.ViewProductChoiceDetailFragment(productList,arg2,Category);
-            			}
-            		});
                 }
             }
                 
@@ -127,22 +114,7 @@ public class TabCatalogProductsFragment extends Fragment {
 				requestProduct task = new requestProduct();
 				task.execute(""+Category.getId());
 			}else{
-				final ListView lis= (ListView) mLinearLayout.findViewById(id.list);
-                
-        		adapter =new ProductChoiceAdapter(getActivity(),
-        				R.layout.product_choice_list_item, productList);
-        		lis.setAdapter(adapter);
-        	
-        		lis.setOnItemClickListener(new OnItemClickListener() {
-
-        			@Override
-        			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-        					long arg3) {
-        				// TODO Auto-generated method stub
-        				productList=adapter.getProductList();
-        				mCallback.ViewProductChoiceDetailFragment(productList,arg2,Category);
-        			}
-        		});
+				showList();				
 			}
 		}else{
 			AlertDialog dialogBox = dialogs.ConnectionNotFound(getActivity());
@@ -163,15 +135,33 @@ public class TabCatalogProductsFragment extends Fragment {
         }
        
         
-      
-        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_products_list_layout,	container, false);
-   		
+      	
 		
 
         return mLinearLayout;
         
     }
-  
+   
+    public void showList(){
+    	final ListView list = (ListView) mLinearLayout.findViewById(id.list);
+        
+    	list.setCacheColorHint(000000000);
+        
+		adapter =new ProductChoiceAdapter(getActivity(),
+				R.layout.product_choice_list_item, productList);
+		list.setAdapter(adapter);
+	
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				productList=adapter.getProductList();
+				mCallback.ViewProductChoiceDetailFragment(productList,arg2,Category);
+			}
+		});
+    }
     public void updateCategory(ListCategories list, int pos){
     	positionOnCategoryList=pos;
     	listCategories= new ListCategories();
@@ -281,6 +271,11 @@ public class TabCatalogProductsFragment extends Fragment {
                     + " must implement OnProductChoiceDetailListener");
         }
     }
+
+	public void updateProductList(ListProduct list) {
+		// TODO Auto-generated method stub
+		productList=list;
+	}
 	
 
 	
