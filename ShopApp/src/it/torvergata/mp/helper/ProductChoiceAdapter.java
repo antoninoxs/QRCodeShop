@@ -52,7 +52,7 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 	private Context context;
 	
 	
-	private ListProduct productList =new ListProduct();
+	private ListProduct productList;
 	private int mViewResourceId;
 	
 	public ProductChoiceAdapter(Context ctx, int viewResourceId,ListProduct pList) {
@@ -73,7 +73,9 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 	public Product getItem(int position) {
 		return productList.get(position);
 	}
-
+	public ListProduct getProductList(){
+		return productList;
+	}
 
 	@Override
 	public long getItemId(int position) {

@@ -88,7 +88,8 @@ public class TabCatalogMainFragment extends Fragment {
                 }
                 else {
                 	final ListView list = (ListView) mLinearLayout.findViewById(id.list);
-                    
+                	list.setCacheColorHint(000000000);
+                	
             		adapter =new MacrocategoriesAdapter(getActivity(),
             				R.layout.macrocategory_list_item, listMacrocategories);
             		list.setAdapter(adapter);

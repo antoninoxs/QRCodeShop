@@ -84,7 +84,8 @@ public class TabOrdersMainFragment extends Fragment {
 	        mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_orders_list_layout,
 					container, false);
 	   		final ListView list = (ListView) mLinearLayout.findViewById(id.list);
-	        
+	   		list.setCacheColorHint(000000000);
+	   		
 			adapter =new OrdersAdapter(getActivity(),
 					R.layout.order_list_item, listOrders);
 			list.setAdapter(adapter);

@@ -98,6 +98,7 @@ public class TabCatalogProductsFragment extends Fragment {
                 else {
                 	
                 	final ListView list = (ListView) mLinearLayout.findViewById(id.list);
+                    list.setCacheColorHint(000000000);
                     
             		adapter =new ProductChoiceAdapter(getActivity(),
             				R.layout.product_choice_list_item, productList);
@@ -109,6 +110,7 @@ public class TabCatalogProductsFragment extends Fragment {
             			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
             					long arg3) {
             				// TODO Auto-generated method stub
+            				productList=adapter.getProductList();
             				mCallback.ViewProductChoiceDetailFragment(productList,arg2,Category);
             			}
             		});
@@ -121,9 +123,27 @@ public class TabCatalogProductsFragment extends Fragment {
     	
     	if(isConnected){
 			//Lancio dell'AsyncTask Thread che effettua il download delle informazioni dal Server
-			
-			requestProduct task = new requestProduct();
-			task.execute(""+Category.getId());
+			if (productList==null){
+				requestProduct task = new requestProduct();
+				task.execute(""+Category.getId());
+			}else{
+				final ListView lis= (ListView) mLinearLayout.findViewById(id.list);
+                
+        		adapter =new ProductChoiceAdapter(getActivity(),
+        				R.layout.product_choice_list_item, productList);
+        		lis.setAdapter(adapter);
+        	
+        		lis.setOnItemClickListener(new OnItemClickListener() {
+
+        			@Override
+        			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+        					long arg3) {
+        				// TODO Auto-generated method stub
+        				productList=adapter.getProductList();
+        				mCallback.ViewProductChoiceDetailFragment(productList,arg2,Category);
+        			}
+        		});
+			}
 		}else{
 			AlertDialog dialogBox = dialogs.ConnectionNotFound(getActivity());
 			dialogBox.show();

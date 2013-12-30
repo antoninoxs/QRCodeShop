@@ -78,7 +78,8 @@ public class TabOrdersProductListFragment extends Fragment {
     	Button btnAdd 		= (Button) mLinearLayout.findViewById(R.id.btnAdd);
 		Button btnContinue 	= (Button) mLinearLayout.findViewById(R.id.btnContinue);
 		final ListView list = (ListView) mLinearLayout.findViewById(id.list);
-        
+		list.setCacheColorHint(000000000);
+		
 		adapter =new ProductAdapter(getActivity(),
 				R.layout.new_list_item, productList);
 		list.setAdapter(adapter);

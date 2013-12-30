@@ -44,7 +44,6 @@
             android:id="@+id/rlProductDetails"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-		    android:background="@drawable/backgroundl"
             android:orientation="horizontal"
             android:padding="5dp" >
 
