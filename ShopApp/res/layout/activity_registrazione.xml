@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/radialgradientback"
+    android:background="@drawable/background"
     android:layout_centerHorizontal="true"
     android:orientation="vertical"
     android:padding="30dp"
