@@ -59,11 +59,14 @@ public class TabCatalogProductsFragment extends Fragment {
 	private Macrocategory Mcategory;
 	private Category Category;
 	
+	private ListProduct localProductList;   
+	
 	private LinearLayout mLinearLayout;
 	private Dialogs dialogs;
 	private ProductChoiceAdapter adapter;
 	private Handler handler;
 	private int positionOnCategoryList;
+	
 	OnProductChoiceDetailListener mCallback;
 
 	// Container Activity must implement this interface
@@ -144,7 +147,7 @@ public class TabCatalogProductsFragment extends Fragment {
     	list.setCacheColorHint(000000000);
         
 		adapter =new ProductChoiceAdapter(getActivity(),
-				R.layout.product_choice_list_item, TabsFragmentActivity.productList);
+				R.layout.product_choice_list_item, localProductList);
 		list.setAdapter(adapter);
 	
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -153,7 +156,6 @@ public class TabCatalogProductsFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				TabsFragmentActivity.productList=adapter.getProductList();
 				mCallback.ViewProductChoiceDetailFragment(arg2,Category);
 			}
 		});
@@ -192,7 +194,7 @@ public class TabCatalogProductsFragment extends Fragment {
 				JSONObject json=new JSONObject();
 				json.put("richiesta", "3");
 				json.put("categoria", sCategory);
-				
+				localProductList = new ListProduct();
 				JSONArray arrayObject = connection.connectForCataalog("gestioneCatalogoApp", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				Log.i("Lungh array: ", ""+arrayObject.length());
 				TabsFragmentActivity.productList=new ListProduct();
@@ -231,7 +233,7 @@ public class TabCatalogProductsFragment extends Fragment {
 					tempProd.setQuantita(0);
 	
 					// Aggiunta del nuovo prodotto alla lista dei prodotti
-					TabsFragmentActivity.productList.add(tempProd);
+					localProductList.add(tempProd);
 				
 				}
 				

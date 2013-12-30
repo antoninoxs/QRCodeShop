@@ -26,6 +26,7 @@ package it.torvergata.mp.helper;
 import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.id;
+import it.torvergata.mp.activity.tab.TabsFragmentActivity;
 import it.torvergata.mp.entity.ListProduct;
 import it.torvergata.mp.entity.Product;
 
@@ -112,7 +113,11 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 				// TODO Auto-generated method stub
 				if(isChecked) {
 					productList.get(position).setQuantita(1);
+				
 					productList.get(position).setChecked(isChecked);
+					
+					
+					
 					tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
 					
 				}else{
