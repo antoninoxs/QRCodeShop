@@ -5,6 +5,7 @@ package it.torvergata.mp.activity.tab.catalog;
 import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
+import it.torvergata.mp.activity.tab.TabsFragmentActivity;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment.OnAddQrCodeListener;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment.OnTermAcquisitionListener;
 import it.torvergata.mp.entity.Category;
@@ -44,14 +45,13 @@ public class TabCatalogDetailItemFragment extends Fragment {
 	private Button btnListProduct,btnChangeQuantitativeP,btnChangeQuantitativeM;
 	private EditText etQuantitative;
 	private ImageView ivImage;
-	private ListProduct productlist;
 	private int position;
 	private Category mCategory;
 	
 	OnReturnProductChoiceListListener mCallback;
 	// Container Activity must implement this interface
     public interface OnReturnProductChoiceListListener {
-        public void ViewProductChoiceListFragment(ListProduct list,Category cat);
+        public void ViewProductChoiceListFragment(Category cat);
     }
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,8 +103,8 @@ public class TabCatalogDetailItemFragment extends Fragment {
 				if(prod.getQuantita()>1){
 					prod.decrement();
 					prod.setChecked(true);
-					productlist.set(position, prod);
-					productlist.setDecrementTotalPrice(prod.getPrezzoUnitario());
+					TabsFragmentActivity.productList.set(position, prod);
+					TabsFragmentActivity.productList.setDecrementTotalPrice(prod.getPrezzoUnitario());
 					tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 					etQuantitative.setText(""+prod.getQuantita());
 					tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
@@ -120,8 +120,8 @@ public class TabCatalogDetailItemFragment extends Fragment {
 				prod.increment();
 				prod.setChecked(true);
 				
-				productlist.set(position, prod);
-				productlist.setIncrementTotalPrice(prod.getPrezzoUnitario());
+				TabsFragmentActivity.productList.set(position, prod);
+				TabsFragmentActivity.productList.setIncrementTotalPrice(prod.getPrezzoUnitario());
 				tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 				etQuantitative.setText(""+prod.getQuantita());
 				tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
@@ -134,7 +134,7 @@ public class TabCatalogDetailItemFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				mCallback.ViewProductChoiceListFragment(productlist,mCategory);
+				mCallback.ViewProductChoiceListFragment(mCategory);
 			}
 		});
 		
@@ -153,11 +153,9 @@ public class TabCatalogDetailItemFragment extends Fragment {
                     + " must implement OnReturnProductChoiceListListener ");
         }
     }
-	public void updateProduct(ListProduct list,int pos, Category cat) {
+	public void updateProduct(int pos, Category cat) {
 		// TODO Auto-generated method stub
-		productlist = new ListProduct();
-		productlist	=	list;
-		prod		=	list.get(pos);
+		prod		=	TabsFragmentActivity.productList.get(pos);
 		position	= 	pos;
 		mCategory=cat;
 	}

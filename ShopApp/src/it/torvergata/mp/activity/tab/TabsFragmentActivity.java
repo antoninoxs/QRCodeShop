@@ -137,6 +137,8 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     
+       
+        
         // Step 1: Inflate layout
         setContentView(R.layout.tabs_layout);
         
@@ -525,14 +527,13 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
 
 
 	@Override
-	public void ViewMacrocategoryDetailFragment(
-			ListMacrocategories listMacrocategories, int pos) {
+	public void ViewMacrocategoryDetailFragment(int pos) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabCatalogCategoryFragment fragmentScann = new TabCatalogCategoryFragment();
         fragmentTransaction.addToBackStack("MacroCategory");
-        fragmentScann.updateMacrocategory(listMacrocategories,pos);        
+        fragmentScann.updateMacrocategory(pos);        
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 		
@@ -541,14 +542,13 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
 
 
 	@Override
-	public void ViewCategoryDetailFragment(ListCategories listCategories,
-			int pos) {
+	public void ViewCategoryDetailFragment(int pos) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabCatalogProductsFragment fragmentScann = new TabCatalogProductsFragment();
         fragmentTransaction.addToBackStack("Category");
-        fragmentScann.updateCategory(listCategories,pos);        
+        fragmentScann.updateCategory(pos);        
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 	}
@@ -556,25 +556,24 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
 
 
 	@Override
-	public void ViewProductChoiceDetailFragment(ListProduct productList, int pos, Category cat) {
+	public void ViewProductChoiceDetailFragment(int pos, Category cat) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabCatalogDetailItemFragment fragmentScann = new TabCatalogDetailItemFragment();
         fragmentTransaction.addToBackStack("List");
-        fragmentScann.updateProduct(productList,pos,cat);        
+        fragmentScann.updateProduct(pos,cat);        
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
 	}
 
 	@Override
-	public void ViewProductChoiceListFragment(ListProduct list,Category cat) {
+	public void ViewProductChoiceListFragment(Category cat) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabCatalogProductsFragment fragmentScann = new TabCatalogProductsFragment();
         fragmentScann.updateCategory(cat);       
-        fragmentScann.updateProductList(list);
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
  

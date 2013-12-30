@@ -10,6 +10,7 @@ import it.torvergata.mp.Const;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
+import it.torvergata.mp.activity.tab.TabsFragmentActivity;
 import it.torvergata.mp.activity.tab.orders.TabOrdersMainFragment.OnOrderDetailListener;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment.SendOrder;
 import it.torvergata.mp.entity.Category;
@@ -55,11 +56,8 @@ public class TabCatalogProductsFragment extends Fragment {
     /** (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */
-	private ListMacrocategories listMacrocategories;
 	private Macrocategory Mcategory;
-	private ListCategories listCategories;
 	private Category Category;
-	private ListProduct productList;
 	
 	private LinearLayout mLinearLayout;
 	private Dialogs dialogs;
@@ -70,7 +68,7 @@ public class TabCatalogProductsFragment extends Fragment {
 
 	// Container Activity must implement this interface
     public interface OnProductChoiceDetailListener {
-         public void ViewProductChoiceDetailFragment(ListProduct productList,int pos,Category c);	
+         public void ViewProductChoiceDetailFragment(int pos,Category c);	
  }
   
 	
@@ -82,8 +80,6 @@ public class TabCatalogProductsFragment extends Fragment {
 		dialogs= new Dialogs();
     	boolean isConnected = Const.verifyConnection(getActivity());
   	
-    	listMacrocategories= new ListMacrocategories();
-
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_products_list_layout,	container, false);
     	  
 		
@@ -110,7 +106,7 @@ public class TabCatalogProductsFragment extends Fragment {
     	
     	if(isConnected){
 			//Lancio dell'AsyncTask Thread che effettua il download delle informazioni dal Server
-			if (productList==null){
+			if (TabsFragmentActivity.productList==null){
 				requestProduct task = new requestProduct();
 				task.execute(""+Category.getId());
 			}else{
@@ -148,7 +144,7 @@ public class TabCatalogProductsFragment extends Fragment {
     	list.setCacheColorHint(000000000);
         
 		adapter =new ProductChoiceAdapter(getActivity(),
-				R.layout.product_choice_list_item, productList);
+				R.layout.product_choice_list_item, TabsFragmentActivity.productList);
 		list.setAdapter(adapter);
 	
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -157,16 +153,14 @@ public class TabCatalogProductsFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				productList=adapter.getProductList();
-				mCallback.ViewProductChoiceDetailFragment(productList,arg2,Category);
+				TabsFragmentActivity.productList=adapter.getProductList();
+				mCallback.ViewProductChoiceDetailFragment(arg2,Category);
 			}
 		});
     }
-    public void updateCategory(ListCategories list, int pos){
+    public void updateCategory(int pos){
     	positionOnCategoryList=pos;
-    	listCategories= new ListCategories();
-    	listCategories=list;
-    	Category =list.get(pos);
+    	Category =TabsFragmentActivity.listCategories.get(pos);
     }
     public void updateCategory(Category cat){
     	Category =cat;
@@ -201,7 +195,7 @@ public class TabCatalogProductsFragment extends Fragment {
 				
 				JSONArray arrayObject = connection.connectForCataalog("gestioneCatalogoApp", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				Log.i("Lungh array: ", ""+arrayObject.length());
-				productList=new ListProduct();
+				TabsFragmentActivity.productList=new ListProduct();
 				for (int i=0;i<arrayObject.length();i++){ 
 					// Lettura dell'oggetto Json
 					JSONObject object= (JSONObject)arrayObject.get(i);
@@ -237,7 +231,7 @@ public class TabCatalogProductsFragment extends Fragment {
 					tempProd.setQuantita(0);
 	
 					// Aggiunta del nuovo prodotto alla lista dei prodotti
-					productList.add(tempProd);
+					TabsFragmentActivity.productList.add(tempProd);
 				
 				}
 				
@@ -272,10 +266,7 @@ public class TabCatalogProductsFragment extends Fragment {
         }
     }
 
-	public void updateProductList(ListProduct list) {
-		// TODO Auto-generated method stub
-		productList=list;
-	}
+
 	
 
 	
