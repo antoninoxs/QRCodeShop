@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import it.torvergata.mp.Const;
+import it.torvergata.mp.GenericFunctions;
 import it.torvergata.mp.R;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
@@ -71,7 +72,7 @@ public class TabCatalogProductsFragment extends Fragment {
 
 	// Container Activity must implement this interface
     public interface OnProductChoiceDetailListener {
-         public void ViewProductChoiceDetailFragment(int pos,Category c);	
+         public void ViewProductChoiceDetailFragment(int pos,ListProduct c);	
  }
   
 	
@@ -109,12 +110,10 @@ public class TabCatalogProductsFragment extends Fragment {
     	
     	if(isConnected){
 			//Lancio dell'AsyncTask Thread che effettua il download delle informazioni dal Server
-			if (TabsFragmentActivity.productList==null){
 				requestProduct task = new requestProduct();
 				task.execute(""+Category.getId());
-			}else{
-				showList();				
-			}
+						
+			
 		}else{
 			AlertDialog dialogBox = dialogs.ConnectionNotFound(getActivity());
 			dialogBox.show();
@@ -155,8 +154,8 @@ public class TabCatalogProductsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
-				mCallback.ViewProductChoiceDetailFragment(arg2,Category);
+				// TODO Auto-generated method stu
+				mCallback.ViewProductChoiceDetailFragment(arg2,localProductList);
 			}
 		});
     }
@@ -197,7 +196,6 @@ public class TabCatalogProductsFragment extends Fragment {
 				localProductList = new ListProduct();
 				JSONArray arrayObject = connection.connectForCataalog("gestioneCatalogoApp", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				Log.i("Lungh array: ", ""+arrayObject.length());
-				TabsFragmentActivity.productList=new ListProduct();
 				for (int i=0;i<arrayObject.length();i++){ 
 					// Lettura dell'oggetto Json
 					JSONObject object= (JSONObject)arrayObject.get(i);
@@ -236,6 +234,8 @@ public class TabCatalogProductsFragment extends Fragment {
 					localProductList.add(tempProd);
 				
 				}
+				
+				TabsFragmentActivity.productList.updateChecked(localProductList);
 				
 				Message message = handler.obtainMessage(1, Const.OK, 0);
 			

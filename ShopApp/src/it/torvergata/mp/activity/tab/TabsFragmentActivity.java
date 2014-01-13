@@ -137,7 +137,7 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     
-       
+       productList= new ListProduct();
         
         // Step 1: Inflate layout
         setContentView(R.layout.tabs_layout);
@@ -556,14 +556,14 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
 
 
 	@Override
-	public void ViewProductChoiceDetailFragment(int pos, Category cat) {
+	public void ViewProductChoiceDetailFragment(int pos, ListProduct list) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TabCatalogDetailItemFragment fragmentScann = new TabCatalogDetailItemFragment();
+        TabCatalogDetailItemFragment fragment = new TabCatalogDetailItemFragment();
         fragmentTransaction.addToBackStack("List");
-        fragmentScann.updateProduct(pos,cat);        
-        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+        fragment.updateProduct(pos,list);        
+        fragmentTransaction.replace(R.id.realtabcontent, fragment);
         fragmentTransaction.commit();
 	}
 

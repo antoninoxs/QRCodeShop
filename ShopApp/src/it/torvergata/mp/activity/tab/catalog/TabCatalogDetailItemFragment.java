@@ -47,6 +47,7 @@ public class TabCatalogDetailItemFragment extends Fragment {
 	private ImageView ivImage;
 	private int position;
 	private Category mCategory;
+	private ListProduct localListProduct;
 	
 	OnReturnProductChoiceListListener mCallback;
 	// Container Activity must implement this interface
@@ -117,11 +118,18 @@ public class TabCatalogDetailItemFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
+				
+				if(prod.getQuantita()==0)TabsFragmentActivity.productList.add(prod);
+				
 				prod.increment();
 				prod.setChecked(true);
 				
-				TabsFragmentActivity.productList.set(position, prod);
+				//TabsFragmentActivity.productList.getById(prod.getId()).increment();
+				TabsFragmentActivity.productList.print();
+				Log.i("lOCALE","locale");
+				localListProduct.print();
 				TabsFragmentActivity.productList.setIncrementTotalPrice(prod.getPrezzoUnitario());
+				
 				tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 				etQuantitative.setText(""+prod.getQuantita());
 				tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
@@ -153,11 +161,12 @@ public class TabCatalogDetailItemFragment extends Fragment {
                     + " must implement OnReturnProductChoiceListListener ");
         }
     }
-	public void updateProduct(int pos, Category cat) {
+	public void updateProduct(int pos, ListProduct list) {
 		// TODO Auto-generated method stub
-		prod		=	TabsFragmentActivity.productList.get(pos);
+		prod		=	list.get(pos);
 		position	= 	pos;
-		mCategory=cat;
+		localListProduct = list;
+		
 	}
 
 

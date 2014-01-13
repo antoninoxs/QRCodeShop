@@ -223,5 +223,46 @@ public class ListProduct extends ArrayList<Product> {
 		return result;
 	}
 
+	public void removeById(String id) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<this.size();i++){
+			if(this.get(i).getId().compareTo(id)==0){
+				this.remove(i);
+				break;
+			}
+		}
+	}
+
+	public void print() {
+		// TODO Auto-generated method stub
+		Log.i("LISTA PRODOTTI DA ORDINARE", " ");
+		for(int i=0;i<this.size();i++){
+			Log.i("LISTA PRODOTTI DA ORDINARE", "PRODOTTO NUMERO "+i+" : "+this.get(i).getNome()+" Quantità: "+this.get(i).getQuantita());
+		}
+		
+	}
+	public void updateChecked(ListProduct localProductList) {
+		for(int i=0;i<this.size();i++){
+			for(int j=0;j<localProductList.size();j++){
+				if(this.get(i).getId().compareTo(localProductList.get(j).getId())==0){
+					localProductList.get(j).setChecked(true);
+					localProductList.get(j).setQuantita(this.get(i).getQuantita());
+					break;
+				}
+			}
+		}
+	}
+
+	public Product getById(String id) {
+		Product p = null;
+		for(int i = 0; i<this.size();i++){
+			if(this.get(i).getId().compareTo(id)== 0){
+				p = this.get(i);
+				break;
+			}
+		}
+		return p;
+	}
+
 	
 }

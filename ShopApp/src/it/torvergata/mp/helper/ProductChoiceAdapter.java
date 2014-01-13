@@ -112,19 +112,22 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
 				if(isChecked) {
-					productList.get(position).setQuantita(1);
-				
-					productList.get(position).setChecked(isChecked);
+					TabsFragmentActivity.productList.add(productList.get(position));
 					
+					productList.get(position).setChecked(isChecked);
+					productList.get(position).setQuantita(1);
 					
 					
 					tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
 					
 				}else{
-					productList.get(position).setQuantita(0);
+					TabsFragmentActivity.productList.removeById(productList.get(position).getId());
 					productList.get(position).setChecked(isChecked);
+					productList.get(position).setQuantita(0);
+					
 					tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
 				}
+				TabsFragmentActivity.productList.print();
 				
 			}
 		});
