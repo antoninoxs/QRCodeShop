@@ -556,13 +556,13 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
 
 
 	@Override
-	public void ViewProductChoiceDetailFragment(int pos, ListProduct list) {
+	public void ViewProductChoiceDetailFragment(int pos, ListProduct list,Category cat) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TabCatalogDetailItemFragment fragment = new TabCatalogDetailItemFragment();
         fragmentTransaction.addToBackStack("List");
-        fragment.updateProduct(pos,list);        
+        fragment.updateProduct(pos,list,cat);        
         fragmentTransaction.replace(R.id.realtabcontent, fragment);
         fragmentTransaction.commit();
 	}
@@ -571,12 +571,15 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
 	public void ViewProductChoiceListFragment(Category cat) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TabCatalogProductsFragment fragmentScann = new TabCatalogProductsFragment();
-        fragmentScann.updateCategory(cat);       
-        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
-        fragmentTransaction.commit();
- 
+		fragmentManager.popBackStack();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        TabCatalogProductsFragment fragmentScann = new TabCatalogProductsFragment();
+//        
+//        
+//        fragmentScann.updateCategory(cat);       
+//        fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
+//        fragmentTransaction.commit();
+// 
 	}
 	@Override
     public void onBackPressed()

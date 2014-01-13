@@ -124,9 +124,11 @@ public class TabCatalogDetailItemFragment extends Fragment {
 				prod.increment();
 				prod.setChecked(true);
 				
-				//TabsFragmentActivity.productList.getById(prod.getId()).increment();
+				(TabsFragmentActivity.productList.getById(localListProduct.get(position).getId())).increment();
+				
+				Log.i("LISTA","DI PRODOTTI ORDINATI");
 				TabsFragmentActivity.productList.print();
-				Log.i("lOCALE","locale");
+				Log.i("LISTA","LOCALE");
 				localListProduct.print();
 				TabsFragmentActivity.productList.setIncrementTotalPrice(prod.getPrezzoUnitario());
 				
@@ -161,11 +163,12 @@ public class TabCatalogDetailItemFragment extends Fragment {
                     + " must implement OnReturnProductChoiceListListener ");
         }
     }
-	public void updateProduct(int pos, ListProduct list) {
+	public void updateProduct(int pos, ListProduct list, Category c) {
 		// TODO Auto-generated method stub
 		prod		=	list.get(pos);
 		position	= 	pos;
 		localListProduct = list;
+		mCategory=c;
 		
 	}
 

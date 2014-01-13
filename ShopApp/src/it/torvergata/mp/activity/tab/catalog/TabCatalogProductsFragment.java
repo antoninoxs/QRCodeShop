@@ -72,7 +72,7 @@ public class TabCatalogProductsFragment extends Fragment {
 
 	// Container Activity must implement this interface
     public interface OnProductChoiceDetailListener {
-         public void ViewProductChoiceDetailFragment(int pos,ListProduct c);	
+         public void ViewProductChoiceDetailFragment(int pos,ListProduct c,Category cat);	
  }
   
 	
@@ -155,7 +155,7 @@ public class TabCatalogProductsFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stu
-				mCallback.ViewProductChoiceDetailFragment(arg2,localProductList);
+				mCallback.ViewProductChoiceDetailFragment(arg2,localProductList, Category);
 			}
 		});
     }
