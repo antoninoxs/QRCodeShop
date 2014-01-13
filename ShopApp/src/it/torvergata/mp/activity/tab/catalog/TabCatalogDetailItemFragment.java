@@ -119,18 +119,40 @@ public class TabCatalogDetailItemFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				
-				if(prod.getQuantita()==0)TabsFragmentActivity.productList.add(prod);
-				
+				if(prod.getQuantita()==0){
+					
+					Log.i("initial hash", ""+localListProduct.get(position).hashCode() );
+					
+					Product toAdd = localListProduct.get(position).clone();
+					Log.i("to add hash", ""+toAdd.hashCode());
+					
+					TabsFragmentActivity.productList.add(toAdd);
+				}
 				prod.increment();
+				
+				Log.i("LISTA","DI PRODOTTI ORDINATI 1");
+				TabsFragmentActivity.productList.print();
+				Log.i("LISTA","DI PRODOTTI LOCALE 1");
+				localListProduct.print();
+				
 				prod.setChecked(true);
+				
+				Log.i("LISTA"," "+prod.hashCode());
+				Log.i("LISTA"," "+TabsFragmentActivity.productList.getById(localListProduct.get(position).getId()).hashCode());
+				
 				
 				(TabsFragmentActivity.productList.getById(localListProduct.get(position).getId())).increment();
 				
-				Log.i("LISTA","DI PRODOTTI ORDINATI");
+				Log.i("LISTA","DI PRODOTTI ORDINATI 2");
 				TabsFragmentActivity.productList.print();
-				Log.i("LISTA","LOCALE");
+				Log.i("LISTA","DI PRODOTTI LOCALE 2");
 				localListProduct.print();
+				
 				TabsFragmentActivity.productList.setIncrementTotalPrice(prod.getPrezzoUnitario());
+				
+				Log.i("LISTA"," "+prod.hashCode());
+				Log.i("LISTA"," "+TabsFragmentActivity.productList.getById(localListProduct.get(position).getId()).hashCode());
+				
 				
 				tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 				etQuantitative.setText(""+prod.getQuantita());
@@ -164,7 +186,7 @@ public class TabCatalogDetailItemFragment extends Fragment {
         }
     }
 	public void updateProduct(int pos, ListProduct list, Category c) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		prod		=	list.get(pos);
 		position	= 	pos;
 		localListProduct = list;

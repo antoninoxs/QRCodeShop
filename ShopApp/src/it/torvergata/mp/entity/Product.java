@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Product implements Parcelable{
 	private String id;
@@ -16,6 +17,8 @@ public class Product implements Parcelable{
 	private String descrizione;
 	private String fileImmagine;
 	private boolean isChecked;
+	
+	int III=0;
 	
 	public String getFileImmagine() {
 		return fileImmagine;
@@ -40,6 +43,7 @@ public class Product implements Parcelable{
 	
 	
 	public void increment(){
+		Log.i("inCREMENTO", ++III+"");
 		quantita++;
 	}
 	public void decrement(){
@@ -80,7 +84,21 @@ public class Product implements Parcelable{
 	     immagine = new BitmapDrawable(bitmap);
 	     
 	 }
-	 public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
+	 public Product clone() {
+		 	Product r = new Product(this.getId());
+			r.setQuantita(this.getQuantita());
+			r.setNome(this.getNome());
+			r.setPrezzoUnitario(this.getPrezzoUnitario());
+			r.setScadenza(this.getScadenza());
+			r.setDisponibilita(this.getDisponibilita());
+			r.setDescrizione(this.getDescrizione());
+			r.setFileImmagine(this.getFileImmagine());
+			r.setImmagine(this.getImmagine());
+			r.setChecked(this.isChecked());
+			
+			return r;
+	}
+	public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
 	     public Product createFromParcel(Parcel in) {
 	         return new Product(in);
 	     }

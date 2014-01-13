@@ -35,6 +35,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,7 +113,12 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
 				if(isChecked) {
-					TabsFragmentActivity.productList.add(productList.get(position));
+					Log.i("initial hash", ""+productList.get(position).hashCode() );
+					
+					Product toAdd = productList.get(position).clone();
+					Log.i("to add hash", ""+toAdd.hashCode());
+					
+					TabsFragmentActivity.productList.add(toAdd);
 					
 					productList.get(position).setChecked(isChecked);
 					productList.get(position).setQuantita(1);
