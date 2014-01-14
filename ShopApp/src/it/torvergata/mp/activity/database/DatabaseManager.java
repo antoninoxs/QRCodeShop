@@ -101,6 +101,7 @@ public class DatabaseManager {
 		
 		for (int i=0;i<list.size();i++){
 			ContentValues PoductValues = new ContentValues();
+			int q=list.get(i).getQuantita();
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_ID, 				list.get(i).getId());
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_NAME, 			list.get(i).getNome());
 			PoductValues.put(dbInterface.TABLE_PRODOTTO_COLUMN_DESCRIPTION, 	list.get(i).getDescrizione());
@@ -117,10 +118,9 @@ public class DatabaseManager {
 						field,
 						filter,null, null,null);
 				cursor.moveToLast();
-				if(cursor.getCount() == 1) {
-					continue;
-				}else{
-					db.insert(dbInterface.TABLE_PRODOTTO, null, PoductValues);
+				if(cursor.getCount() != 1) {
+					long err= db.insert(dbInterface.TABLE_PRODOTTO, null, PoductValues);
+					Log.i("Errore DB", ""+err);
 				}
 			}
 			catch (SQLiteConstraintException e){
@@ -177,7 +177,7 @@ public class DatabaseManager {
 			temp.setNome(cursorP.getString(1));
 			temp.setPrezzoUnitario(cursorP.getDouble(2));
 			temp.setScadenza(cursorP.getString(3));
-			temp.setQuantita(cursorP.getInt(4));
+			temp.setQuantita(cursor.getInt(2));
 			temp.setDescrizione(cursorP.getString(5));
 			temp.setFileImmagine(cursorP.getString(6));
 			
