@@ -114,6 +114,8 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 				// TODO Auto-generated method stub
 				if(isChecked) {
 					Log.i("initial hash", ""+productList.get(position).hashCode() );
+				
+					productList.get(position).setQuantita(1);
 					
 					Product toAdd = productList.get(position).clone();
 					Log.i("to add hash", ""+toAdd.hashCode());
@@ -121,7 +123,7 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 					TabsFragmentActivity.productList.add(toAdd);
 					
 					productList.get(position).setChecked(isChecked);
-					productList.get(position).setQuantita(1);
+					productList.print("LISTA LOCALE DENTRO ADAPTER DOPO AUMENTO");
 					
 					
 					tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
@@ -130,10 +132,10 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 					TabsFragmentActivity.productList.removeById(productList.get(position).getId());
 					productList.get(position).setChecked(isChecked);
 					productList.get(position).setQuantita(0);
-					
+					productList.print("LISTA LOCALE DENTRO ADAPTER DOPO AVER DEFLEGGATO IL PRODOTTO");
 					tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
 				}
-				TabsFragmentActivity.productList.print();
+				TabsFragmentActivity.productList.print("LISTA DA ORDINARE DENTRO ADAPTER DOPO AUMENTO O DECREMENTO");
 				
 			}
 		});

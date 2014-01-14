@@ -233,11 +233,11 @@ public class ListProduct extends ArrayList<Product> {
 		}
 	}
 
-	public void print() {
+	public void print(String g) {
 		// TODO Auto-generated method stub
-		Log.i("LISTA PRODOTTI DA ORDINARE", " ");
+		Log.i(g, " ");
 		for(int i=0;i<this.size();i++){
-			Log.i("LISTA PRODOTTI DA ORDINARE", "PRODOTTO NUMERO "+i+" : "+this.get(i).getNome()+" Quantità: "+this.get(i).getQuantita());
+			Log.i(g, "PRODOTTO NUMERO "+i+" : "+this.get(i).getNome()+" Quantità: "+this.get(i).getQuantita());
 		}
 		
 	}

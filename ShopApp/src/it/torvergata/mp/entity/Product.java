@@ -43,7 +43,7 @@ public class Product implements Parcelable{
 	
 	
 	public void increment(){
-		Log.i("inCREMENTO", ++III+"");
+	
 		quantita++;
 	}
 	public void decrement(){
