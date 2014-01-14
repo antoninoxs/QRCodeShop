@@ -37,7 +37,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
  
 
-public class TabCatalogDetailItemFragment extends Fragment {
+public class TabCatalogBasketDetailItemFragment extends Fragment {
     
 	private Product prod;
 	private LinearLayout mLinearLayout;
@@ -105,19 +105,9 @@ public class TabCatalogDetailItemFragment extends Fragment {
 				if(prod.getQuantita()>1){
 					prod.decrement();
 					prod.setChecked(true);
-				
-					TabsFragmentActivity.productList.print("LISTA DI PRODOTTI ORDINATI IN DET DOPO DECREMENT A LISTA LOCALE");
-					localListProduct.print("LISTA DI PRODOTTI LOCALI IN DET DOPO DECREMENT A LISTA LOCALE");
-					
-					
-					(TabsFragmentActivity.productList.getById(localListProduct.get(position).getId())).decrement();
 					
 					TabsFragmentActivity.productList.setDecrementTotalPrice(prod.getPrezzoUnitario());
-					
-					TabsFragmentActivity.productList.print("LISTA DI PRODOTTI ORDINATI IN DET DOPO DECREMENT A LISTA DA ORDINARE");
-					localListProduct.print("LISTA DI PRODOTTI LOCALI IN DET DOPO DECREMENT A LISTA DA ORDINARE");
-					
-					
+										
 					tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 					etQuantitative.setText(""+prod.getQuantita());
 					tvPrice.setText(getString(R.string.tvTotal)+" "+GenericFunctions.currencyStamp(prod.getPrezzoTotale())+"  "+getString(R.string.Euro));
@@ -142,17 +132,10 @@ public class TabCatalogDetailItemFragment extends Fragment {
 				}
 				prod.increment();
 				
-				TabsFragmentActivity.productList.print("LISTA DI PRODOTTI ORDINATI IN DET DOPO INCREMENT A LISTA LOCALE");
-				localListProduct.print("LISTA DI PRODOTTI LOCALI IN DET DOPO INCREMENT A LISTA LOCALE");
-				
 				prod.setChecked(true);
 				
-				(TabsFragmentActivity.productList.getById(localListProduct.get(position).getId())).increment();
 				TabsFragmentActivity.productList.setIncrementTotalPrice(prod.getPrezzoUnitario());
 			
-				TabsFragmentActivity.productList.print("LISTA DI PRODOTTI ORDINATI IN DET DOPO INCREMENT A LISTA DA ORDINARE");
-				localListProduct.print("LISTA DI PRODOTTI LOCALI IN DET DOPO INCREMENT A LISTA DA ORDINARE");
-				
 				
 				tvQuantitative.setText(getString(R.string.tQuantitative)+" "+prod.getQuantita());
 				etQuantitative.setText(""+prod.getQuantita());
@@ -190,19 +173,12 @@ public class TabCatalogDetailItemFragment extends Fragment {
                     + " must implement OnReturnProductChoiceListListener ");
         }
     }
-	public void updateProduct(int pos, ListProduct list, Category c) {
+
+	public void updateProduct(int pos) {
 		// TODO Auto-generated method stu
-		prod		=	list.get(pos);
+		prod		=	TabsFragmentActivity.productList.get(pos);
 		position	= 	pos;
-		localListProduct = list;
-		mCategory=c;
 		
-	}
-	public void updateProduct(int pos, ListProduct list) {
-		// TODO Auto-generated method stu
-		prod		=	list.get(pos);
-		position	= 	pos;
-		localListProduct = list;
 				
 	}
 

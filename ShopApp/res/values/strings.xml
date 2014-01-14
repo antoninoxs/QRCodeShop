@@ -65,6 +65,7 @@
      <string name="tSendingOrger">Invio Ordine...</string>
      <string name="tSendOrder">Invia ordine</string>
      <string name="tUpdateOrderState">Aggiornamento stato ordine</string>
+     <string name="ProceedWithOrder">Procedi con l\'ordine</string>
      
     
 

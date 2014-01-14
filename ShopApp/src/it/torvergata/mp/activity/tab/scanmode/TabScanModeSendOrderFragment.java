@@ -55,13 +55,13 @@ public class TabScanModeSendOrderFragment extends Fragment {
 	private ImageView ivSendOrder;
 	private TextView   tvNumberProducts,tvTotalCost;
 	private Dialogs dialogs;
-	
+	private int returnScr;
 	private Handler handler;
 	
 	OnFinishOrderListener mCallback;
 	// Container Activity must implement this interface
     public interface OnFinishOrderListener {
-        public void FinishOrder(ListProduct list,int res);
+        public void FinishOrder(ListProduct list,int res,int returnScreen);
     }
 
 	
@@ -89,7 +89,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
     	                	Log.i("Ordine", "Ordine inviato con successo, Id Assegnato :"+res);
     	                	AlertDialog dialogBox = dialogs.successSendOrder(getActivity());
     	    				dialogBox.show();
-    	                	mCallback.FinishOrder(productList,res);
+    	                	mCallback.FinishOrder(productList,res,returnScr);
     	                }
     	                }
     	                
@@ -151,9 +151,10 @@ public class TabScanModeSendOrderFragment extends Fragment {
 		
         return mLinearLayout;}
 
-	public void updateProduct(ListProduct productl) {
+	public void updateProduct(ListProduct productl,int returnScreen) {
 		// TODO Auto-generated method stub
 		productList=productl;
+		returnScr=returnScreen;
 		
 	}
 	public void onAttach(Activity activity) {

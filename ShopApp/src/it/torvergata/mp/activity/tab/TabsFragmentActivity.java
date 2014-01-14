@@ -13,6 +13,7 @@ import it.torvergata.mp.R.drawable;
 import it.torvergata.mp.R.id;
 import it.torvergata.mp.R.layout;
 import it.torvergata.mp.activity.database.DatabaseManager;
+import it.torvergata.mp.activity.tab.catalog.TabCatalogBasketDetailItemFragment;
 import it.torvergata.mp.activity.tab.catalog.TabCatalogCategoryFragment;
 import it.torvergata.mp.activity.tab.catalog.TabCatalogDetailItemFragment;
 import it.torvergata.mp.activity.tab.catalog.TabCatalogMainFragment;
@@ -25,6 +26,7 @@ import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeMainFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment;
+import it.torvergata.mp.activity.tab.catalog.TabCatalogListFragment;
 import it.torvergata.mp.entity.Category;
 import it.torvergata.mp.entity.ListCategories;
 import it.torvergata.mp.entity.ListMacrocategories;
@@ -78,7 +80,9 @@ TabOrdersProductListFragment.OnProductsList,
 TabCatalogMainFragment.OnMacrocategoryDetailListener,
 TabCatalogCategoryFragment.OnCategoryDetailListener,
 TabCatalogProductsFragment.OnProductChoiceDetailListener,
-TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
+TabCatalogDetailItemFragment.OnReturnProductChoiceListListener,
+TabCatalogListFragment.OnActionCatalogList,
+TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
  
 	
 	final DatabaseManager db = new DatabaseManager(this);
@@ -428,7 +432,7 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
      * al Fragment di invio ordine. A tale scopo si passa la lista dei  prodotti
      */
 	@Override
-	public void ViewOrderFragment(ListProduct product) {
+	public void ViewOrderFragment(ListProduct product,int returnScreen) {
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -436,7 +440,7 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
         fragmentTransaction.addToBackStack("Order");
         
         //Si richiama il metodo per impostare la lista prodotti
-        fragmentScann.updateProduct(product);
+        fragmentScann.updateProduct(product,returnScreen);
         
         fragmentTransaction.replace(R.id.realtabcontent, fragmentScann);
         fragmentTransaction.commit();
@@ -469,18 +473,31 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
      * al Fragment iniziale del tab ScanMode, questa interfaccia provvede ad inserire
      * nel db i dettagli dell'ordine appena inviato.
 	 */
-	public void FinishOrder(ListProduct list,int res) {
+	public void FinishOrder(ListProduct list,int res,int returnScr) {
 		// TODO Auto-generated method stub
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        TabScanModeMainFragment fragmentMain = new TabScanModeMainFragment();
-        fragmentTransaction.replace(R.id.realtabcontent, fragmentMain);
-        fragmentTransaction.commit();
-        db.open();
-        db.insertOrder(res,list);
-        db.close();
+        
+        if(returnScr==1){
+        	TabScanModeMainFragment fragmentMain = new TabScanModeMainFragment();
+        	fragmentTransaction.replace(R.id.realtabcontent, fragmentMain);
+            fragmentTransaction.commit();
+            db.open();
+            db.insertOrder(res,list);
+            db.close();
+        }else{
+        	TabCatalogMainFragment fragmentMain = new TabCatalogMainFragment();
+        	fragmentTransaction.replace(R.id.realtabcontent, fragmentMain);
+            fragmentTransaction.commit();
+            db.open();
+            db.insertOrder(res,list);
+            db.close();
+            productList = new ListProduct();
+        }
+        
+        
 	}
 
 	/**
@@ -589,6 +606,39 @@ TabCatalogDetailItemFragment.OnReturnProductChoiceListListener{
        
     }
 
+	@Override
+	public void ViewCatalogFragment(ListProduct list) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ViewBasket() {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack("ProductList");
+        TabCatalogListFragment fragment = new TabCatalogListFragment();
+        
+      
+        fragmentTransaction.replace(R.id.realtabcontent, fragment);
+        fragmentTransaction.commit();
+
+	}
+
+	@Override
+	public void ViewCatalogProductDetailFragment(int pos) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabCatalogBasketDetailItemFragment fragment = new TabCatalogBasketDetailItemFragment();
+        fragmentTransaction.addToBackStack("Basket");
+        fragment.updateProduct(pos);        
+        fragmentTransaction.replace(R.id.realtabcontent, fragment);
+        fragmentTransaction.commit();
+	}
+
+	
 
 
 	

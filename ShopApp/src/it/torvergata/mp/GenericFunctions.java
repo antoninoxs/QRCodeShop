@@ -30,7 +30,8 @@ public class GenericFunctions {
 	public static String currencyStamp(double d){
 		double price=d;
 		DecimalFormat df= new DecimalFormat ("#.00");
-		return df.format(price);
+		if(d == 0) return "0,00";
+		else return df.format(price);
 	}
 	public static String getDate(){
 		long msTime = System.currentTimeMillis();  

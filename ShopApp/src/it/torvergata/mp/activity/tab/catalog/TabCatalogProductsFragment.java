@@ -40,6 +40,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -72,7 +73,8 @@ public class TabCatalogProductsFragment extends Fragment {
 
 	// Container Activity must implement this interface
     public interface OnProductChoiceDetailListener {
-         public void ViewProductChoiceDetailFragment(int pos,ListProduct c,Category cat);	
+         public void ViewProductChoiceDetailFragment(int pos,ListProduct c,Category cat);
+         public void ViewBasket();
  }
   
 	
@@ -83,9 +85,10 @@ public class TabCatalogProductsFragment extends Fragment {
     	final DatabaseManager db = new DatabaseManager(getActivity());
 		dialogs= new Dialogs();
     	boolean isConnected = Const.verifyConnection(getActivity());
-  	
+    	
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_products_list_layout,	container, false);
-    	  
+        Button btnProceed = (Button) mLinearLayout.findViewById(R.id.btnProceed);
+        	  	 
 		
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
@@ -132,7 +135,14 @@ public class TabCatalogProductsFragment extends Fragment {
             return null;
         }
        
-        
+        btnProceed.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mCallback.ViewBasket();
+			}
+		});
       	
 		
 
