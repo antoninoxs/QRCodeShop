@@ -52,17 +52,18 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 
 	private LayoutInflater mInflater;
 	private Context context;
-	
+	private TextView tvNumber,tvPriceT;
 	
 	private ListProduct productList;
 	private int mViewResourceId;
 	
-	public ProductChoiceAdapter(Context ctx, int viewResourceId,ListProduct pList) {
+	public ProductChoiceAdapter(Context ctx, int viewResourceId,ListProduct pList,TextView tvNum,TextView tvPr) {
 		super(ctx, viewResourceId, pList);
 		context=ctx;
 		mInflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		productList=pList;
-		
+		tvNumber=tvNum;
+		tvPriceT=tvPr;
 		mViewResourceId = viewResourceId;
 	}
 
@@ -112,6 +113,8 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
+			
+				
 				if(isChecked) {
 					Log.i("initial hash", ""+productList.get(position).hashCode() );
 				
@@ -136,6 +139,10 @@ public class ProductChoiceAdapter extends ArrayAdapter<Product> {
 					tvQuantitative.setText("Quantità:"+" "+productList.get(position).getQuantita());
 				}
 				TabsFragmentActivity.productList.print("LISTA DA ORDINARE DENTRO ADAPTER DOPO AUMENTO O DECREMENTO");
+				tvNumber.setText(""+TabsFragmentActivity.productList.getProductsCount());
+				double totalPrice=TabsFragmentActivity.productList.getTotalPrice();
+		    	String price = GenericFunctions.currencyStamp(totalPrice);
+				tvPriceT.setText(price+" "+"\u20ac"+" ");
 				
 			}
 		});

@@ -68,6 +68,8 @@ public class TabCatalogProductsFragment extends Fragment {
 	private ProductChoiceAdapter adapter;
 	private Handler handler;
 	private int positionOnCategoryList;
+	private TextView tvNumber;
+	private TextView tvPrice;
 	
 	OnProductChoiceDetailListener mCallback;
 
@@ -88,8 +90,15 @@ public class TabCatalogProductsFragment extends Fragment {
     	
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_products_list_layout,	container, false);
         Button btnProceed = (Button) mLinearLayout.findViewById(R.id.btnProceed);
-        	  	 
+        
+        tvNumber =(TextView) mLinearLayout.findViewById(R.id.tvN);
+        tvPrice =(TextView) mLinearLayout.findViewById(R.id.tvP);
+    	tvNumber.setText(""+TabsFragmentActivity.productList.getProductsCount());
+    	String price = GenericFunctions.currencyStamp(TabsFragmentActivity.productList.getTotalPrice());
+		tvPrice.setText(price+" "+"\u20ac"+" ");
 		
+    	
+    	
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
             @Override
@@ -156,7 +165,7 @@ public class TabCatalogProductsFragment extends Fragment {
     	list.setCacheColorHint(000000000);
         
 		adapter =new ProductChoiceAdapter(getActivity(),
-				R.layout.product_choice_list_item, localProductList);
+				R.layout.product_choice_list_item, localProductList,tvNumber,tvPrice);
 		list.setAdapter(adapter);
 	
 		list.setOnItemClickListener(new OnItemClickListener() {

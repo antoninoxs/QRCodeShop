@@ -71,34 +71,7 @@ public class TabScanModeListFragment extends Fragment {
             return null;
         }
        
-//        
-//        Product prod1= new Product(1111111);
-//        prod1.setNome("Gocciole");
-//        prod1.setDescrizione("Gocciole Pavesi");
-//        prod1.setDisponibilita(22);
-//        prod1.setPrezzoUnitario(2.0);
-//        prod1.setScadenza("2015-01-01");
-//        prod1.setFileImmagine("gocciole.png");
-//        productList.add(prod1);
-//        
-//        Product prod2= new Product(2222222);
-//        prod2.setNome("Krumiri");
-//        prod2.setDescrizione("Krumiri Bistefani");
-//        prod2.setDisponibilita(22);
-//        prod2.setPrezzoUnitario(2.0);
-//        prod2.setScadenza("2015-01-01");
-//        prod2.setFileImmagine("krumiriBistefani.png");
-//        productList.add(prod2);
-//        
-//        Product prod3= new Product(4444444);
-//        prod3.setNome("Abbracci");
-//        prod3.setDescrizione("Abbracci Mulino Bianco");
-//        prod3.setDisponibilita(22);
-//        prod3.setPrezzoUnitario(2.0);
-//        prod3.setScadenza("2015-01-01");
-//        prod3.setFileImmagine("abbracci.png");
-//        productList.add(prod3);
-        
+
         
         dialogs=new Dialogs();
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_scan_mode_list_layout,
