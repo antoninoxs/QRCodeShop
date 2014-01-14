@@ -107,7 +107,7 @@
                 android:ems="10"
                 android:inputType="textPassword" />
 
-            <Button
+            <Button style="@style/CustomButton"
                 android:id="@+id/BregistrazioneRegistrati"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -117,7 +117,7 @@
         android:clipToPadding="false"
         android:padding="10dp" >
 
-        <Button
+        <Button style="@style/CustomButton"
             android:id="@+id/FinishScanButton"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -128,7 +128,7 @@
             android:background="@drawable/gradient_back"
             android:text="@string/tFinishScan" />
 
-        <Button
+        <Button style="@style/CustomButton"
             android:id="@+id/ContinueScanButton"
            android:layout_width="0dp"
             android:layout_weight="1"

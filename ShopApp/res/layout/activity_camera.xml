@@ -52,15 +52,15 @@
         android:layout_height="0dp"
         android:layout_weight="1" >
 
-        <Button
+        <Button style="@style/CustomButton"
+            
             android:id="@+id/btnAdd"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            
             android:text="@string/tBtnAdd" />
 
-        <Button
+        <Button style="@style/CustomButton"
             android:id="@+id/btnContinue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
