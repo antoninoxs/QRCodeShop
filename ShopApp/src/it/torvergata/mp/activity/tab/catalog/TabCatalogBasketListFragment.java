@@ -36,7 +36,7 @@ import android.widget.ListView;
 import android.widget.TextView;
  
 
-public class TabCatalogListFragment extends Fragment {
+public class TabCatalogBasketListFragment extends Fragment {
     /** (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */
@@ -51,7 +51,7 @@ public class TabCatalogListFragment extends Fragment {
 
 	// Container Activity must implement this interface
     public interface OnActionCatalogList {
-        public void ViewCatalogFragment(ListProduct list);
+        public void RestartCatalogFragment(ListProduct list);
         public void ViewCatalogProductDetailFragment(int pos);
         public void ViewOrderFragment(ListProduct list,int returnScreen);
 		
@@ -72,34 +72,7 @@ public class TabCatalogListFragment extends Fragment {
             return null;
         }
        
-//        
-//        Product prod1= new Product(1111111);
-//        prod1.setNome("Gocciole");
-//        prod1.setDescrizione("Gocciole Pavesi");
-//        prod1.setDisponibilita(22);
-//        prod1.setPrezzoUnitario(2.0);
-//        prod1.setScadenza("2015-01-01");
-//        prod1.setFileImmagine("gocciole.png");
-//        productList.add(prod1);
-//        
-//        Product prod2= new Product(2222222);
-//        prod2.setNome("Krumiri");
-//        prod2.setDescrizione("Krumiri Bistefani");
-//        prod2.setDisponibilita(22);
-//        prod2.setPrezzoUnitario(2.0);
-//        prod2.setScadenza("2015-01-01");
-//        prod2.setFileImmagine("krumiriBistefani.png");
-//        productList.add(prod2);
-//        
-//        Product prod3= new Product(4444444);
-//        prod3.setNome("Abbracci");
-//        prod3.setDescrizione("Abbracci Mulino Bianco");
-//        prod3.setDisponibilita(22);
-//        prod3.setPrezzoUnitario(2.0);
-//        prod3.setScadenza("2015-01-01");
-//        prod3.setFileImmagine("abbracci.png");
-//        productList.add(prod3);
-        
+
         
         dialogs=new Dialogs();
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_scan_mode_list_layout,
@@ -165,7 +138,7 @@ public class TabCatalogListFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				mCallback.ViewCatalogFragment(TabsFragmentActivity.productList);
+				mCallback.RestartCatalogFragment(TabsFragmentActivity.productList);
 			}
 		});
 	

@@ -26,7 +26,7 @@ import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeMainFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeScanningFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeSendOrderFragment;
-import it.torvergata.mp.activity.tab.catalog.TabCatalogListFragment;
+import it.torvergata.mp.activity.tab.catalog.TabCatalogBasketListFragment;
 import it.torvergata.mp.entity.Category;
 import it.torvergata.mp.entity.ListCategories;
 import it.torvergata.mp.entity.ListMacrocategories;
@@ -81,7 +81,7 @@ TabCatalogMainFragment.OnMacrocategoryDetailListener,
 TabCatalogCategoryFragment.OnCategoryDetailListener,
 TabCatalogProductsFragment.OnProductChoiceDetailListener,
 TabCatalogDetailItemFragment.OnReturnProductChoiceListListener,
-TabCatalogListFragment.OnActionCatalogList,
+TabCatalogBasketListFragment.OnActionCatalogList,
 TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
  
 	
@@ -607,11 +607,7 @@ TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
        
     }
 
-	@Override
-	public void ViewCatalogFragment(ListProduct list) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void ViewBasket() {
@@ -619,7 +615,7 @@ TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
 		FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.addToBackStack("ProductList");
-        TabCatalogListFragment fragment = new TabCatalogListFragment();
+        TabCatalogBasketListFragment fragment = new TabCatalogBasketListFragment();
         
       
         fragmentTransaction.replace(R.id.realtabcontent, fragment);
@@ -637,6 +633,20 @@ TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
         fragment.updateProduct(pos);        
         fragmentTransaction.replace(R.id.realtabcontent, fragment);
         fragmentTransaction.commit();
+	}
+
+	@Override
+	public void RestartCatalogFragment(ListProduct list) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+         
+        TabCatalogMainFragment fragmentMain = new TabCatalogMainFragment();
+        
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentMain);
+        fragmentTransaction.commit();
+        
 	}
 
 	
