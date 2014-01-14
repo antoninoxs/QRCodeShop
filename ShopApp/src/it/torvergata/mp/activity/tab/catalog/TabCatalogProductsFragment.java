@@ -99,7 +99,7 @@ public class TabCatalogProductsFragment extends Fragment {
 		
     	
     	
-    	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
+    	//HJandler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
             @Override
             public void handleMessage(Message mess) {
