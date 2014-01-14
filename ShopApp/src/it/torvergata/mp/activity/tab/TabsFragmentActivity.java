@@ -495,6 +495,7 @@ TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
             db.insertOrder(res,list);
             db.close();
             productList = new ListProduct();
+            //Si azzera la listProduct Globale
         }
         
         
