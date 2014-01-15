@@ -36,14 +36,16 @@ import android.util.Log;
 
 public class HttpConnection {
 
+	private Handler handler;
 	public HttpConnection(){
 		
 	}
 	
-	public JSONObject connect(String phpFile, JSONObject json , Handler handler, int connectionTimeout,int socketTimeout) throws JSONException{
+	public JSONObject connect(String phpFile, JSONObject json , Handler handle, int connectionTimeout,int socketTimeout) throws JSONException{
 		// Preparazione delle informazioni da inviare al server
 	JSONObject object=null;
 	JSONArray array=null;
+	handler=handle;
 		try {
 
 			// Connessione al Server

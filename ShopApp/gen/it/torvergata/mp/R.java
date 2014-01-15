@@ -59,7 +59,7 @@ public final class R {
         public static final int TWregistrazioneNome=0x7f09001a;
         public static final int TWregistrazionePassword=0x7f090021;
         public static final int TWregistrazionePassword1=0x7f090023;
-        public static final int TWregistrazioneRegistrazione=0x7f090006;
+        public static final int TWregistrazioneRegistrazione=0x7f090005;
         public static final int TWregistrazioneUsername=0x7f09001f;
         public static final int action_settings=0x7f090040;
         public static final int btnAdd=0x7f090003;
@@ -69,14 +69,14 @@ public final class R {
         public static final int btnListProduct=0x7f090018;
         public static final int btnProceed=0x7f090039;
         public static final int btnQrCode=0x7f090034;
-        public static final int btnSalta=0x7f09000b;
         public static final int buttonAccess=0x7f090009;
         public static final int cameraPreview=0x7f090027;
         public static final int cbItemSelection=0x7f090033;
         public static final int description=0x7f09002c;
         public static final int editTextPassword=0x7f090008;
-        public static final int editTextUsername=0x7f090005;
+        public static final int editTextUsername=0x7f090006;
         public static final int etQuantitative=0x7f090016;
+        public static final int imageView1=0x7f09000b;
         public static final int ivDetailImage=0x7f09000d;
         public static final int ivSendOrder=0x7f09003f;
         public static final int list_image=0x7f09002a;

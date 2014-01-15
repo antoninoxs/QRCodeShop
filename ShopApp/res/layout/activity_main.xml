@@ -1,80 +1,99 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainNotificationActivity" >
 
-    <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TWregistrazioneRegistrazione"
-        android:layout_alignBottom="@+id/TWregistrazioneRegistrazione"
-        android:layout_alignParentRight="true"
-        android:ems="10" >
+        android:layout_marginTop="40dp">
 
-        <requestFocus />
-    </EditText>
+        <TextView
+            android:id="@+id/TWregistrazioneRegistrazione"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/username"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/TWregistrazioneRegistrazione"
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:ems="10"
+              />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="116dp"
-        android:text="@string/username" />
+        android:layout_marginTop="5dp" >
 
-    <TextView
-        android:id="@+id/TWregistrazioneCognome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TWregistrazioneRegistrazione"
-        android:layout_below="@+id/editTextUsername"
-        android:layout_marginTop="36dp"
-        android:text="@string/password" />
+        <TextView
+            android:id="@+id/TWregistrazioneCognome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/password"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TWregistrazioneCognome"
-        android:layout_alignBottom="@+id/TWregistrazioneCognome"
-        android:layout_alignLeft="@+id/editTextUsername"
-        android:ems="10"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            
+            android:ems="10"
+            android:inputType="textPassword" >
 
-    <Button style="@style/CustomButton"
+           
+        </EditText>
+    </LinearLayout>
+
+    <Button
         android:id="@+id/buttonAccess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/CustomButton"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
         android:layout_below="@+id/editTextPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="5dp"
+      
         android:text="@string/accedi" />
 
     <TextView
         android:id="@+id/textViewRegistrazione"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TWregistrazioneRegistrazione"
-        android:layout_below="@+id/buttonAccess"
-        android:layout_marginTop="26dp"
         android:text="@string/registrazione"
-        android:textSize="20dp" />
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+         android:layout_marginTop="5dp"
+        />
 
-    <Button style="@style/CustomButton"
-        android:id="@+id/btnSalta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/buttonAccess"
-        android:layout_below="@+id/textViewRegistrazione"
-        android:layout_marginTop="24dp"
-        android:text="Salta" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+</LinearLayout>

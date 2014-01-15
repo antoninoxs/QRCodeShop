@@ -44,6 +44,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -90,6 +91,7 @@ public class TabCatalogProductsFragment extends Fragment {
     	
         mLinearLayout = (LinearLayout) inflater.inflate(R.layout.tab_frag_catalog_products_list_layout,	container, false);
         Button btnProceed = (Button) mLinearLayout.findViewById(R.id.btnProceed);
+        //EditText etProdDigit = (EditText) mLinearLayout.findViewById(R.id.etProdDigit);
         
         tvNumber =(TextView) mLinearLayout.findViewById(R.id.tvN);
         tvPrice =(TextView) mLinearLayout.findViewById(R.id.tvP);
@@ -153,7 +155,7 @@ public class TabCatalogProductsFragment extends Fragment {
 			}
 		});
       	
-		
+        	
 
         return mLinearLayout;
         

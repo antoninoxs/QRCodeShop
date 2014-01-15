@@ -107,8 +107,7 @@ public class MainActivity extends Activity {
 		edPassword 			= (EditText) findViewById(R.id.editTextPassword);
 		tvRegistrazione 	= (TextView) findViewById(R.id.textViewRegistrazione);
 		bAccesso			= (Button) findViewById(R.id.buttonAccess);
-		btnSalta 			= (Button) findViewById(R.id.btnSalta);
-	
+		
 		final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
 		
 		bAccesso.setOnClickListener(new OnClickListener() {			
@@ -214,16 +213,7 @@ public class MainActivity extends Activity {
 			}
 		});
 	
-		//Tasto per il Debug
-		btnSalta.setOnClickListener(new OnClickListener() {
-			
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+	
 	
 	}
 	

@@ -117,15 +117,13 @@
         android:clipToPadding="false"
         android:padding="10dp" >
 
-        <Button style="@style/CustomButton"
+        <Button 
+            style="@style/CustomButton"
             android:id="@+id/FinishScanButton"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp"
-     
-            android:background="@drawable/gradient_back"
+            android:layout_marginRight="1dp"
             android:text="@string/tFinishScan" />
 
         <Button style="@style/CustomButton"
@@ -133,10 +131,9 @@
            android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_back"
             android:text="@string/tContinueScan"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp" />
+            android:layout_marginLeft="1dp"
+             />
     </LinearLayout>
 
 </LinearLayout>
