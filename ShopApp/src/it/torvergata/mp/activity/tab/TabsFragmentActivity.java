@@ -21,6 +21,7 @@ import it.torvergata.mp.activity.tab.catalog.TabCatalogProductsFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersDetailItemFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersMainFragment;
 import it.torvergata.mp.activity.tab.orders.TabOrdersProductListFragment;
+import it.torvergata.mp.activity.tab.orders.TabOrdersQrCodeFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeDetailItemFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeListFragment;
 import it.torvergata.mp.activity.tab.scanmode.TabScanModeMainFragment;
@@ -82,7 +83,8 @@ TabCatalogCategoryFragment.OnCategoryDetailListener,
 TabCatalogProductsFragment.OnProductChoiceDetailListener,
 TabCatalogDetailItemFragment.OnReturnProductChoiceListListener,
 TabCatalogBasketListFragment.OnActionCatalogList,
-TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
+TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener
+{
  
 	
 	final DatabaseManager db = new DatabaseManager(this);
@@ -649,8 +651,21 @@ TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener{
         
 	}
 
-	
+	@Override
+	public void viewQrCode(int orderId) {
+		// TODO Auto-generated method stub
+		FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+         
+        TabOrdersQrCodeFragment fragmentMain = new TabOrdersQrCodeFragment();
+        fragmentTransaction.addToBackStack("ProductList");
+        
+        fragmentMain.updateOrderId(orderId);
+        fragmentTransaction.replace(R.id.realtabcontent, fragmentMain);
+        fragmentTransaction.commit();
+	}
 
+	
 
 	
  

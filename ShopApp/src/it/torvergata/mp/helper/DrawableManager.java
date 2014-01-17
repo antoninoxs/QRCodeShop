@@ -39,6 +39,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -142,4 +143,38 @@ public class DrawableManager {
         HttpResponse response = httpClient.execute(request);
         return response.getEntity().getContent();
     }
+
+	public static void fetchDrawableQrCode(int ordId,final FragmentActivity ctx,final ImageView imageView) {
+		// TODO Auto-generated method stub
+		final String urlString=Const.QRCODE_URL+ordId+".png";
+		
+		if (drawableMap.containsKey(urlString)) {
+            imageView.setImageDrawable(drawableMap.get(urlString));
+            //product.setImmagine(drawableMap.get(urlString));
+        }
+
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                Drawable dr = (Drawable) message.obj;
+            	imageView.setImageDrawable(dr);
+                
+            }
+        };
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                //TODO : set imageView to a "pending" image
+            	Drawable d = ctx.getResources().getDrawable( R.drawable.blank );
+            	Message messagea = handler.obtainMessage(1, d);
+                handler.sendMessage(messagea);
+                Drawable drawable = fetchDrawable(urlString,ctx);
+                Message messageb = handler.obtainMessage(1, drawable);
+                handler.sendMessage(messageb);
+            }
+        };
+        thread.start();
+    }
+		
 }

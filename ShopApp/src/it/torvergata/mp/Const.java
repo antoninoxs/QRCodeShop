@@ -17,6 +17,8 @@ public class Const {
 	
 	
 	public static final String IMAGE_URL = "http://"+IPADDRESS+"/images/";
+	public static final String QRCODE_URL = "http://"+IPADDRESS+"/images/QRCOrdini/";
+
 	public static final int OK = 1;
 	public static final int KO = 0;
 	public static final int TIMEOUT = 2;

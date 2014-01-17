@@ -52,6 +52,7 @@ public class TabOrdersProductListFragment extends Fragment {
 	
 	public interface OnProductsList{
 		public void viewProductDetail(ListProduct list, int pos);
+		public void viewQrCode(int orderId);
 	}
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +76,8 @@ public class TabOrdersProductListFragment extends Fragment {
     	totalPrice 			= (TextView) mLinearLayout.findViewById(R.id.tvTotalPrice);
     	tvOrderState 			= (TextView) mLinearLayout.findViewById(R.id.tvOrderDetailState);
 		
+    	Button btnShowQrCode 		= (Button) mLinearLayout.findViewById(R.id.btnShowQrCode);
+    	
     	Button btnAdd 		= (Button) mLinearLayout.findViewById(R.id.btnAdd);
 		Button btnContinue 	= (Button) mLinearLayout.findViewById(R.id.btnContinue);
 		final ListView list = (ListView) mLinearLayout.findViewById(id.list);
@@ -88,7 +91,14 @@ public class TabOrdersProductListFragment extends Fragment {
 		
 		setTotalPrice();
 		
-		
+		btnShowQrCode.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mCallback.viewQrCode(productList.getAssociateOrderId());
+			}
+		});
 		
 		list.setOnItemClickListener(new OnItemClickListener() {
 
@@ -124,6 +134,7 @@ public class TabOrdersProductListFragment extends Fragment {
 	public void updateProductList(ListProduct list) {
 		// TODO Auto-generated method stub
 		productList=list;
+	
 	}
 	
 	public void setTotalPrice(){

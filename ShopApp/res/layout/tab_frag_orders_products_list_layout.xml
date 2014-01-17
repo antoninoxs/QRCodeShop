@@ -42,7 +42,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8.4" >
+        android:layout_weight="7.4" >
     </ListView>
 
     <LinearLayout
@@ -61,6 +61,15 @@
           	android:textColor="#e02f2f"
             android:textSize="20dip"
             android:textStyle="bold" />
+
     </LinearLayout>
+
+    <Button
+        style="@style/CustomButton"
+        android:id="@+id/btnShowQrCode"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/tBtnShowQrCode" />
 
 </LinearLayout>
