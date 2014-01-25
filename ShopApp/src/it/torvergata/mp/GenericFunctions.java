@@ -59,7 +59,7 @@ public class GenericFunctions {
                  break;
         case 2:  result = "Preso in Carico";
                  break;
-        case 3:  result = "Pronto";
+        case 3:  result = "Pronto, in attesa di ritiro";
                  break;
         case 4:  result = "Ritirato";
         		 break;         
