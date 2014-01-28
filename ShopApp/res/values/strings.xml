@@ -60,6 +60,8 @@
      <string name="tChangeQuantitative">Cambia quantità:</string>
      <string name="tTotalImport">"Importo Totale: "</string>
      <string name="tProductsInOrder">"Prodotti nell'ordine: "</string>
+     <string name="tProductMex">"Prodotto più caro: "</string>
+     <string name="tProductMec">"Prodotti più economico: "</string>
      <string name="tShopApp">ShopApp</string>
      <string name="tOrderSendSuccess">Ordine inviato correttamente</string>
      <string name="tOrderSendWrong">Invio ordine non riuscito</string>

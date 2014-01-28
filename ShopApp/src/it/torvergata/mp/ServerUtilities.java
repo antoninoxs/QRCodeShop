@@ -43,57 +43,18 @@ public final class ServerUtilities {
     private static final Random random = new Random();
     static Handler handler;
     public static void register(final Context context, final String regId) {
-//        String serverUrl = SERVER_URL;
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("regId", regId);
-//        long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
-//        for (int i = 1; i <= MAX_ATTEMPTS; i++) {
-//            try {
-//                post(serverUrl, params);
-//                GCMRegistrar.setRegisteredOnServer(context, true);
-//                return;
-//            } catch (IOException e) {
-//                if (i == MAX_ATTEMPTS) {
-//                    break;
-//                }
-//                try {
-//                    Thread.sleep(backoff);
-//                } catch (InterruptedException e1) {
-//                    Thread.currentThread().interrupt();
-//                    return;
-//                }
-//                backoff *= 2;
-//            }
-//        }
-    	
-//		//Handler per il messaggio di risposta del Server, proveniente dal Thread.
-//		handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message mess) {
-//            	
-//            	int res = mess.arg1;
-//            }               
-//            
-//		};
 		HttpConnection connection = new HttpConnection();
 		JSONObject json = new JSONObject();
-	    //Gestione della Sessione
+		/**Recupero della userName*/
 		SharedPreferences settings = context.getSharedPreferences(Const.PREFS_NAME, 0);
 		String user = settings.getString("User","*");
-		Log.i("USER RECUPERATO DA PREFERENCES", user);
 		try {
 			json.put("regId", regId);
 			json.put("user", user);
-			
 			JSONObject object = connection.connect("notificationRegister", json, handler,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-						
-		
-		
-		
+		}	
     }
     static void unregister(final Context context, final String regId) {
         String serverUrl = SERVER_URL + "/unregister";

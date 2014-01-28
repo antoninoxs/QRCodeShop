@@ -61,7 +61,7 @@ public final class R {
         public static final int TWregistrazionePassword1=0x7f090023;
         public static final int TWregistrazioneRegistrazione=0x7f090005;
         public static final int TWregistrazioneUsername=0x7f09001f;
-        public static final int action_settings=0x7f090042;
+        public static final int action_settings=0x7f090046;
         public static final int btnAdd=0x7f090003;
         public static final int btnChangeQuantitativeM=0x7f090015;
         public static final int btnChangeQuantitativeP=0x7f090017;
@@ -80,7 +80,7 @@ public final class R {
         public static final int imageView1=0x7f09000b;
         public static final int ivDetailImage=0x7f09000d;
         public static final int ivQrCode=0x7f09003c;
-        public static final int ivSendOrder=0x7f090041;
+        public static final int ivSendOrder=0x7f090045;
         public static final int list_image=0x7f09002a;
         public static final int option_text=0x7f090032;
         public static final int price=0x7f09002e;
@@ -102,6 +102,10 @@ public final class R {
         public static final int tvPriceDetail=0x7f090002;
         public static final int tvPriceTot=0x7f090036;
         public static final int tvProductID=0x7f090000;
+        public static final int tvProductMoreEconomic=0x7f090044;
+        public static final int tvProductMoreEconomicLabel=0x7f090043;
+        public static final int tvProductMoreExpensive=0x7f090042;
+        public static final int tvProductMoreExpensiveLabel=0x7f090041;
         public static final int tvQuantitative=0x7f09002d;
         public static final int tvQuantitativeChange=0x7f090014;
         public static final int tvQuantitativeDetail=0x7f09000f;
@@ -155,7 +159,7 @@ public final class R {
     public static final class string {
         public static final int Euro=0x7f06001c;
         public static final int Loading=0x7f060016;
-        public static final int ProceedWithOrder=0x7f060041;
+        public static final int ProceedWithOrder=0x7f060043;
         public static final int accedi=0x7f060007;
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
@@ -185,11 +189,13 @@ public final class R {
         public static final int tMessageDelete=0x7f060018;
         public static final int tMessageDeleteProd=0x7f06001b;
         public static final int tOk=0x7f060030;
-        public static final int tOrderSendSuccess=0x7f06003c;
-        public static final int tOrderSendWrong=0x7f06003d;
+        public static final int tOrderSendSuccess=0x7f06003e;
+        public static final int tOrderSendWrong=0x7f06003f;
         public static final int tPasswordMismatch=0x7f060028;
         public static final int tPrice=0x7f060022;
         public static final int tProductList=0x7f060035;
+        public static final int tProductMec=0x7f06003c;
+        public static final int tProductMex=0x7f06003b;
         public static final int tProductNotFound=0x7f060031;
         public static final int tProductsInOrder=0x7f06003a;
         public static final int tQrCodeNotValid=0x7f06002f;
@@ -197,14 +203,14 @@ public final class R {
         public static final int tRegistration=0x7f060029;
         public static final int tScanQrCode=0x7f06002b;
         public static final int tScanning=0x7f060033;
-        public static final int tSendOrder=0x7f06003f;
-        public static final int tSendingOrger=0x7f06003e;
-        public static final int tShopApp=0x7f06003b;
+        public static final int tSendOrder=0x7f060041;
+        public static final int tSendingOrger=0x7f060040;
+        public static final int tShopApp=0x7f06003d;
         public static final int tTimeout=0x7f06002e;
         public static final int tTitleBoxDeleteProduct=0x7f06001a;
-        public static final int tTotal=0x7f060042;
+        public static final int tTotal=0x7f060044;
         public static final int tTotalImport=0x7f060039;
-        public static final int tUpdateOrderState=0x7f060040;
+        public static final int tUpdateOrderState=0x7f060042;
         public static final int tUserPasswordWrong=0x7f060025;
         public static final int tWarning=0x7f06002d;
         public static final int title_activity_camera=0x7f060011;

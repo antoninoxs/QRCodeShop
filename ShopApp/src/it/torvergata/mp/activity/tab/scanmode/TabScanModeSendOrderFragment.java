@@ -53,7 +53,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 	private LinearLayout mLinearLayout;
 	private ListProduct productList;
 	private ImageView ivSendOrder;
-	private TextView   tvNumberProducts,tvTotalCost;
+	private TextView   tvNumberProducts,tvTotalCost,tvProductMex,tvProductMec;
 	private Dialogs dialogs;
 	private int returnScr;
 	private Handler handler;
@@ -114,8 +114,12 @@ public class TabScanModeSendOrderFragment extends Fragment {
         ivSendOrder= (ImageView) mLinearLayout.findViewById(R.id.ivSendOrder);
         tvNumberProducts =(TextView) mLinearLayout.findViewById(R.id.tvNumberProductsTabOrder);
         tvTotalCost =(TextView) mLinearLayout.findViewById(R.id.tvTotalCostTabOrder);
+        tvProductMex =(TextView) mLinearLayout.findViewById(R.id.tvProductMoreExpensive);
+        tvProductMec =(TextView) mLinearLayout.findViewById(R.id.tvProductMoreEconomic);
         
-        setTotalProductAndTotalPrice(tvNumberProducts,tvTotalCost);
+        
+        
+        setTotalProductAndTotalPrice(tvNumberProducts,tvTotalCost,tvProductMex,tvProductMec);
         
       //Gestione della Sessione
 		SharedPreferences settings = getActivity().getSharedPreferences(Const.PREFS_NAME, 0);
@@ -240,9 +244,14 @@ public class TabScanModeSendOrderFragment extends Fragment {
 	
 	}
 	
-	public void setTotalProductAndTotalPrice(TextView totalProducts,TextView totalPrice){
+	public void setTotalProductAndTotalPrice(TextView totalProducts,TextView totalPrice,TextView tvMex,TextView tvMec){
 		String price = GenericFunctions.currencyStamp(productList.getTotalPrice());
 		totalPrice.setText(price+" "+getString(R.string.Euro));
 		totalProducts.setText(""+productList.getCount()); 
+		String[] ExEc = new String[2];
+		ExEc = productList.getMexAndMec();
+		tvMex.setText(ExEc[0]);
+		tvMec.setText(ExEc[1]);
+		
 	}
 }

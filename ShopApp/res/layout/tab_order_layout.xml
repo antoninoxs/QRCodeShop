@@ -7,54 +7,72 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp" >
+        android:layout_height="0dp"
+        android:layout_weight="1"
+         >
 
         <TextView
             android:id="@+id/tvSummaryTabOrder"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="8"
             android:layout_height="wrap_content"
             android:text="Riepilogo: "
+            android:layout_gravity="top"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="italic" />
+            android:textColor="#FFFFFF"/>
+
+        <ImageView
+            android:id="@+id/imageView1"
+             android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_launcher" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp" >
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
 
         <TextView
             android:id="@+id/tvNumberProductsLabelTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tProductsInOrder"
+            android:layout_marginLeft="15dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="italic" />
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/tvNumberProductsTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:textColor="#e02f2f"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="italic" />
+             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp" >
+        android:layout_height="0dp"
+        android:layout_weight="1"
+         >
 
         <TextView
             android:id="@+id/tvTotalCostLabelTabOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tTotalImport"
+            android:layout_marginLeft="15dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="italic" />
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/tvTotalCostTabOrder"
@@ -66,11 +84,68 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tvProductMoreExpensiveLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tProductMex"
+            android:layout_marginLeft="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvProductMoreExpensive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#e02f2f"
+             android:layout_marginLeft="15dp"
+            android:text="Prodotto Più caro"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+             />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        
+        >
+
+        <TextView
+            android:id="@+id/tvProductMoreEconomicLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tProductMec"
+            android:layout_marginLeft="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvProductMoreEconomic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#e02f2f"
+             android:layout_marginLeft="15dp"
+            android:text="Prodotto Più economico"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+             />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.24" >
+        android:layout_height="0dp"
+        android:layout_weight="3" >
 
         <ImageView
             android:id="@+id/ivSendOrder"
@@ -88,7 +163,7 @@
 		    android:layout_centerHorizontal="true"
 		    android:text="@string/tSendOrder"
 		    android:textAppearance="?android:attr/textAppearanceMedium"
-		    android:textStyle="italic" />
+		    android:textColor="#ffffff" />
 
     </RelativeLayout>
 

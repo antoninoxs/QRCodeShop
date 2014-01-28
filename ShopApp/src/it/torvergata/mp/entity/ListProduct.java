@@ -264,5 +264,28 @@ public class ListProduct extends ArrayList<Product> {
 		return p;
 	}
 
+	public String[] getMexAndMec() {
+		String[] pickedString = new String[2];
+		int min = 0,max = 0;
+		double  minp = 500.00,maxp = 0.0;
+		String smin = null,smax = null;
+		for(int i = 0; i<this.size();i++){
+			double cur=this.get(i).getPrezzoUnitario();
+			if(cur<minp){
+				minp=cur;
+				min=i;
+				pickedString[0]=this.get(i).getNome()+" ("+GenericFunctions.currencyStamp(this.get(i).getPrezzoUnitario())+" "+"\u20ac"+")";
+			}
+			if(cur>maxp){
+				maxp=cur;
+				max=i;
+				pickedString[1]=this.get(i).getNome()+" ("+GenericFunctions.currencyStamp(this.get(i).getPrezzoUnitario())+" "+"\u20ac"+")";
+				
+			}
+		}
+
+		return pickedString;
+	}
+
 	
 }

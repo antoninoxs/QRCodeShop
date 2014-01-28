@@ -15,7 +15,6 @@ public class GenericFunctions {
 		String rLine = "";
 		StringBuilder answer = new StringBuilder();
 		BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
 		try {
 			while ((rLine = rd.readLine()) != null) {
 				answer.append(rLine);
@@ -39,7 +38,6 @@ public class GenericFunctions {
 		SimpleDateFormat formatterDate = new SimpleDateFormat("EEEE, d MMMM yyy");  
 		String formattedDateString = formatterDate.format(anotherCurDate);
 		Log.i("Data",formattedDateString);
-		
 		return formattedDateString;
 	}
 	public static String getTime(){

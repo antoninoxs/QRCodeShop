@@ -206,10 +206,10 @@ TabCatalogBasketDetailItemFragment.OnReturnProductChoiceListListener
             String orderId=items[0];
             String state=items[1];
             Toast.makeText(getApplicationContext(), "Id Ordine: " + orderId +" Stato: "+ state, Toast.LENGTH_LONG).show();
-            db.open();
+                   db.open();
             db.updateOrder(orderId,state);
             db.close();
-//            // Rilascia il wavelocker
+//           // Rilascia il wavelocker
             WakeLocker.release();
         }
     };
