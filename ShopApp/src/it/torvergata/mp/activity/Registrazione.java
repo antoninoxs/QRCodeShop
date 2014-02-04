@@ -95,7 +95,7 @@ public class Registrazione extends Activity {
 					Toast toast = Toast.makeText(Registrazione.this,
 							R.string.tBlankField, Toast.LENGTH_LONG);
 					toast.show();
-				//Se le password inserite non coincidono si avvisa l'utente
+				//Se le password inserite non coincidono si avvisa l'utente con un toast
 				} else if (!((edPassword.getText().toString())
 						.equals(edPassword1.getText().toString()))) {
 					Toast toast = Toast.makeText(Registrazione.this,
