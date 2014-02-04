@@ -236,7 +236,7 @@ public class MainActivity extends Activity {
 	    protected void onPreExecute()
 	    {
 	    	//Creazione di un Dialog di attesa per il login
-	        progressDialog= ProgressDialog.show(MainActivity.this, "ShopApp","Accesso in corso...", true);
+	        progressDialog= ProgressDialog.show(MainActivity.this, "Poster Market","Accesso in corso...", true);
 	    };      
 	    @Override
 	    protected Void doInBackground(Void... params)

@@ -180,7 +180,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 		@Override
 		protected void onPreExecute() {
 			//Creazione di un Dialog di attesa per il login
-	        progressDialog= ProgressDialog.show(getActivity(), "ShopApp","Invio Ordine...", true);
+	        progressDialog= ProgressDialog.show(getActivity(), "Poster Market","Invio Ordine...", true);
 		};
 
 		@Override

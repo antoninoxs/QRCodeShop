@@ -142,7 +142,7 @@ public class Registrazione extends Activity {
             	else{		            	
 	            	//KOU==Ko User, è l'identificativo del messaggio che segnala un Username già presente
 	            	if(res.equals("KOU")){
-	            		Toast toast = Toast.makeText(Registrazione.this,
+	            		Toast toast = Toast.makeText(context,
 	            				mess, Toast.LENGTH_LONG);
 	            		toast.show();
 	            	}
@@ -183,7 +183,7 @@ public class Registrazione extends Activity {
 		@Override
 		protected void onPreExecute() {
 			// Creazione di un Dialog di attesa
-			progressDialog = ProgressDialog.show(Registrazione.this, "ShopApp",
+			progressDialog = ProgressDialog.show(Registrazione.this, "Poster Market",
 					"Registrazione in corso...", true);
 		};
 

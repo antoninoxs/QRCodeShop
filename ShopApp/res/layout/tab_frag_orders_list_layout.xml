@@ -18,7 +18,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_weight="1"
-       
+       android:textColor="#FFFFFF"
         android:text="@string/tvOrders"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold" />

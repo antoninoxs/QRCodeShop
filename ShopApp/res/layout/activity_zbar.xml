@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:padding="10dp"
         android:text="@string/tScanQrCode"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
 
