@@ -250,8 +250,7 @@ public class TabScanModeSendOrderFragment extends Fragment {
 		totalProducts.setText(""+productList.getCount()); 
 		String[] ExEc = new String[2];
 		ExEc = productList.getMexAndMec();
-		tvMex.setText(ExEc[0]);
-		tvMec.setText(ExEc[1]);
-		
+		tvMec.setText(ExEc[0]);
+		tvMex.setText(ExEc[1]);
 	}
 }
